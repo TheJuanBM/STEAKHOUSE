@@ -1,0 +1,111 @@
+---
+
+---
+
+<header>
+  <div class="frame">
+    <div class="ornament">
+      <span class="line"></span>
+      <span class="diamond"></span>
+      <span class="line"></span>
+    </div>
+
+    <h1>MENÚ</h1>
+
+    <p class="subtitle">Carta del Día</p>
+
+    <div class="ornament">
+      <span class="line"></span>
+      <span class="diamond"></span>
+      <span class="line"></span>
+    </div>
+  </div>
+</header>
+
+<style>
+  header {
+    padding: 24px 16px 16px;
+  }
+
+  @media (min-width: 640px) {
+    header {
+      padding: 32px 24px 24px;
+    }
+  }
+
+  .frame {
+    border: 1px solid rgba(245, 230, 200, 0.25);
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .frame {
+      padding: 40px 32px;
+      gap: 20px;
+    }
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .line {
+    width: 40px;
+    height: 1px;
+    background-color: rgba(245, 230, 200, 0.35);
+  }
+
+  @media (min-width: 640px) {
+    .line {
+      width: 60px;
+    }
+  }
+
+  .diamond {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(245, 230, 200, 0.4);
+    transform: rotate(45deg);
+  }
+
+  h1 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 48px;
+    font-weight: 600;
+    color: #f5e6c8;
+    letter-spacing: 16px;
+    margin: 0;
+    margin-right: -16px;
+  }
+
+  @media (min-width: 640px) {
+    h1 {
+      font-size: 64px;
+      letter-spacing: 20px;
+      margin-right: -20px;
+    }
+  }
+
+  .subtitle {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(245, 230, 200, 0.6);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  @media (min-width: 640px) {
+    .subtitle {
+      font-size: 12px;
+      letter-spacing: 5px;
+    }
+  }
+</style>

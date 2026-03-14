@@ -1,0 +1,462 @@
+---
+import Header from "../components/Header.astro";
+import MenuHeader from "../components/MenuHeader.astro";
+import MenuNav from "../components/MenuNav.astro";
+import MenuSection from "../components/MenuSection.astro";
+import Layout from "../layouts/Layout.astro";
+
+//  {
+//    entradas: [
+//     {
+//       nombre: "Carpaccio de Res",
+//       descripcion:
+//         "Finas láminas de res con rúcula, parmesano y vinagreta de limón",
+//       precio: "$185",
+//     },
+//     {
+//       nombre: "Tartar de Atún",
+//       descripcion: "Atún fresco con aguacate, ajonjolí y salsa ponzu",
+//       precio: "$210",
+//     },
+//     {
+//       nombre: "Bruschetta Mediterránea",
+//       descripcion:
+//         "Pan artesanal con tomate, albahaca fresca y aceite de oliva",
+//       precio: "$125",
+//     },
+//     {
+//       nombre: "Sopa de Cebolla Gratinada",
+//       descripcion: "Clásica sopa francesa con queso gruyère fundido",
+//       precio: "$145",
+//     },
+//   ],
+//   fuertes: [
+//     {
+//       nombre: "Costillas BBQ",
+//       descripcion: "Costillas de cerdo glaseadas con salsa barbacoa casera",
+//       precio: "$385",
+//     },
+//     {
+//       nombre: "Pollo al Horno",
+//       descripcion:
+//         "Medio pollo marinado con hierbas provenzales y papas rústicas",
+//       precio: "$295",
+//     },
+//     {
+//       nombre: "Arrachera",
+//       descripcion:
+//         "Corte de res marinado a la parrilla con guacamole y tortillas",
+//       precio: "$365",
+//     },
+//     {
+//       nombre: "Cochinita Pibil",
+//       descripcion: "Cerdo marinado en achiote con cebolla morada encurtida",
+//       precio: "$285",
+//     },
+//   ],
+//   principales: [
+//     {
+//       nombre: "Filete Mignon",
+//       descripcion:
+//         "Corte premium de 250g con salsa de vino tinto y puré trufado",
+//       precio: "$485",
+//     },
+//     {
+//       nombre: "Salmón a la Parrilla",
+//       descripcion: "Con vegetales de temporada y salsa de eneldo",
+//       precio: "$365",
+//     },
+//     {
+//       nombre: "Risotto de Hongos",
+//       descripcion: "Arroz arborio con mezcla de hongos silvestres y parmesano",
+//       precio: "$285",
+//     },
+//     {
+//       nombre: "Rack de Cordero",
+//       descripcion:
+//         "Costillas de cordero con costra de hierbas y reducción de menta",
+//       precio: "$425",
+//     },
+//     {
+//       nombre: "Pasta Trufa Negra",
+//       descripcion: "Tagliatelle frescos con crema de trufa negra y pecorino",
+//       precio: "$345",
+//     },
+//   ],
+//   postres: [
+//     {
+//       nombre: "Tiramisú Clásico",
+//       descripcion: "Tradicional postre italiano con mascarpone y café espresso",
+//       precio: "$145",
+//     },
+//     {
+//       nombre: "Crème Brûlée",
+//       descripcion: "Crema de vainilla con costra de caramelo",
+//       precio: "$125",
+//     },
+//     {
+//       nombre: "Fondant de Chocolate",
+//       descripcion: "Volcán de chocolate belga con helado de vainilla",
+//       precio: "$155",
+//     },
+//     {
+//       nombre: "Tarta de Queso",
+//       descripcion: "Estilo vasco con frutos rojos de temporada",
+//       precio: "$135",
+//     },
+//   ],
+//   bebidas: [
+//     {
+//       nombre: "Copa de Vino Tinto de LF Steakhouse",
+//       descripcion: "Selección del sommelier",
+//       precio: "$95",
+//     },
+//     {
+//       nombre: "Copa de Vino Blanco de LF Steakhouse",
+//       descripcion: "Selección del sommelier",
+//       precio: "$85",
+//     },
+//     { nombre: "Agua Mineral", descripcion: "Con o sin gas", precio: "$45" },
+//     {
+//       nombre: "Café Americano",
+//       descripcion: "Grano de altura tostado artesanalmente",
+//       precio: "$55",
+//     },
+//     {
+//       nombre: "Espresso Doble",
+//       descripcion: "Intenso y aromático",
+//       precio: "$65",
+//     },
+//   ],
+// };
+
+const menuData = {
+  entradas: [
+    {
+      nombre: "Mazorcitas",
+      descripcion:
+        "Asadas y bañadas en salsa de tocineta y queso fresco rallado",
+      precio: "$39.900",
+    },
+    {
+      nombre: "Cazuela de empanadas",
+      descripcion:
+        "Empanadas listas para untar con salsa verde tatemada, crema agria, queso fresco, cebolla roja, cilantro y limón",
+      precio: "$29.900",
+    },
+    {
+      nombre: "Chicharron acevichado",
+      descripcion: "",
+      precio: "$29.900",
+    },
+    {
+      nombre: "Queso costeño crujiente con chamoy",
+      descripcion: "",
+      precio: "$29.900",
+    },
+  ],
+
+  brasas: [
+    {
+      nombre: "Punta de anca 350/380gr",
+      descripcion: "",
+      precio: "$79.900",
+    },
+    {
+      nombre: "Punta de anca 250/280gr",
+      descripcion: "",
+      precio: "$59.900",
+    },
+    {
+      nombre: "Churrasco 350/380gr",
+      descripcion: "",
+      precio: "$75.900",
+    },
+    {
+      nombre: "Churrasco 250/280gr",
+      descripcion: "",
+      precio: "$57.900",
+    },
+    {
+      nombre: "Baby beef 250/280gr",
+      descripcion: "",
+      precio: "$62.900",
+    },
+    {
+      nombre: "Beef chorizo",
+      descripcion: "",
+      precio: "$75.900",
+    },
+    {
+      nombre: "Morrillo",
+      descripcion: "",
+      precio: "$54.900",
+    },
+    {
+      nombre: "Pollo marinado 250gr",
+      descripcion: "Contramuslo",
+      precio: "$48.900",
+    },
+    {
+      nombre: "Costilla BBQ 400gr",
+      descripcion: "",
+      precio: "$79.900",
+    },
+    {
+      nombre: "Chorizo 200gr",
+      descripcion: "",
+      precio: "$29.900",
+    },
+    {
+      nombre: "Salmón 250gr",
+      descripcion: "",
+      precio: "$65.000",
+    },
+  ],
+
+  importados: [
+    {
+      nombre: "Strip Loin",
+      descripcion: "",
+      precio: "$175.900",
+    },
+    {
+      nombre: "Picanha",
+      descripcion: "",
+      precio: "$139.900",
+    },
+  ],
+
+  especiales: [
+    {
+      nombre: "Lomo Steak House",
+      descripcion:
+        "Lomo fino con frijol refrito, salsa verde, guacamole, crema agria, pico de gallo y chicharrón",
+      precio: "$72.900",
+    },
+    {
+      nombre: "Morrillo Ajisaso",
+      descripcion:
+        "Morrillo con marinación especial en salsa de ají amarillo y chimichurri",
+      precio: "$62.900",
+    },
+    {
+      nombre: "Lomo americano",
+      descripcion:
+        "Lomo fino con queso philadelphia y mermelada especial de tocineta",
+      precio: "$72.900",
+    },
+    {
+      nombre: "Lomo steak pimienta",
+      descripcion: "Lomo fino en salsa especial con mix de pimientas",
+      precio: "$62.900",
+    },
+    {
+      nombre: "Lomo cuatro quesos",
+      descripcion:
+        "Lomo fino con trocitos de plátano maduro y salsa de queso fundido",
+      precio: "$64.900",
+    },
+  ],
+
+  compartir: [
+    {
+      nombre: "Molcajete",
+      descripcion:
+        "Guacamole con chicharrón, chorizo, queso costeño, carne de res y arepitas",
+      precio: "$69.900",
+    },
+    {
+      nombre: "Cacerola a lo macho",
+      descripcion:
+        "Frijol refrito, carne molida, queso fundido, salsa verde, guacamole, pico de gallo y arepitas",
+      precio: "$38.900",
+    },
+  ],
+
+  hamburguesas: [
+    {
+      nombre: "Hamburguesa Origen",
+      descripcion:
+        "Pan brioche, carne americana 150gr, mozzarella, queso americano, tocineta BBQ, chimichurri y salsa de ajo",
+      precio: "$39.000",
+    },
+    {
+      nombre: "Hamburguesa Americana",
+      descripcion:
+        "Pan brioche, carne americana 150gr, queso americano, mermelada de tocineta y escabeche de cebolla",
+      precio: "$44.900",
+    },
+  ],
+
+  infantil: [
+    {
+      nombre: "Mini hamburguesa",
+      descripcion: "",
+      precio: "$32.900",
+    },
+  ],
+
+  bebidas: [
+    { nombre: "Gaseosa", descripcion: "", precio: "$7.900" },
+    { nombre: "Jugos naturales", descripcion: "", precio: "$12.000" },
+    { nombre: "Hatsu", descripcion: "", precio: "$12.000" },
+    { nombre: "Cerveza Corona", descripcion: "", precio: "$14.000" },
+    { nombre: "Cerveza Stella", descripcion: "", precio: "$14.000" },
+    { nombre: "Cerveza Club Dorada", descripcion: "", precio: "$12.000" },
+    { nombre: "Soda de corozo", descripcion: "", precio: "$18.000" },
+    { nombre: "Soda naranja jengibre", descripcion: "", precio: "$18.000" },
+    { nombre: "Soda frutos rojos", descripcion: "", precio: "$18.000" },
+    { nombre: "Sangría rose", descripcion: "", precio: "$129.000" },
+    { nombre: "Sangría tinto", descripcion: "", precio: "$129.000" },
+  ],
+
+  cocteles: [
+    { nombre: "Paloma LF", descripcion: "", precio: "$27.900" },
+    { nombre: "Penicilin", descripcion: "", precio: "$27.900" },
+    { nombre: "Moscow Mule", descripcion: "", precio: "$29.900" },
+    { nombre: "Mojito a la fresca", descripcion: "", precio: "$25.900" },
+    { nombre: "Margarita de corozo", descripcion: "", precio: "$25.900" },
+    { nombre: "Gin & Tonic", descripcion: "", precio: "$27.900" },
+    { nombre: "Nace un borracho", descripcion: "", precio: "$28.900" },
+  ],
+};
+
+const categorias = [
+  { id: "entradas", nombre: "Entradas" },
+  { id: "brasas", nombre: "Brasas" },
+  { id: "importados", nombre: "Importados" },
+  { id: "especiales", nombre: "Especiales de la casa" },
+  { id: "compartir", nombre: "Para compartir" },
+  { id: "hamburguesas", nombre: "Hamburguesas" },
+  { id: "infantil", nombre: "Menú infantil" },
+  { id: "bebidas", nombre: "Bebidas" },
+  { id: "cocteles", nombre: "Cócteles" },
+];
+---
+
+<Layout title="Menú - LF Steakhouse">
+  <Header currentPage="/menu" />
+  <main>
+    <MenuHeader />
+    <MenuNav categorias={categorias} />
+
+    <div class="content">
+      <MenuSection id="entradas" titulo="Entradas" items={menuData.entradas} />
+      <MenuSection id="brasas" titulo="Brasas" items={menuData.brasas} />
+      <MenuSection
+        id="importados"
+        titulo="Importados"
+        items={menuData.importados}
+      />
+      <MenuSection
+        id="especiales"
+        titulo="Especiales de la casa"
+        items={menuData.especiales}
+      />
+      <MenuSection
+        id="compartir"
+        titulo="Para compartir"
+        items={menuData.compartir}
+      />
+      <MenuSection
+        id="hamburguesas"
+        titulo="Hamburguesas"
+        items={menuData.hamburguesas}
+      />
+      <MenuSection
+        id="infantil"
+        titulo="Menú infantil"
+        items={menuData.infantil}
+      />
+      <MenuSection id="bebidas" titulo="Bebidas" items={menuData.bebidas} />
+      <MenuSection id="cocteles" titulo="Cócteles" items={menuData.cocteles} />
+    </div>
+
+    <footer>
+      <div class="ornament">
+        <span class="line"></span>
+        <span class="dot"></span>
+        <span class="line"></span>
+      </div>
+      <p class="note">Precios incluyen IVA</p>
+      <p class="allergy">
+        Por favor, informe a su mesero sobre cualquier alergia alimentaria
+      </p>
+    </footer>
+  </main>
+</Layout>
+
+<style>
+  main {
+    max-width: 500px;
+    margin: 0 auto;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  @media (min-width: 640px) {
+    main {
+      max-width: 560px;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 24px 20px 0;
+  }
+
+  @media (min-width: 640px) {
+    .content {
+      gap: 48px;
+      padding: 32px 28px 0;
+    }
+  }
+
+  footer {
+    margin-top: 100px;
+    padding: 24px 20px 0;
+    text-align: center;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .line {
+    width: 32px;
+    height: 1px;
+    background-color: rgba(245, 230, 200, 0.2);
+  }
+
+  .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: rgba(245, 230, 200, 0.3);
+  }
+
+  .note {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(245, 230, 200, 0.45);
+    letter-spacing: 1px;
+    margin: 0;
+  }
+
+  .allergy {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.3);
+    margin: 8px 0 0;
+    font-style: italic;
+  }
+</style>

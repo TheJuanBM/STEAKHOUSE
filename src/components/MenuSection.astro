@@ -1,0 +1,161 @@
+---
+interface MenuItem {
+  nombre: string;
+  descripcion: string;
+  precio: string;
+}
+
+interface Props {
+  id: string;
+  titulo: string;
+  items: MenuItem[];
+}
+
+const { id, titulo, items } = Astro.props;
+---
+
+<section id={id}>
+  <header>
+    <h2>
+      {titulo}
+      <!-- <a href={`#${id}`} data-category={id}>{titulo}</a> -->
+    </h2>
+  </header>
+</section>
+
+<ul class="list-wrapper">
+  {
+    items.map((item) => (
+      <li>
+        <div class="item-row">
+          <span class="item-name">{item.nombre}</span>
+          <span class="item-line" />
+          <span class="item-price">{item.precio}</span>
+        </div>
+        <p class="item-desc">{item.descripcion}</p>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  section {
+    scroll-margin-top: 120px;
+  }
+
+  @media (min-width: 768px) {
+    section {
+      scroll-margin-top: 130px;
+    }
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(245, 230, 200, 0.2);
+  }
+
+  h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #f5e6c8;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  a {
+    color: #f5e6c8;
+    text-decoration: none;
+  }
+
+  @media (min-width: 640px) {
+    h2 {
+      font-size: 28px;
+      letter-spacing: 4px;
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .item-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .item-name {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #f5e6c8;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    .item-name {
+      font-size: 20px;
+    }
+  }
+
+  .item-line {
+    flex: 1;
+    height: 1px;
+    background: repeating-linear-gradient(
+      to right,
+      rgba(245, 230, 200, 0.3),
+      rgba(245, 230, 200, 0.3) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+    min-width: 20px;
+    position: relative;
+    top: -4px;
+  }
+
+  .item-price {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #f5e6c8;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    .item-price {
+      font-size: 20px;
+    }
+  }
+
+  .item-desc {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.5);
+    line-height: 1.4;
+    margin: 0;
+    padding-left: 0;
+  }
+
+  @media (min-width: 640px) {
+    .item-desc {
+      font-size: 14px;
+    }
+  }
+</style>

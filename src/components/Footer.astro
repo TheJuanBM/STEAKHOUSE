@@ -1,0 +1,223 @@
+---
+
+---
+
+<footer>
+  <div class="container">
+    <div class="brand">
+      <span class="logo">LF Steakhouse</span>
+      <p class="tagline">Cocina de autor con alma tradicional</p>
+    </div>
+
+    <div class="links-grid">
+      <div class="links-column">
+        <h4 class="column-title">Navegación</h4>
+        <a href="/" class="link">Inicio</a>
+        <a href="/menu" class="link">Menú</a>
+        <a href="/galeria" class="link">Galería</a>
+        <a href="/reservar" class="link">Reservar</a>
+      </div>
+
+      <div class="links-column">
+        <h4 class="column-title">Contacto</h4>
+        <p class="info">
+          <a
+            href="https://www.google.com/maps?q=7.9995370,-75.2310100"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link"
+            >Km 3, vía a la costa, glorieta antes de llegar a Campoalegre.</a
+          >
+        </p>
+        <p class="info">+57 304 258 2119</p>
+        <p class="info">info@lfsteakhouse.com</p>
+      </div>
+
+      <div class="links-column">
+        <h4 class="column-title">Horarios</h4>
+        <p class="info">Lunes a Jueves</p>
+        <p class="info-highlight">13:00 - 23:00</p>
+        <p class="info">Viernes a Domingo</p>
+        <p class="info-highlight">12:00 - 00:00</p>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <div class="divider"></div>
+      <div class="bottom-content">
+        <p class="copyright">
+          &copy; {new Date().getFullYear()} LF Steakhouse. Todos los derechos reservados.
+        </p>
+        <div class="social">
+          <a
+            href="https://www.instagram.com/lf.steakhouse/"
+            class="social-link"
+            aria-label="Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+              <circle cx="12" cy="12" r="4"></circle>
+              <circle cx="18" cy="6" r="1.5" fill="currentColor" stroke="none"
+              ></circle>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background-color: var(--burgundy-dark);
+    padding: 60px 20px 30px;
+  }
+
+  @media (min-width: 768px) {
+    footer {
+      padding: 80px 40px 40px;
+    }
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .brand {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  @media (min-width: 768px) {
+    .brand {
+      text-align: left;
+    }
+  }
+
+  .logo {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 3px;
+  }
+
+  .tagline {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.5);
+    letter-spacing: 1px;
+    margin-top: 8px;
+  }
+
+  .links-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  @media (min-width: 600px) {
+    .links-grid {
+      grid-template-columns: repeat(3, 1fr);
+      text-align: left;
+    }
+  }
+
+  .column-title {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--cream);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .link {
+    display: block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.6);
+    text-decoration: none;
+    padding: 6px 0;
+    transition: color 0.2s ease;
+  }
+
+  .link:hover {
+    color: var(--cream);
+  }
+
+  .info {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.6);
+    line-height: 1.8;
+  }
+
+  .info-highlight {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(245, 230, 200, 0.8);
+    margin-bottom: 12px;
+  }
+
+  .bottom {
+    margin-top: 48px;
+  }
+
+  .divider {
+    height: 1px;
+    background-color: rgba(245, 230, 200, 0.1);
+    margin-bottom: 24px;
+  }
+
+  .bottom-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  @media (min-width: 600px) {
+    .bottom-content {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  .copyright {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.4);
+  }
+
+  .social {
+    display: flex;
+    gap: 16px;
+  }
+
+  .social-link {
+    color: rgba(245, 230, 200, 0.5);
+    transition: color 0.2s ease;
+  }
+
+  .social-link:hover {
+    color: var(--cream);
+  }
+</style>

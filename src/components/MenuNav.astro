@@ -1,0 +1,279 @@
+---
+interface Props {
+  categorias: { id: string; nombre: string }[];
+}
+
+const { categorias } = Astro.props;
+---
+
+<nav>
+  <div class="nav-scroll" id="nav-scroll">
+    <div class="nav-inner">
+      {
+        categorias.map((categoria) => (
+          <a href={`#${categoria.id}`} data-category={categoria.id}>
+            {categoria.nombre}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+  <div class="fade-left" id="fade-left"></div>
+  <div class="fade-right" id="fade-right"></div>
+</nav>
+
+<style>
+  nav {
+    position: sticky;
+    top: 56px;
+    z-index: 90;
+    background-color: #3d1f1f;
+    border-bottom: 1px solid rgba(245, 230, 200, 0.12);
+  }
+
+  @media (min-width: 768px) {
+    nav {
+      top: 68px;
+    }
+  }
+
+  .nav-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .nav-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 20px;
+    gap: 0;
+    min-width: max-content;
+  }
+
+  @media (min-width: 500px) {
+    .nav-inner {
+      justify-content: center;
+    }
+  }
+
+  a {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: rgba(245, 230, 200, 0.5);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 14px 14px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  @media (min-width: 640px) {
+    a {
+      font-size: 11px;
+      padding: 16px 18px;
+      letter-spacing: 1.5px;
+    }
+  }
+
+  a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #f5e6c8;
+    transition: width 0.2s ease;
+  }
+
+  a:hover {
+    color: rgba(245, 230, 200, 0.8);
+  }
+
+  a.active {
+    color: #f5e6c8;
+  }
+
+  a.active::after {
+    width: calc(100% - 28px);
+  }
+
+  @media (min-width: 640px) {
+    a.active::after {
+      width: calc(100% - 36px);
+    }
+  }
+
+  .fade-left,
+  .fade-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 24px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+  }
+
+  .fade-left {
+    left: 0;
+    background: linear-gradient(to right, #3d1f1f 0%, transparent 100%);
+  }
+
+  .fade-right {
+    right: 0;
+    background: linear-gradient(to left, #3d1f1f 0%, transparent 100%);
+  }
+
+  .fade-left.visible,
+  .fade-right.visible {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  function initMenuNav() {
+    const links = document.querySelectorAll<HTMLAnchorElement>(
+      "nav a[data-category]",
+    );
+    const sections = document.querySelectorAll<HTMLElement>("section[id]");
+    const navScroll = document.getElementById("nav-scroll");
+    const fadeLeft = document.getElementById("fade-left");
+    const fadeRight = document.getElementById("fade-right");
+
+    if (!links.length || !sections.length) return;
+
+    function updateFades() {
+      if (!navScroll || !fadeLeft || !fadeRight) return;
+      const { scrollLeft, scrollWidth, clientWidth } = navScroll;
+      fadeLeft.classList.toggle("visible", scrollLeft > 2);
+      fadeRight.classList.toggle(
+        "visible",
+        scrollLeft < scrollWidth - clientWidth - 2,
+      );
+    }
+
+    if (navScroll) {
+      navScroll.addEventListener("scroll", updateFades);
+      setTimeout(updateFades, 100);
+    }
+
+    function scrollActiveIntoView(link: HTMLElement) {
+      if (!navScroll) return;
+      const scrollRect = navScroll.getBoundingClientRect();
+      const linkRect = link.getBoundingClientRect();
+
+      if (linkRect.left < scrollRect.left + 20) {
+        navScroll.scrollTo({
+          left: navScroll.scrollLeft - (scrollRect.left - linkRect.left) - 40,
+          behavior: "smooth",
+        });
+      } else if (linkRect.right > scrollRect.right - 20) {
+        navScroll.scrollTo({
+          left: navScroll.scrollLeft + (linkRect.right - scrollRect.right) + 40,
+          behavior: "smooth",
+        });
+      }
+    }
+
+    function setActiveLink(id: string) {
+      links.forEach((link) => {
+        const isActive = link.getAttribute("data-category") === id;
+        link.classList.toggle("active", isActive);
+        if (isActive) {
+          scrollActiveIntoView(link);
+        }
+      });
+      updateFades();
+    }
+
+    function updateActiveSection() {
+      const headerHeight = window.innerWidth >= 768 ? 68 : 56;
+      const menuNavHeight = 48;
+      const totalOffset = headerHeight + menuNavHeight;
+      const viewportHeight = window.innerHeight;
+      const checkPoint = totalOffset + (viewportHeight - totalOffset) * 0.3;
+
+      let activeSection: HTMLElement | null = null;
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= checkPoint && rect.bottom > checkPoint) {
+          activeSection = section;
+        }
+      });
+
+      if (!activeSection) {
+        let closestDistance = Infinity;
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top < checkPoint) {
+            const distance = checkPoint - rect.top;
+            if (distance < closestDistance) {
+              closestDistance = distance;
+              activeSection = section;
+            }
+          }
+        });
+      }
+
+      if (!activeSection && sections.length > 0) {
+        activeSection = sections[0];
+      }
+
+      if (activeSection) {
+        const id = activeSection.getAttribute("id");
+        if (id) setActiveLink(id);
+      }
+    }
+
+    let ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateActiveSection();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener("scroll", onScroll);
+
+    // Initial state
+    updateActiveSection();
+
+    links.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute("href")?.slice(1);
+        const target = document.getElementById(targetId || "");
+        if (target) {
+          const headerHeight = window.innerWidth >= 768 ? 68 : 56;
+          const menuNavHeight = 48;
+          const offset = headerHeight + menuNavHeight + 10;
+          const y =
+            target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+          if (targetId) setActiveLink(targetId);
+        }
+      });
+    });
+  }
+
+  // Run on load and after view transitions
+  initMenuNav();
+  document.addEventListener("astro:after-swap", initMenuNav);
+</script>

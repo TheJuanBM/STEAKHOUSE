@@ -1,0 +1,399 @@
+---
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Reservar Mesa - LF Steakhouse">
+  <Header currentPage="/reservar" />
+  <main>
+    <section class="reservar">
+      <div class="container">
+        <div class="header">
+          <div class="ornament">
+            <span class="line"></span>
+            <span class="diamond"></span>
+            <span class="line"></span>
+          </div>
+          <h1 class="title">Reserva tu Mesa</h1>
+          <p class="subtitle">
+            Completa el formulario y te contactaremos por WhatsApp para
+            confirmar tu reservación
+          </p>
+        </div>
+
+        <form id="reservation-form" class="form">
+          <div class="form-group">
+            <label for="nombre" class="label">Nombre completo</label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              required
+              class="input"
+              placeholder="Tu nombre"
+            />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fecha" class="label">Fecha</label>
+              <input
+                type="date"
+                id="fecha"
+                name="fecha"
+                required
+                class="input"
+              />
+            </div>
+            <div class="form-group">
+              <label for="hora" class="label">Hora</label>
+              <select id="hora" name="hora" required class="input">
+                <option value="">Seleccionar</option>
+                <option value="13:00">13:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+                <option value="20:30">20:30</option>
+                <option value="21:00">21:00</option>
+                <option value="21:30">21:30</option>
+                <option value="22:00">22:00</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="personas" class="label">Personas</label>
+              <select id="personas" name="personas" required class="input">
+                <option value="">Seleccionar</option>
+                <option value="1">1 persona</option>
+                <option value="2">2 personas</option>
+                <option value="3">3 personas</option>
+                <option value="4">4 personas</option>
+                <option value="5">5 personas</option>
+                <option value="6">6 personas</option>
+                <option value="7">7 personas</option>
+                <option value="8">8+ personas</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="ocasion" class="label">Ocasión (opcional)</label>
+              <select id="ocasion" name="ocasion" class="input">
+                <option value="">Seleccionar</option>
+                <option value="cumpleaños">Cumpleaños</option>
+                <option value="aniversario">Aniversario</option>
+                <option value="negocios">Cena de negocios</option>
+                <option value="romántica">Cena romántica</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="notas" class="label">Notas especiales (opcional)</label>
+            <textarea
+              id="notas"
+              name="notas"
+              rows="3"
+              class="input textarea"
+              placeholder="Alergias, preferencias de mesa, etc."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <svg
+              class="whatsapp-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+              ></path>
+            </svg>
+            Reservar por WhatsApp
+          </button>
+        </form>
+
+        <div class="info-section">
+          <div class="info-card">
+            <h3 class="info-title">Horarios de reservación</h3>
+            <p class="info-text">Comida: 13:00 - 16:00</p>
+            <p class="info-text">Cena: 19:00 - 23:00</p>
+          </div>
+          <div class="info-card">
+            <h3 class="info-title">Política de cancelación</h3>
+            <p class="info-text">
+              Cancelaciones con al menos 2 horas de anticipación sin cargo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  main {
+    padding-top: 80px;
+    min-height: 100vh;
+  }
+
+  .reservar {
+    padding: 40px 20px 80px;
+  }
+
+  @media (min-width: 768px) {
+    .reservar {
+      padding: 60px 40px 100px;
+    }
+  }
+
+  .container {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .ornament .line {
+    width: 30px;
+    height: 1px;
+    background-color: rgba(245, 230, 200, 0.3);
+  }
+
+  .ornament .diamond {
+    width: 6px;
+    height: 6px;
+    background-color: rgba(245, 230, 200, 0.4);
+    transform: rotate(45deg);
+  }
+
+  .title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .title {
+      font-size: 44px;
+    }
+  }
+
+  .subtitle {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.6);
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(245, 230, 200, 0.7);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .input {
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--cream);
+    background-color: rgba(245, 230, 200, 0.05);
+    border: 1px solid rgba(245, 230, 200, 0.2);
+    padding: 14px 16px;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+    outline: none;
+  }
+
+  .input::placeholder {
+    color: rgba(245, 230, 200, 0.35);
+  }
+
+  .input:focus {
+    border-color: rgba(245, 230, 200, 0.5);
+    background-color: rgba(245, 230, 200, 0.08);
+  }
+
+  .textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  select.input {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23F5E6C8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 44px;
+  }
+
+  select.input option {
+    background-color: var(--burgundy);
+    color: var(--cream);
+  }
+
+  .submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #25d366;
+    border: none;
+    padding: 18px 32px;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      transform 0.2s ease;
+    margin-top: 8px;
+  }
+
+  .submit-btn:hover {
+    background-color: #22c55e;
+    transform: translateY(-2px);
+  }
+
+  .whatsapp-icon {
+    flex-shrink: 0;
+  }
+
+  .info-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 500px) {
+    .info-section {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .info-card {
+    padding: 24px;
+    border: 1px solid rgba(245, 230, 200, 0.15);
+    text-align: center;
+  }
+
+  .info-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+
+  .info-text {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.6);
+    line-height: 1.6;
+  }
+</style>
+
+<script>
+  const form = document.getElementById("reservation-form") as HTMLFormElement;
+  const phoneNumber = "573042582119";
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const nombre = formData.get("nombre") as string;
+    const fecha = formData.get("fecha") as string;
+    const hora = formData.get("hora") as string;
+    const personas = formData.get("personas") as string;
+    const ocasion = formData.get("ocasion") as string;
+    const notas = formData.get("notas") as string;
+
+    const fechaObj = new Date(fecha + "T00:00:00");
+    const fechaFormateada = fechaObj.toLocaleDateString("es-MX", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    let mensaje = `Hola, me gustaría hacer una reservación:\n\n`;
+    mensaje += `• *Nombre:* ${nombre}\n`;
+    mensaje += `• *Fecha:* ${fechaFormateada}\n`;
+    mensaje += `• *Hora:* ${hora}\n`;
+    mensaje += `• *Personas:* ${personas}\n`;
+
+    if (ocasion) {
+      mensaje += `• *Ocasión:* ${ocasion}\n`;
+    }
+
+    if (notas) {
+      mensaje += `• *Notas:* ${notas}\n`;
+    }
+
+    mensaje += `\nQuedo atento a su confirmación. Gracias.`;
+
+    const mensajeCodificado = encodeURIComponent(mensaje);
+
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${mensajeCodificado}`;
+    window.open(whatsappUrl, "_blank");
+  });
+
+  const fechaInput = document.getElementById("fecha") as HTMLInputElement;
+  if (fechaInput) {
+    const today = new Date().toISOString().split("T")[0];
+    fechaInput.min = today;
+  }
+</script>

@@ -1,0 +1,257 @@
+---
+interface Props {
+  currentPage?: string;
+}
+
+const { currentPage = "" } = Astro.props;
+
+const links = [
+  { href: "/", label: "Inicio" },
+  { href: "/menu", label: "Menú" },
+  { href: "/galeria", label: "Galería" },
+  { href: "/reservar", label: "Reservar" },
+];
+---
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <span class="logo-text">[STEAKHOUSE]</span>
+    </a>
+
+    <nav class="nav-desktop">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class:list={["nav-link", { active: currentPage === link.href }]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <button class="menu-btn" id="menu-btn" aria-label="Abrir menú">
+      <span class="menu-line"></span>
+      <span class="menu-line"></span>
+    </button>
+  </div>
+
+  <nav class="nav-mobile" id="nav-mobile">
+    <div class="nav-mobile-inner">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "nav-mobile-link",
+              { active: currentPage === link.href },
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+</header>
+
+<style>
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: rgba(61, 31, 31, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .header-inner {
+      padding: 20px 40px;
+    }
+  }
+
+  .logo {
+    text-decoration: none;
+  }
+
+  .logo-text {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 2px;
+  }
+
+  @media (min-width: 768px) {
+    .logo-text {
+      font-size: 28px;
+    }
+  }
+
+  .nav-desktop {
+    display: none;
+    align-items: center;
+    gap: 32px;
+  }
+
+  @media (min-width: 768px) {
+    .nav-desktop {
+      display: flex;
+    }
+  }
+
+  .nav-link {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(245, 230, 200, 0.7);
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 8px 0;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--cream);
+    transition: width 0.2s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--cream);
+  }
+
+  .nav-link.active::after,
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  .menu-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    .menu-btn {
+      display: none;
+    }
+  }
+
+  .menu-line {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background-color: var(--cream);
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+  }
+
+  .menu-btn.open .menu-line:first-child {
+    transform: translateY(3.5px) rotate(45deg);
+  }
+
+  .menu-btn.open .menu-line:last-child {
+    transform: translateY(-3.5px) rotate(-45deg);
+  }
+
+  .nav-mobile {
+    display: none;
+    background-color: var(--burgundy);
+    border-top: 1px solid rgba(245, 230, 200, 0.1);
+  }
+
+  .nav-mobile.open {
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .nav-mobile {
+      display: none !important;
+    }
+  }
+
+  .nav-mobile-inner {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .nav-mobile-link {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(245, 230, 200, 0.7);
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(245, 230, 200, 0.1);
+    transition: color 0.2s ease;
+  }
+
+  .nav-mobile-link:last-child {
+    border-bottom: none;
+  }
+
+  .nav-mobile-link:hover,
+  .nav-mobile-link.active {
+    color: var(--cream);
+  }
+</style>
+
+<script>
+  function initMobileMenu() {
+    const menuBtn = document.getElementById("menu-btn");
+    const navMobile = document.getElementById("nav-mobile");
+
+    if (!menuBtn || !navMobile) return;
+
+    const newMenuBtn = menuBtn.cloneNode(true);
+    menuBtn.parentNode?.replaceChild(newMenuBtn, menuBtn);
+
+    newMenuBtn.addEventListener("click", () => {
+      (newMenuBtn as HTMLElement).classList.toggle("open");
+      navMobile.classList.toggle("open");
+    });
+
+    const mobileLinks = navMobile.querySelectorAll("a");
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        (newMenuBtn as HTMLElement).classList.remove("open");
+        navMobile.classList.remove("open");
+      });
+    });
+  }
+
+  initMobileMenu();
+
+  document.addEventListener("astro:after-swap", initMobileMenu);
+</script>
