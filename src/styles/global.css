@@ -1,7 +1,0 @@
-@import "tailwindcss";
-
-/* Custom theme variables for the steakhouse */
-@theme inline {
-  --font-sans: "Montserrat", sans-serif;
-  --font-serif: "Cormorant Garamond", serif;
-}
