@@ -1,0 +1,69 @@
+{
+  "name": "LF Steakhouse",
+  "short_name": "LF Steakhouse",
+  "description": "Restaurante premium en Caucasia Antioquia especializado en carnes, parrilla y comida gourmet. Reservas online en LF Steakhouse.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#3d1f1f",
+  "theme_color": "#2d1717",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "es",
+  "categories": [
+    "Restaurante en Caucasia",
+    "Parrilla",
+    "Carnes",
+    "Steakhouse",
+    "Comida gourmet",
+    "Restaurante en Antioquia"
+  ],
+  "icons": [
+    {
+      "src": "/icons/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/favicon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/fotos/og-image.png",
+      "sizes": "1200x1200",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Vista principal de LF Steakhouse"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Reservar mesa",
+      "short_name": "Reservar",
+      "description": "Reservar una mesa en LF Steakhouse",
+      "url": "/reservar",
+      "icons": [
+        {
+          "src": "/icons/favicon-96x96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}

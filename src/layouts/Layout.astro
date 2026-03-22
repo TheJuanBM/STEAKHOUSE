@@ -1,9 +1,31 @@
 ---
 interface Props {
   title: string;
+  image?: string;
+  keywords?: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const {
+  title = "LF Steakhouse",
+  image = "/fotos/og-image.png",
+  description = "Restaurante premium en Caucasia Antioquia especializado en carnes, parrilla y comida gourmet. Reservas online en LF Steakhouse.",
+  keywords = "lfsteakhouse, Caucasia, reservar restaurante lujo, comida premium Bajo Cauca, confirmación inmediata restaurante, gastronomía, lf, steakhouse, comida de calidad",
+} = Astro.props;
+const imageURL = new URL(image, Astro.site).toString();
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const baseUrl = Astro.site?.toString() || "https://lfsteakhouse.com";
+
+const siteName = "LF Steakhouse";
+const itemListElement = [
+  { name: "Inicio", url: baseUrl },
+  { name: "LF Steakhouse", url: baseUrl },
+].map((crumb, index) => ({
+  "@type": "ListItem",
+  position: index + 1,
+  name: crumb.name,
+  item: crumb.url,
+}));
 ---
 
 <!doctype html>
@@ -11,22 +33,353 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta
-      name="description"
-      content="Menú del Restaurante - Carta de platos y bebidas"
-    />
-    <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap"
-      rel="stylesheet"
-    />
+
+    <!-- Preconnect para recursos críticos externos -->
+    <link rel="preconnect" href="https://www.google.com" />
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+
+    <!-- Primary Meta Tags -->
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="LF Steakhouse" />
+
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Hreflang Tag para idioma del sitio -->
+    <link rel="alternate" hreflang="es-CO" href={canonicalURL} />
+
+    <!-- Geo Meta Tags -->
+    <meta name="geo.region" content="CO-ANT" />
+    <meta name="geo.placename" content="Caucasia, Antioquia" />
+    <meta name="geo.position" content="7.999502155398765;-75.23093994479436" />
+    <meta name="ICBM" content="7.999502155398765, -75.23093994479436" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:image:secure_url" content={imageURL} />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${title} - LF Steakhouse`} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@lfsteakhouse" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
+    <meta name="twitter:image:alt" content={`${title} - LF Steakhouse`} />
+
+    <!-- Favicon SVG para navegadores modernos (prioridad, soporta tema claro/oscuro) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="/icons/favicon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="/icons/favicon-48x48.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/icons/favicon-16x16.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/icons/apple-touch-icon-180x180.png"
+    />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- PWA & App Meta Tags -->
+    <meta
+      name="theme-color"
+      content="#3d1f1f"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#2d1717"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Botánico" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content={siteName} />
+    <meta name="msapplication-TileColor" content="#3d1f1f" />
+    <meta name="msapplication-TileImage" content="/icons/icon-144x144.png" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- JSON-LD Schema for LFSteakhouse -->
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": ["Restaurant", "LocalBusiness", "FoodEstablishment"],
+        "@id": `${baseUrl}#restaurant`,
+        name: "LF Steakhouse",
+        menu: `${baseUrl}/menu`,
+        slogan: "Restaurante premium en Caucasia Antioquia",
+        hasMenu: {
+          "@type": "Menu",
+          "@id": `${baseUrl}/menu#menu`,
+          url: `${baseUrl}/menu`,
+        },
+        alternateName: "LF Steakhouse",
+        description,
+        url: baseUrl,
+        logo: {
+          "@type": "ImageObject",
+          "@id": `${baseUrl}#logo`,
+          url: `${baseUrl}/logo.png`,
+        },
+        image: [imageURL, `${baseUrl}/og-image.jpg`],
+        areaServed: {
+          "@type": "Place",
+          name: "Caucasia Antioquia Colombia",
+        },
+        mainEntityOfPage: {
+          "@id": `${baseUrl}#website`,
+        },
+        parentOrganization: {
+          "@id": `${baseUrl}#organization`,
+        },
+        servesCuisine: [
+          "Steakhouse",
+          "Parrilla",
+          "Comida Gourmet",
+          "Restaurante Premium",
+        ],
+        address: {
+          "@type": "PostalAddress",
+          "@id": `${baseUrl}#address`,
+          streetAddress: "Km 3 Vía a la Costa, Sector Campoalegre",
+          addressLocality: "Caucasia",
+          addressRegion: "Antioquia",
+          postalCode: "052410",
+          addressCountry: "CO",
+        },
+        location: {
+          "@type": "Place",
+          "@id": `${baseUrl}#place`,
+          name: "LF Steakhouse",
+          address: {
+            "@id": `${baseUrl}#address`,
+          },
+          geo: {
+            "@id": `${baseUrl}#geo`,
+          },
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          "@id": `${baseUrl}#geo`,
+          latitude: 7.999502155398765,
+          longitude: -75.23093994479436,
+        },
+        telephone: "+573042582119",
+        email: "info@lfsteakhouse.com",
+        sameAs: [
+          "https://instagram.com/lf.steakhouse",
+          "https://maps.google.com/?q=7.999502155398765,-75.23093994479436",
+        ],
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          "@id": `${baseUrl}/menu#catalog`,
+          name: "Menú LF Steakhouse",
+          url: `${baseUrl}/menu`,
+        },
+        priceRange: "$$$",
+        currenciesAccepted: "COP",
+        paymentAccepted:
+          "Efectivo, Tarjeta de Crédito, Tarjeta de Débito, Transferencia Bancaria",
+        knowsAbout: [
+          "Restaurante en Caucasia",
+          "Parrilla",
+          "Carnes",
+          "Steakhouse",
+          "Comida gourmet",
+          "Restaurante en Antioquia",
+        ],
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday",
+            ],
+            opens: "12:00",
+            closes: "23:00",
+          },
+        ],
+        brand: {
+          "@type": "Brand",
+          name: "LF Steakhouse",
+        },
+        foundingLocation: {
+          "@type": "Place",
+          name: "Caucasia, Antioquia, Colombia",
+        },
+        petsAllowed: true,
+        acceptsReservations: `${baseUrl}/reservas`,
+        amenityFeature: [
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Reserva",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "WiFi Gratis",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Aire Acondicionado",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Estacionamiento",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Cena",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Bar",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Eventos",
+            value: true,
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            name: "Experiencia",
+            value: true,
+          },
+        ],
+        inLanguage: "es-CO",
+        hasMap:
+          "https://maps.google.com/?q=7.999502155398765,-75.23093994479436",
+      })}
+    />
+
+    <!-- JSON-LD Schema for Organization -->
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": `${baseUrl}#organization`,
+        name: "LF Steakhouse",
+        url: baseUrl,
+        logo: {
+          "@type": "ImageObject",
+          "@id": `${baseUrl}#logo`,
+          url: `${baseUrl}/logo.png`,
+        },
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: "+573042582119",
+          contactType: "reservations",
+          availableLanguage: ["Spanish", "English"],
+          areaServed: "CO",
+        },
+        inLanguage: "es-CO",
+        sameAs: [
+          "https://instagram.com/lf.steakhouse",
+          "https://maps.google.com/?q=7.999502155398765,-75.23093994479436",
+        ],
+      })}
+    />
+
+    <!-- JSON-LD Schema for WebSite (Search Action) -->
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": `${baseUrl}#website`,
+        url: baseUrl,
+        name: "LF Steakhouse",
+        description: "El mejor restaurante de la zona",
+        publisher: {
+          "@id": `${baseUrl}#organization`,
+        },
+        about: {
+          "@id": `${baseUrl}#restaurant`,
+        },
+        mainEntity: {
+          "@id": `${baseUrl}#restaurant`,
+        },
+        potentialAction: {
+          "@type": "SearchAction",
+          target: `${baseUrl}/?q={search_term_string}`,
+          "query-input": "required name=search_term_string",
+        },
+        inLanguage: "es-CO",
+      })}
+    />
+
+    <!-- JSON-LD Schema for BreadcrumbList -->
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement,
+        },
+        null,
+        2,
+      )}
+    />
   </head>
   <body>
     <slot />
