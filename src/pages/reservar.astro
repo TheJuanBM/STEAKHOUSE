@@ -240,17 +240,28 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .input {
+    height: 50px;
     font-family: "Montserrat", sans-serif;
     font-size: 15px;
     font-weight: 400;
     color: var(--cream);
     background-color: rgba(245, 230, 200, 0.05);
     border: 1px solid rgba(245, 230, 200, 0.2);
-    padding: 14px 16px;
+    padding: 0 16px;
     transition:
       border-color 0.2s ease,
       background-color 0.2s ease;
     outline: none;
+  }
+
+  input[type="date"] {
+    cursor: pointer;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: brightness(0) saturate(100%) invert(89%) sepia(21%) saturate(287%)
+      hue-rotate(356deg) brightness(95%) contrast(92%);
   }
 
   .input::placeholder {
@@ -265,6 +276,7 @@ import Layout from "../layouts/Layout.astro";
   .textarea {
     resize: vertical;
     min-height: 100px;
+    padding: 14px 16px;
   }
 
   select.input {
@@ -294,13 +306,12 @@ import Layout from "../layouts/Layout.astro";
     color: #fff;
     background-color: #1b8d47;
     border: none;
-    padding: 18px 32px;
+    height: 50px;
     cursor: pointer;
     transition:
       background-color 0.2s ease,
       transform 0.2s ease;
-    margin-top: 8px;
-    box-shadow: 0 2px 8px rgba(27, 141, 71, 0.3);
+    box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
   }
 
   .submit-btn:hover {
