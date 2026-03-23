@@ -64,6 +64,16 @@ const links = [
     left: 0;
     right: 0;
     z-index: 1000;
+    background-color: transparent;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    transition:
+      background-color 0.4s ease,
+      backdrop-filter 0.4s ease,
+      -webkit-backdrop-filter 0.4s ease;
+  }
+
+  header.scrolled {
     background-color: rgba(61, 31, 31, 0.75);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -228,6 +238,25 @@ const links = [
 </style>
 
 <script>
+  function initScrollHeader() {
+    const header = document.querySelector("header");
+    if (!header) return;
+
+    const onScroll = () => {
+      if (window.scrollY > 80) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
+  initScrollHeader();
+  document.addEventListener("astro:after-swap", initScrollHeader);
+
   function initMobileMenu() {
     const menuBtn = document.getElementById("menu-btn");
     const navMobile = document.getElementById("nav-mobile");
