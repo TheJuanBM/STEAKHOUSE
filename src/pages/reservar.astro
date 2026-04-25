@@ -58,9 +58,7 @@ import Trans from "../i18n/Trans.astro";
                 <Trans es="Hora" en="Time" />
               </label>
               <select id="hora" name="hora" required class="input">
-                <option value="" data-es="Seleccionar" data-en="Select">
-                  <span class="i18n-es">Seleccionar</span>
-                </option>
+                <option value="" data-i18n-select="true">Seleccionar</option>
                 <option value="13:00">13:00</option>
                 <option value="13:30">13:30</option>
                 <option value="14:00">14:00</option>
@@ -83,17 +81,15 @@ import Trans from "../i18n/Trans.astro";
                 <Trans es="Personas" en="Guests" />
               </label>
               <select id="personas" name="personas" required class="input">
-                <option value="">
-                  <span class="i18n-es">Seleccionar</span><span class="i18n-en">Select</span>
-                </option>
-                <option value="1 persona" data-en="1 guest">1 persona</option>
-                <option value="2 personas" data-en="2 guests">2 personas</option>
-                <option value="3 personas" data-en="3 guests">3 personas</option>
-                <option value="4 personas" data-en="4 guests">4 personas</option>
-                <option value="5 personas" data-en="5 guests">5 personas</option>
-                <option value="6 personas" data-en="6 guests">6 personas</option>
-                <option value="7 personas" data-en="7 guests">7 personas</option>
-                <option value="8 personas" data-en="8+ guests">8+ personas</option>
+                <option value="" data-i18n-select="true">Seleccionar</option>
+                <option value="1 persona">1 persona</option>
+                <option value="2 personas">2 personas</option>
+                <option value="3 personas">3 personas</option>
+                <option value="4 personas">4 personas</option>
+                <option value="5 personas">5 personas</option>
+                <option value="6 personas">6 personas</option>
+                <option value="7 personas">7 personas</option>
+                <option value="8 personas">8+ personas</option>
               </select>
             </div>
             <div class="form-group">
@@ -101,14 +97,12 @@ import Trans from "../i18n/Trans.astro";
                 <Trans es="Ocasión (opcional)" en="Occasion (optional)" />
               </label>
               <select id="ocasion" name="ocasion" class="input">
-                <option value="">
-                  <span class="i18n-es">Seleccionar</span><span class="i18n-en">Select</span>
-                </option>
-                <option value="cumpleaños" data-en="Birthday">Cumpleaños</option>
-                <option value="aniversario" data-en="Anniversary">Aniversario</option>
-                <option value="negocios" data-en="Business dinner">Cena de negocios</option>
-                <option value="romántica" data-en="Romantic dinner">Cena romántica</option>
-                <option value="otro" data-en="Other">Otro</option>
+                <option value="" data-i18n-select="true">Seleccionar</option>
+                <option value="cumpleaños">Cumpleaños</option>
+                <option value="aniversario">Aniversario</option>
+                <option value="negocios">Cena de negocios</option>
+                <option value="romántica">Cena romántica</option>
+                <option value="otro">Otro</option>
               </select>
             </div>
           </div>
@@ -487,12 +481,18 @@ import Trans from "../i18n/Trans.astro";
   const fechaInput = document.getElementById("fecha") as HTMLInputElement;
   let selectedDate = "";
 
-  // Update placeholder text based on current language
+  // Update placeholders and select default option text based on current language
   function updatePlaceholders() {
     const lang = document.documentElement.getAttribute("lang") || "es";
+    const isEn = lang === "en";
+
     document.querySelectorAll<HTMLElement>("[data-placeholder-es]").forEach((el) => {
-      const key = lang === "en" ? "data-placeholder-en" : "data-placeholder-es";
+      const key = isEn ? "data-placeholder-en" : "data-placeholder-es";
       (el as HTMLInputElement | HTMLTextAreaElement).placeholder = el.getAttribute(key) || "";
+    });
+
+    document.querySelectorAll<HTMLOptionElement>("option[data-i18n-select]").forEach((opt) => {
+      opt.textContent = isEn ? "Select" : "Seleccionar";
     });
   }
 
