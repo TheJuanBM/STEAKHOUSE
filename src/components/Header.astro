@@ -31,8 +31,15 @@ const links = [
       <LanguageSwitcher />
     </div>
 
+    {currentPage !== "/" && (
+      <button class="back-btn" id="back-btn" aria-label="Volver atrás">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+    )}
+
     <div class="mobile-actions">
-      <LanguageSwitcher />
       <button class="menu-btn" id="menu-btn" aria-label="Menú">
         <span class="menu-line"></span>
         <span class="menu-line"></span>
@@ -49,6 +56,9 @@ const links = [
           <span class="i18n-en">{link.en}</span>
         </a>
       ))}
+      <div class="lang-mobile">
+        <LanguageSwitcher />
+      </div>
     </div>
   </nav>
 </header>
@@ -79,7 +89,7 @@ const links = [
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px 20px;
+    padding: 32px 20px;
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
@@ -87,7 +97,7 @@ const links = [
 
   @media (min-width: 768px) {
     .header-inner {
-      padding: 20px 40px;
+      padding: 32px 40px;
     }
   }
 
@@ -150,11 +160,36 @@ const links = [
     width: 100%;
   }
 
+  .back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(245, 230, 200, 0.7);
+    padding: 8px 0;
+    transition: color 0.2s ease;
+  }
+
+  .back-btn:hover {
+    color: var(--cream);
+  }
+
+  @media (min-width: 768px) {
+    .back-btn {
+      display: none;
+    }
+  }
+
   /* Mobile */
   .mobile-actions {
     display: flex;
     align-items: center;
-    gap: 4px;
+    position: absolute;
+    right: 20px;
   }
 
   @media (min-width: 768px) {
@@ -224,8 +259,14 @@ const links = [
     transition: color 0.2s ease;
   }
 
-  .nav-mobile-link:last-child {
+  .nav-mobile-link:last-of-type {
     border-bottom: none;
+  }
+
+  .lang-mobile {
+    padding-top: 20px;
+    border-top: 1px solid rgba(245, 230, 200, 0.1);
+    margin-top: 4px;
   }
 
   .nav-mobile-link:hover,
@@ -269,4 +310,13 @@ const links = [
 
   initMobileMenu();
   document.addEventListener("astro:after-swap", initMobileMenu);
+
+  document.getElementById("back-btn")?.addEventListener("click", () => {
+    const fromSameSite = document.referrer && new URL(document.referrer).origin === window.location.origin;
+    if (fromSameSite) {
+      history.back();
+    } else {
+      window.location.href = "/";
+    }
+  });
 </script>
