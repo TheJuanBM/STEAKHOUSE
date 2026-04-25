@@ -394,9 +394,8 @@ import Layout from "../layouts/Layout.astro";
   #form-toast {
     position: fixed;
     bottom: 32px;
-    right: 24px;
-    left: auto;
-    transform: translateY(20px);
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -419,7 +418,20 @@ import Layout from "../layouts/Layout.astro";
 
   #form-toast.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
+  }
+
+  @media (min-width: 540px) {
+    #form-toast {
+      left: auto;
+      right: 24px;
+      transform: translateY(20px);
+      max-width: 340px;
+    }
+
+    #form-toast.visible {
+      transform: translateY(0);
+    }
   }
 
   #form-toast svg {
