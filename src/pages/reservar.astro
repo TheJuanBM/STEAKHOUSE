@@ -39,11 +39,12 @@ import Layout from "../layouts/Layout.astro";
             <div class="form-group">
               <label for="fecha" class="label">Fecha</label>
               <input
-                type="date"
+                type="text"
                 id="fecha"
                 name="fecha"
                 required
                 class="input"
+                placeholder="dd/mm/aaaa"
               />
             </div>
             <div class="form-group">
@@ -125,12 +126,6 @@ import Layout from "../layouts/Layout.astro";
             <h2 class="info-title">Horarios de reservación</h2>
             <p class="info-text">Comida: 13:00 - 16:00</p>
             <p class="info-text">Cena: 19:00 - 23:00</p>
-          </div>
-          <div class="info-card">
-            <h2 class="info-title">Política de cancelación</h2>
-            <p class="info-text">
-              Cancelaciones con al menos 2 horas de anticipación sin cargo.
-            </p>
           </div>
         </div>
       </div>
@@ -240,7 +235,6 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .input {
-    height: 50px;
     font-family: "Montserrat", sans-serif;
     font-size: 15px;
     font-weight: 400;
@@ -248,10 +242,18 @@ import Layout from "../layouts/Layout.astro";
     background-color: rgba(245, 230, 200, 0.05);
     border: 1px solid rgba(245, 230, 200, 0.2);
     padding: 0 16px;
+    box-sizing: border-box;
+    width: 100%;
     transition:
       border-color 0.2s ease,
       background-color 0.2s ease;
     outline: none;
+  }
+
+  input.input,
+  select.input {
+    height: 50px;
+    line-height: 50px;
   }
 
   input[type="date"] {
@@ -277,6 +279,7 @@ import Layout from "../layouts/Layout.astro";
     resize: vertical;
     min-height: 100px;
     padding: 14px 16px;
+    line-height: 1.6;
   }
 
   select.input {
@@ -330,7 +333,7 @@ import Layout from "../layouts/Layout.astro";
 
   @media (min-width: 500px) {
     .info-section {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
     }
   }
 
@@ -405,6 +408,16 @@ import Layout from "../layouts/Layout.astro";
   const fechaInput = document.getElementById("fecha") as HTMLInputElement;
   if (fechaInput) {
     const today = new Date().toISOString().split("T")[0];
-    fechaInput.min = today;
+
+    fechaInput.addEventListener("focus", () => {
+      fechaInput.type = "date";
+      fechaInput.min = today;
+    });
+
+    fechaInput.addEventListener("blur", () => {
+      if (!fechaInput.value) {
+        fechaInput.type = "text";
+      }
+    });
   }
 </script>
