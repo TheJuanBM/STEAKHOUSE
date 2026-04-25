@@ -1,4 +1,6 @@
 ---
+import Trans from "../i18n/Trans.astro";
+
 const googleMapsUrl =
   "https://www.google.com/maps/dir/?api=1&destination=7.999502155398765,-75.23093994479436";
 const wazeUrl =
@@ -15,30 +17,23 @@ const embedUrl =
         <span class="diamond"></span>
         <span class="line"></span>
       </div>
-      <h2 id="llegar-titulo" class="title">Encuéntranos</h2>
-      <p class="subtitle">Te esperamos en Caucasia, Antioquia</p>
+      <h2 id="llegar-titulo" class="title">
+        <Trans es="Encuéntranos" en="Find Us" />
+      </h2>
+      <p class="subtitle">
+        <Trans es="Te esperamos en Caucasia, Antioquia" en="We're waiting for you in Caucasia, Antioquia" />
+      </p>
     </div>
 
     <div class="content">
-      <!-- Info lateral -->
       <div class="info">
         <div class="info-block">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            aria-hidden="true"
-          >
-            <path
-              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
-            ></path>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"></path>
             <circle cx="12" cy="9" r="2.5"></circle>
           </svg>
           <div>
-            <p class="info-label">Dirección</p>
+            <p class="info-label"><Trans es="Dirección" en="Address" /></p>
             <p class="info-value">
               Km 3, vía a la costa, glorieta antes de llegar a Campoalegre
             </p>
@@ -47,21 +42,11 @@ const embedUrl =
         </div>
 
         <div class="info-block">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            aria-hidden="true"
-          >
-            <path
-              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
-            ></path>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path>
           </svg>
           <div>
-            <p class="info-label">Teléfono</p>
+            <p class="info-label"><Trans es="Teléfono" en="Phone" /></p>
             <a href="tel:+573042582119" class="info-value info-link">
               +57 304 258 2119
             </a>
@@ -69,22 +54,18 @@ const embedUrl =
         </div>
 
         <div class="info-block">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            aria-hidden="true"
-          >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
             <circle cx="12" cy="12" r="10"></circle>
             <path d="M12 6v6l4 2"></path>
           </svg>
           <div>
-            <p class="info-label">Horarios</p>
-            <p class="info-value">Lunes a Jueves: 13:00 – 23:00</p>
-            <p class="info-value">Viernes a Domingo: 12:00 – 00:00</p>
+            <p class="info-label"><Trans es="Horarios" en="Hours" /></p>
+            <p class="info-value">
+              <Trans es="Lunes a Jueves: 13:00 – 23:00" en="Monday to Thursday: 13:00 – 23:00" />
+            </p>
+            <p class="info-value">
+              <Trans es="Viernes a Domingo: 12:00 – 00:00" en="Friday to Sunday: 12:00 – 00:00" />
+            </p>
           </div>
         </div>
 
@@ -94,18 +75,10 @@ const embedUrl =
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-primary"
-            aria-label="Abrir ruta en Google Maps"
+            aria-label="Google Maps"
           >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-              ></path>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
             </svg>
             Google Maps
           </a>
@@ -114,15 +87,9 @@ const embedUrl =
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-secondary"
-            aria-label="Abrir ruta en Waze"
+            aria-label="Waze"
           >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M3 11l19-9-9 19-2-8-8-2z"/>
             </svg>
             Waze
@@ -130,7 +97,6 @@ const embedUrl =
         </div>
       </div>
 
-      <!-- Mapa -->
       <div class="map-wrapper">
         <iframe
           src={embedUrl}
@@ -140,8 +106,8 @@ const embedUrl =
           allowfullscreen
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="Ubicación de LF Steakhouse en Caucasia, Antioquia"
-          aria-label="Mapa de Google con la ubicación de LF Steakhouse"
+          title="LF Steakhouse — Caucasia, Antioquia"
+          aria-label="Google Maps — LF Steakhouse"
         ></iframe>
       </div>
     </div>
@@ -228,7 +194,6 @@ const embedUrl =
     }
   }
 
-  /* Info */
   .info {
     display: flex;
     flex-direction: column;
@@ -323,7 +288,6 @@ const embedUrl =
     background-color: rgba(245, 230, 200, 0.05);
   }
 
-  /* Mapa */
   .map-wrapper {
     flex: 1;
     min-height: 360px;
@@ -335,7 +299,6 @@ const embedUrl =
       0 24px 60px rgba(0, 0, 0, 0.5);
   }
 
-  /* Esquinas decorativas */
   .map-wrapper::before,
   .map-wrapper::after {
     content: "";

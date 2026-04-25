@@ -1,6 +1,12 @@
 ---
+interface Categoria {
+  id: string;
+  nombre: string;
+  en: string;
+}
+
 interface Props {
-  categorias: { id: string; nombre: string }[];
+  categorias: Categoria[];
 }
 
 const { categorias } = Astro.props;
@@ -12,7 +18,8 @@ const { categorias } = Astro.props;
       {
         categorias.map((categoria) => (
           <a href={`#${categoria.id}`} data-category={categoria.id}>
-            {categoria.nombre}
+            <span class="i18n-es">{categoria.nombre}</span>
+            <span class="i18n-en">{categoria.en}</span>
           </a>
         ))
       }
@@ -192,14 +199,11 @@ const { categorias } = Astro.props;
       links.forEach((link) => {
         const isActive = link.getAttribute("data-category") === id;
         link.classList.toggle("active", isActive);
-        if (isActive) {
-          scrollActiveIntoView(link);
-        }
+        if (isActive) scrollActiveIntoView(link);
       });
       updateFades();
     }
 
-    // Initial state: always start on first section
     const firstId = sections[0]?.getAttribute("id");
     if (firstId) setActiveLink(firstId);
 
@@ -221,7 +225,6 @@ const { categorias } = Astro.props;
           }
         });
 
-        // Pick the topmost visible section
         let topmostId: string | null = null;
         let topmostTop = Infinity;
         sections.forEach((section) => {
@@ -263,7 +266,6 @@ const { categorias } = Astro.props;
     });
   }
 
-  // Run on load and after view transitions
   initMenuNav();
   document.addEventListener("astro:after-swap", initMenuNav);
 </script>

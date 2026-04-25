@@ -1,5 +1,5 @@
 ---
-
+import Trans from "../i18n/Trans.astro";
 ---
 
 <section class="hero">
@@ -13,14 +13,22 @@
     <div class="logo-wrapper">
       <img src="/logo.jpg" alt="LF Steakhouse" class="hero-logo" />
     </div>
-    <p class="subtitle">Cocina de autor con alma tradicional</p>
+    <p class="subtitle">
+      <Trans es="Cocina de autor con alma tradicional" en="Chef-driven cuisine with a traditional soul" />
+    </p>
     <div class="cta-group">
-      <a href="/reservar" class="btn btn-primary">Reservar Mesa</a>
-      <a href="/menu" class="btn btn-secondary">Ver menú</a>
+      <a href="/reservar" class="btn btn-primary">
+        <Trans es="Reservar Mesa" en="Reserve a Table" />
+      </a>
+      <a href="/menu" class="btn btn-secondary">
+        <Trans es="Ver menú" en="View Menu" />
+      </a>
     </div>
   </div>
   <div class="scroll-indicator">
-    <span class="scroll-text">Descubre</span>
+    <span class="scroll-text">
+      <Trans es="Descubre" en="Discover" />
+    </span>
     <span class="scroll-line"></span>
   </div>
 </section>

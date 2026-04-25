@@ -1,24 +1,29 @@
 ---
+type Descripcion = string | { es: string; en: string };
+
 interface MenuItem {
   nombre: string;
-  descripcion: string;
+  descripcion: Descripcion;
   precio: string;
 }
 
 interface Props {
   id: string;
   titulo: string;
+  tituloEn?: string;
   items: MenuItem[];
 }
 
-const { id, titulo, items } = Astro.props;
+const { id, titulo, tituloEn, items } = Astro.props;
 ---
 
 <section id={id}>
   <header>
     <h2>
-      {titulo}
-      <!-- <a href={`#${id}`} data-category={id}>{titulo}</a> -->
+      {tituloEn
+        ? <><span class="i18n-es">{titulo}</span><span class="i18n-en">{tituloEn}</span></>
+        : titulo
+      }
     </h2>
   </header>
 </section>
@@ -32,7 +37,15 @@ const { id, titulo, items } = Astro.props;
           <span class="item-line" />
           <span class="item-price">{item.precio}</span>
         </div>
-        <p class="item-desc">{item.descripcion}</p>
+        {typeof item.descripcion === "object"
+          ? (item.descripcion.es || item.descripcion.en) && (
+              <p class="item-desc">
+                {item.descripcion.es && <span class="i18n-es">{item.descripcion.es}</span>}
+                {item.descripcion.en && <span class="i18n-en">{item.descripcion.en}</span>}
+              </p>
+            )
+          : <p class="item-desc">{item.descripcion}</p>
+        }
       </li>
     ))
   }
@@ -64,11 +77,6 @@ const { id, titulo, items } = Astro.props;
     letter-spacing: 3px;
     text-transform: uppercase;
     margin: 0;
-  }
-
-  a {
-    color: #f5e6c8;
-    text-decoration: none;
   }
 
   @media (min-width: 640px) {

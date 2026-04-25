@@ -1,5 +1,5 @@
 ---
-
+import Trans from "../i18n/Trans.astro";
 ---
 
 <section class="about">
@@ -10,28 +10,39 @@
         <span class="diamond"></span>
         <span class="line"></span>
       </div>
-      <h2 class="title">Nuestra Historia</h2>
+      <h2 class="title">
+        <Trans es="Nuestra Historia" en="Our Story" />
+      </h2>
       <p class="description">
-        Desde 2026, LF Steakhouse ha sido un refugio para los amantes de la
-        buena cocina. Fusionamos técnicas contemporáneas con recetas
-        tradicionales, utilizando ingredientes locales de la más alta calidad.
+        <Trans
+          es="Desde 2026, LF Steakhouse ha sido un refugio para los amantes de la buena cocina. Fusionamos técnicas contemporáneas con recetas tradicionales, utilizando ingredientes locales de la más alta calidad."
+          en="Since 2026, LF Steakhouse has been a haven for lovers of fine dining. We blend contemporary techniques with traditional recipes, using the finest local ingredients."
+        />
       </p>
       <p class="description">
-        Cada plato cuenta una historia, cada visita se convierte en un recuerdo.
-        Te invitamos a ser parte de nuestra familia.
+        <Trans
+          es="Cada plato cuenta una historia, cada visita se convierte en un recuerdo. Te invitamos a ser parte de nuestra familia."
+          en="Every dish tells a story, every visit becomes a memory. We invite you to be part of our family."
+        />
       </p>
       <div class="stats">
         <div class="stat">
           <span class="stat-number">+5</span>
-          <span class="stat-label">Años de experiencia</span>
+          <span class="stat-label">
+            <Trans es="Años de experiencia" en="Years of experience" />
+          </span>
         </div>
         <div class="stat">
           <span class="stat-number">+50</span>
-          <span class="stat-label">Platos de autor</span>
+          <span class="stat-label">
+            <Trans es="Platos de autor" en="Signature dishes" />
+          </span>
         </div>
         <div class="stat">
           <span class="stat-number">10k</span>
-          <span class="stat-label">Clientes felices</span>
+          <span class="stat-label">
+            <Trans es="Clientes felices" en="Happy guests" />
+          </span>
         </div>
       </div>
     </div>

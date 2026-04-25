@@ -1,4 +1,6 @@
 ---
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+
 interface Props {
   currentPage?: string;
 }
@@ -6,10 +8,10 @@ interface Props {
 const { currentPage = "" } = Astro.props;
 
 const links = [
-  { href: "/", label: "Inicio" },
-  { href: "/menu", label: "Menú" },
-  { href: "/galeria", label: "Galería" },
-  { href: "/reservar", label: "Reservar" },
+  { href: "/", es: "Inicio", en: "Home" },
+  { href: "/menu", es: "Menú", en: "Menu" },
+  { href: "/galeria", es: "Galería", en: "Gallery" },
+  { href: "/reservar", es: "Reservar", en: "Reserve" },
 ];
 ---
 
@@ -26,16 +28,20 @@ const links = [
             href={link.href}
             class:list={["nav-link", { active: currentPage === link.href }]}
           >
-            {link.label}
+            <span class="i18n-es">{link.es}</span>
+            <span class="i18n-en">{link.en}</span>
           </a>
         ))
       }
     </nav>
 
-    <button class="menu-btn" id="menu-btn" aria-label="Abrir menú">
-      <span class="menu-line"></span>
-      <span class="menu-line"></span>
-    </button>
+    <div class="header-right">
+      <LanguageSwitcher />
+      <button class="menu-btn" id="menu-btn" aria-label="Menú">
+        <span class="menu-line"></span>
+        <span class="menu-line"></span>
+      </button>
+    </div>
   </div>
 
   <nav class="nav-mobile" id="nav-mobile">
@@ -49,10 +55,14 @@ const links = [
               { active: currentPage === link.href },
             ]}
           >
-            {link.label}
+            <span class="i18n-es">{link.es}</span>
+            <span class="i18n-en">{link.en}</span>
           </a>
         ))
       }
+      <div class="lang-mobile">
+        <LanguageSwitcher />
+      </div>
     </div>
   </nav>
 </header>
@@ -158,6 +168,13 @@ const links = [
     width: 100%;
   }
 
+  /* Right group: lang switcher + hamburger */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
   .menu-btn {
     display: flex;
     flex-direction: column;
@@ -227,13 +244,19 @@ const links = [
     transition: color 0.2s ease;
   }
 
-  .nav-mobile-link:last-child {
+  .nav-mobile-link:last-of-type {
     border-bottom: none;
   }
 
   .nav-mobile-link:hover,
   .nav-mobile-link.active {
     color: var(--cream);
+  }
+
+  .lang-mobile {
+    padding-top: 20px;
+    border-top: 1px solid rgba(245, 230, 200, 0.1);
+    margin-top: 4px;
   }
 </style>
 
@@ -281,6 +304,5 @@ const links = [
   }
 
   initMobileMenu();
-
   document.addEventListener("astro:after-swap", initMobileMenu);
 </script>

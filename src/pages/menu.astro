@@ -4,19 +4,24 @@ import MenuHeader from "../components/MenuHeader.astro";
 import MenuNav from "../components/MenuNav.astro";
 import MenuSection from "../components/MenuSection.astro";
 import Layout from "../layouts/Layout.astro";
+import Trans from "../i18n/Trans.astro";
 
 const menuData = {
   entradas: [
     {
       nombre: "Mazorquitas",
-      descripcion:
-        "Asadas y bañadas en salsa de tocineta y queso fresco rallado",
+      descripcion: {
+        es: "Asadas y bañadas en salsa de tocineta y queso fresco rallado",
+        en: "Grilled corn bathed in bacon sauce and grated fresh cheese",
+      },
       precio: "$39.900",
     },
     {
       nombre: "Cazuela de empanadas",
-      descripcion:
-        "Empanadas de iglesia listas para untar con salsa verde tatemada, crema agria, queso fresco, cebolla roja con cilantro y limón",
+      descripcion: {
+        es: "Empanadas de iglesia listas para untar con salsa verde tatemada, crema agria, queso fresco, cebolla roja con cilantro y limón",
+        en: "Church empanadas ready to dip with roasted green salsa, sour cream, fresh cheese, red onion with cilantro and lime",
+      },
       precio: "$29.900",
     },
     {
@@ -32,104 +37,67 @@ const menuData = {
   ],
 
   brasas: [
-    {
-      nombre: "Punta de anca 350/380gr",
-      descripcion: "",
-      precio: "$79.900",
-    },
-    {
-      nombre: "Punta de anca 250/280gr",
-      descripcion: "",
-      precio: "$59.900",
-    },
-    {
-      nombre: "Churrasco 350/380gr",
-      descripcion: "",
-      precio: "$75.900",
-    },
-    {
-      nombre: "Churrasco 250/280gr",
-      descripcion: "",
-      precio: "$57.900",
-    },
-    {
-      nombre: "Baby beef 250/280gr",
-      descripcion: "",
-      precio: "$62.900",
-    },
-    {
-      nombre: "Beef chorizo",
-      descripcion: "",
-      precio: "$75.900",
-    },
-    {
-      nombre: "Morrillo",
-      descripcion: "",
-      precio: "$54.900",
-    },
+    { nombre: "Punta de anca 350/380gr", descripcion: "", precio: "$79.900" },
+    { nombre: "Punta de anca 250/280gr", descripcion: "", precio: "$59.900" },
+    { nombre: "Churrasco 350/380gr", descripcion: "", precio: "$75.900" },
+    { nombre: "Churrasco 250/280gr", descripcion: "", precio: "$57.900" },
+    { nombre: "Baby beef 250/280gr", descripcion: "", precio: "$62.900" },
+    { nombre: "Beef chorizo", descripcion: "", precio: "$75.900" },
+    { nombre: "Morrillo", descripcion: "", precio: "$54.900" },
     {
       nombre: "Pollo marinado 250gr",
-      descripcion: "Contramuslo",
+      descripcion: { es: "Contramuslo", en: "Chicken thigh" },
       precio: "$48.900",
     },
-    {
-      nombre: "Costilla BBQ 400gr",
-      descripcion: "",
-      precio: "$79.900",
-    },
-    {
-      nombre: "Chorizo 200gr",
-      descripcion: "",
-      precio: "$29.900",
-    },
-    {
-      nombre: "Salmón 250gr",
-      descripcion: "",
-      precio: "$65.000",
-    },
+    { nombre: "Costilla BBQ 400gr", descripcion: "", precio: "$79.900" },
+    { nombre: "Chorizo 200gr", descripcion: "", precio: "$29.900" },
+    { nombre: "Salmón 250gr", descripcion: "", precio: "$65.000" },
   ],
 
   importados: [
-    {
-      nombre: "Strip Loin",
-      descripcion: "",
-      precio: "$175.900",
-    },
-    {
-      nombre: "Picanha",
-      descripcion: "",
-      precio: "$139.900",
-    },
+    { nombre: "Strip Loin", descripcion: "", precio: "$175.900" },
+    { nombre: "Picanha", descripcion: "", precio: "$139.900" },
   ],
 
   especiales: [
     {
       nombre: "Lomo Steak House",
-      descripcion:
-        "Lomo fino con frijol refrito, salsa verde tatemada, guacamole, crema agria, pico de gallo y chicharroncitos crocantes",
+      descripcion: {
+        es: "Lomo fino con frijol refrito, salsa verde tatemada, guacamole, crema agria, pico de gallo y chicharroncitos crocantes",
+        en: "Tenderloin with refried beans, roasted green salsa, guacamole, sour cream, pico de gallo and crispy chicharroncitos",
+      },
       precio: "$72.900",
     },
     {
       nombre: "Morrillo Ajisaso",
-      descripcion:
-        "Tierno morrillo con marinación especial de la casa, en salsa de ají amarillo y chimichurri",
+      descripcion: {
+        es: "Tierno morrillo con marinación especial de la casa, en salsa de ají amarillo y chimichurri",
+        en: "Tender chuck roll with our special house marinade, in yellow chili and chimichurri sauce",
+      },
       precio: "$62.900",
     },
     {
       nombre: "Lomo americano",
-      descripcion:
-        "Lomo fino con queso Philadelphia y mermelada especial de tocineta con Worcestershire",
+      descripcion: {
+        es: "Lomo fino con queso Philadelphia y mermelada especial de tocineta con Worcestershire",
+        en: "Tenderloin with Philadelphia cream cheese and special bacon jam with Worcestershire",
+      },
       precio: "$72.900",
     },
     {
       nombre: "Lomo steak pimienta",
-      descripcion: "Lomo fino en salsa especial con mix de pimientas",
+      descripcion: {
+        es: "Lomo fino en salsa especial con mix de pimientas",
+        en: "Tenderloin in our special sauce with a mix of peppers",
+      },
       precio: "$62.900",
     },
     {
       nombre: "Lomo cuatro quesos",
-      descripcion:
-        "Lomo fino con trocitos de plátano maduro y salsa de queso fundido",
+      descripcion: {
+        es: "Lomo fino con trocitos de plátano maduro y salsa de queso fundido",
+        en: "Tenderloin with pieces of ripe plantain and melted cheese sauce",
+      },
       precio: "$64.900",
     },
   ],
@@ -137,14 +105,18 @@ const menuData = {
   compartir: [
     {
       nombre: "Molcajete",
-      descripcion:
-        "Guacamole hecho en el momento, con chicharrón, chorizo, queso costeño frito, carne de res, arepitas fritas",
+      descripcion: {
+        es: "Guacamole hecho en el momento, con chicharrón, chorizo, queso costeño frito, carne de res, arepitas fritas",
+        en: "Freshly made guacamole with chicharrón, chorizo, fried coastal cheese, beef and fried arepitas",
+      },
       precio: "$69.900",
     },
     {
       nombre: "Cacerola a lo macho",
-      descripcion:
-        "Frijol refrito, carne molida con nuestro guiso especial, queso fundido, salsa verde tatemada, crema agria, guacamole, pico de gallo y arepitas fritas",
+      descripcion: {
+        es: "Frijol refrito, carne molida con nuestro guiso especial, queso fundido, salsa verde tatemada, crema agria, guacamole, pico de gallo y arepitas fritas",
+        en: "Refried beans, ground beef with our special stew, melted cheese, roasted green salsa, sour cream, guacamole, pico de gallo and fried arepitas",
+      },
       precio: "$38.900",
     },
   ],
@@ -152,24 +124,24 @@ const menuData = {
   hamburguesas: [
     {
       nombre: "Hamburguesa Origen",
-      descripcion:
-        "Pan brioche, carne americana 150gr, mozzarella, queso americano, tocineta BBQ, chimichurri y salsa de ajo",
+      descripcion: {
+        es: "Pan brioche, carne americana 150gr, mozzarella, queso americano, tocineta BBQ, chimichurri y salsa de ajo",
+        en: "Brioche bun, 150g American beef, mozzarella, American cheese, BBQ bacon, house chimichurri and garlic sauce",
+      },
       precio: "$39.000",
     },
     {
       nombre: "Hamburguesa Americana",
-      descripcion:
-        "Pan brioche, carne americana 150gr, queso americano, mermelada de tocineta con Worcestershire y escabeche de cebolla con queso crema",
+      descripcion: {
+        es: "Pan brioche, carne americana 150gr, queso americano, mermelada de tocineta con Worcestershire y escabeche de cebolla con queso crema",
+        en: "Brioche bun, 150g American beef, American cheese, bacon jam with Worcestershire and pickled onion with cream cheese",
+      },
       precio: "$44.900",
     },
   ],
 
   infantil: [
-    {
-      nombre: "Mini hamburguesa",
-      descripcion: "",
-      precio: "$32.900",
-    },
+    { nombre: "Mini hamburguesa", descripcion: "", precio: "$32.900" },
   ],
 
   bebidas: [
@@ -189,59 +161,71 @@ const menuData = {
   cocteles: [
     {
       nombre: "Nace un borracho",
-      descripcion:
-        "Famosa chelada de la L y la F a base de tequila, chamoy, zumo de limón y cerveza",
+      descripcion: {
+        es: "Famosa chelada de la L y la F a base de tequila, chamoy, zumo de limón y cerveza",
+        en: "Famous chelada by L & F made with tequila, chamoy, fresh lime juice and beer",
+      },
       precio: "$28.900",
     },
     {
       nombre: "Paloma LF",
-      descripcion:
-        "Cóctel clásico a base de tequila reposado, zumo fresco de limón, syrup de maracuyá-naranja y gaseosa de toronja",
+      descripcion: {
+        es: "Cóctel clásico a base de tequila reposado, zumo fresco de limón, syrup de maracuyá-naranja y gaseosa de toronja",
+        en: "Classic cocktail with aged tequila, fresh lime juice, passion fruit-orange syrup and grapefruit soda",
+      },
       precio: "$27.900",
     },
     {
       nombre: "Penicillin",
-      descripcion:
-        "Cóctel a base de whisky escocés, zumo fresco de limón, syrup de jengibre y naranja",
+      descripcion: {
+        es: "Cóctel a base de whisky escocés, zumo fresco de limón, syrup de jengibre y naranja",
+        en: "Cocktail with Scotch whisky, fresh lemon juice, ginger and orange syrup",
+      },
       precio: "$27.900",
     },
     {
       nombre: "Moscow Mule",
-      descripcion:
-        "Cóctel a base de vodka, zumo fresco de limón, syrup de jengibre y ginger beer",
+      descripcion: {
+        es: "Cóctel a base de vodka, zumo fresco de limón, syrup de jengibre y ginger beer",
+        en: "Cocktail with vodka, fresh lime juice, ginger syrup and ginger beer",
+      },
       precio: "$29.900",
     },
     {
       nombre: "Mojito a la fresca",
-      descripcion:
-        "Clásico refrescante a base de ron añejo, hierbabuena, fresas, zumo de limón y soda",
+      descripcion: {
+        es: "Clásico refrescante a base de ron añejo, hierbabuena, fresas, zumo de limón y soda",
+        en: "Refreshing classic with aged rum, spearmint, strawberries, lime juice and soda",
+      },
       precio: "$25.900",
     },
     {
       nombre: "Margarita de corozo",
-      descripcion:
-        "Clásico margarita a base de tequila reposado, triple sec, zumo de limón y un toque de corozo de la región",
+      descripcion: {
+        es: "Clásico margarita a base de tequila reposado, triple sec, zumo de limón y un toque de corozo de la región",
+        en: "Classic margarita with aged tequila, triple sec, lime juice and a touch of local corozo berry",
+      },
       precio: "$25.900",
     },
     {
       nombre: "Gin & Tonic",
-      descripcion: "London dry gin y agua tónica",
+      descripcion: { es: "London dry gin y agua tónica", en: "London dry gin and tonic water" },
       precio: "$27.900",
     },
   ],
 };
 
 const categorias = [
-  { id: "entradas", nombre: "Entradas" },
-  { id: "brasas", nombre: "Brasas" },
-  { id: "importados", nombre: "Importados" },
-  { id: "guarniciones", nombre: "Guarniciones" },
-  { id: "especiales", nombre: "Especiales de la casa" },
-  { id: "compartir", nombre: "Para compartir" },
-  { id: "hamburguesas", nombre: "Hamburguesas" },
-  { id: "infantil", nombre: "Menú infantil" },
-  { id: "bebidas", nombre: "Bebidas" },
-  { id: "cocteles", nombre: "Cócteles" },
+  { id: "entradas",      nombre: "Entradas",            en: "Starters" },
+  { id: "brasas",        nombre: "Brasas",              en: "From the Grill" },
+  { id: "importados",    nombre: "Importados",          en: "Imported Cuts" },
+  { id: "guarniciones",  nombre: "Guarniciones",        en: "Side Dishes" },
+  { id: "especiales",    nombre: "Especiales de la casa", en: "House Specials" },
+  { id: "compartir",     nombre: "Para compartir",      en: "To Share" },
+  { id: "hamburguesas",  nombre: "Hamburguesas",        en: "Burgers" },
+  { id: "infantil",      nombre: "Menú infantil",       en: "Kids' Menu" },
+  { id: "bebidas",       nombre: "Bebidas",             en: "Drinks" },
+  { id: "cocteles",      nombre: "Cócteles",            en: "Cocktails" },
 ];
 ---
 
@@ -252,55 +236,42 @@ const categorias = [
     <MenuNav categorias={categorias} />
 
     <div class="content">
-      <MenuSection id="entradas" titulo="Entradas" items={menuData.entradas} />
-      <MenuSection id="brasas" titulo="Brasas" items={menuData.brasas} />
-      <MenuSection
-        id="importados"
-        titulo="Importados"
-        items={menuData.importados}
-      />
+      <MenuSection id="entradas" titulo="Entradas" tituloEn="Starters" items={menuData.entradas} />
+      <MenuSection id="brasas" titulo="Brasas" tituloEn="From the Grill" items={menuData.brasas} />
+      <MenuSection id="importados" titulo="Importados" tituloEn="Imported Cuts" items={menuData.importados} />
+
       <section id="guarniciones" class="guarniciones-section">
         <header class="guarniciones-header">
-          <h2 class="guarniciones-title">Escoge tu Guarnición</h2>
+          <h2 class="guarniciones-title">
+            <Trans es="Escoge tu Guarnición" en="Choose Your Side Dish" />
+          </h2>
         </header>
         <ul class="guarniciones-list">
-          <li>Papa Francesa Artesanal</li>
-          <li>Papas Criollas</li>
-          <li>Papa Americana</li>
-          <li>Vegetales a la Brasa</li>
+          <li><Trans es="Papa Francesa Artesanal" en="Artisan French Fries" /></li>
+          <li><Trans es="Papas Criollas" en="Criolla Potatoes" /></li>
+          <li><Trans es="Papa Americana" en="American Style Potato" /></li>
+          <li><Trans es="Vegetales a la Brasa" en="Grilled Vegetables" /></li>
         </ul>
         <div class="guarnicion-extra">
           <div class="guarnicion-extra-row">
-            <span class="guarnicion-extra-name">Desgranado con Salsa de Tocineta y Queso</span>
+            <span class="guarnicion-extra-name">
+              <Trans es="Desgranado con Salsa de Tocineta y Queso" en="Corn Kernels with Bacon and Cheese Sauce" />
+            </span>
             <span class="guarnicion-extra-line" />
             <span class="guarnicion-extra-price">$4.900</span>
           </div>
-          <span class="guarnicion-extra-note">Valor adicional</span>
+          <span class="guarnicion-extra-note">
+            <Trans es="valor adicional" en="additional charge" />
+          </span>
         </div>
       </section>
 
-      <MenuSection
-        id="especiales"
-        titulo="Especiales de la casa"
-        items={menuData.especiales}
-      />
-      <MenuSection
-        id="compartir"
-        titulo="Para compartir"
-        items={menuData.compartir}
-      />
-      <MenuSection
-        id="hamburguesas"
-        titulo="Hamburguesas"
-        items={menuData.hamburguesas}
-      />
-      <MenuSection
-        id="infantil"
-        titulo="Menú infantil"
-        items={menuData.infantil}
-      />
-      <MenuSection id="bebidas" titulo="Bebidas" items={menuData.bebidas} />
-      <MenuSection id="cocteles" titulo="Cócteles" items={menuData.cocteles} />
+      <MenuSection id="especiales" titulo="Especiales de la casa" tituloEn="House Specials" items={menuData.especiales} />
+      <MenuSection id="compartir" titulo="Para compartir" tituloEn="To Share" items={menuData.compartir} />
+      <MenuSection id="hamburguesas" titulo="Hamburguesas" tituloEn="Burgers" items={menuData.hamburguesas} />
+      <MenuSection id="infantil" titulo="Menú infantil" tituloEn="Kids' Menu" items={menuData.infantil} />
+      <MenuSection id="bebidas" titulo="Bebidas" tituloEn="Drinks" items={menuData.bebidas} />
+      <MenuSection id="cocteles" titulo="Cócteles" tituloEn="Cocktails" items={menuData.cocteles} />
     </div>
 
     <footer>
@@ -309,9 +280,12 @@ const categorias = [
         <span class="dot"></span>
         <span class="line"></span>
       </div>
-      <p class="note">Precios incluyen IVA</p>
+      <p class="note"><Trans es="Precios incluyen IVA" en="Prices include tax" /></p>
       <p class="allergy">
-        Por favor, informe a su mesero sobre cualquier alergia alimentaria
+        <Trans
+          es="Por favor, informe a su mesero sobre cualquier alergia alimentaria"
+          en="Please inform your server about any food allergies"
+        />
       </p>
     </footer>
   </main>
@@ -381,6 +355,16 @@ const categorias = [
     margin: 0;
   }
 
+  .allergy {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.75);
+    margin: 8px 0 0;
+    font-style: italic;
+  }
+
+  /* Guarniciones */
   .guarniciones-section {
     scroll-margin-top: 120px;
   }
@@ -508,14 +492,5 @@ const categorias = [
     .guarnicion-extra-price {
       font-size: 20px;
     }
-  }
-
-  .allergy {
-    font-family: "Montserrat", sans-serif;
-    font-size: 10px;
-    font-weight: 300;
-    color: rgba(245, 230, 200, 0.75);
-    margin: 8px 0 0;
-    font-style: italic;
   }
 </style>

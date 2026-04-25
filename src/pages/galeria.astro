@@ -2,34 +2,38 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Trans from "../i18n/Trans.astro";
 
 const galleries = [
   {
     category: "Platillos",
+    categoryEn: "Dishes",
     images: [
-      { id: 1, alt: "Filete Mignon con salsa de vino tinto" },
-      { id: 2, alt: "Tartar de atún fresco" },
-      { id: 3, alt: "Risotto de hongos silvestres" },
-      { id: 4, alt: "Postre de chocolate" },
-      { id: 5, alt: "Carpaccio de res" },
-      { id: 6, alt: "Salmón a la parrilla" },
+      { id: 1, alt: "Filete Mignon con salsa de vino tinto", altEn: "Filet Mignon with red wine sauce" },
+      { id: 2, alt: "Tartar de atún fresco", altEn: "Fresh tuna tartare" },
+      { id: 3, alt: "Risotto de hongos silvestres", altEn: "Wild mushroom risotto" },
+      { id: 4, alt: "Postre de chocolate", altEn: "Chocolate dessert" },
+      { id: 5, alt: "Carpaccio de res", altEn: "Beef carpaccio" },
+      { id: 6, alt: "Salmón a la parrilla", altEn: "Grilled salmon" },
     ],
   },
   {
     category: "Ambiente",
+    categoryEn: "Ambiance",
     images: [
-      { id: 7, alt: "Interior del restaurante" },
-      { id: 8, alt: "Barra de vinos" },
-      { id: 9, alt: "Terraza exterior" },
-      { id: 10, alt: "Mesa privada" },
+      { id: 7, alt: "Interior del restaurante", altEn: "Restaurant interior" },
+      { id: 8, alt: "Barra de vinos", altEn: "Wine bar" },
+      { id: 9, alt: "Terraza exterior", altEn: "Outdoor terrace" },
+      { id: 10, alt: "Mesa privada", altEn: "Private table" },
     ],
   },
   {
     category: "Eventos",
+    categoryEn: "Events",
     images: [
-      { id: 11, alt: "Cena privada" },
-      { id: 12, alt: "Celebración especial" },
-      { id: 13, alt: "Evento corporativo" },
+      { id: 11, alt: "Cena privada", altEn: "Private dinner" },
+      { id: 12, alt: "Celebración especial", altEn: "Special celebration" },
+      { id: 13, alt: "Evento corporativo", altEn: "Corporate event" },
     ],
   },
 ];
@@ -46,21 +50,25 @@ const galleries = [
             <span class="diamond"></span>
             <span class="line"></span>
           </div>
-          <h1 class="title">Galería</h1>
+          <h1 class="title"><Trans es="Galería" en="Gallery" /></h1>
           <p class="subtitle">
-            Descubre nuestra cocina, ambiente y momentos especiales
+            <Trans
+              es="Descubre nuestra cocina, ambiente y momentos especiales"
+              en="Discover our kitchen, atmosphere and special moments"
+            />
           </p>
         </div>
 
         <nav class="tabs">
-          <button class="tab active" data-category="all">Todo</button>
+          <button class="tab active" data-category="all">
+            <span class="i18n-es">Todo</span>
+            <span class="i18n-en">All</span>
+          </button>
           {
             galleries.map((gallery) => (
-              <button
-                class="tab"
-                data-category={gallery.category.toLowerCase()}
-              >
-                {gallery.category}
+              <button class="tab" data-category={gallery.category.toLowerCase()}>
+                <span class="i18n-es">{gallery.category}</span>
+                <span class="i18n-en">{gallery.categoryEn}</span>
               </button>
             ))
           }
@@ -77,24 +85,24 @@ const galleries = [
                 >
                   <div class="image-placeholder">
                     <span class="placeholder-icon">
-                      <svg
-                        width="32"
-                        height="32"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1"
-                      >
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
                         <rect x="3" y="3" width="18" height="18" rx="2" />
                         <circle cx="8.5" cy="8.5" r="1.5" />
                         <path d="M21 15l-5-5L5 21" />
                       </svg>
                     </span>
-                    <span class="placeholder-text">{image.alt}</span>
+                    <span class="placeholder-text i18n-es">{image.alt}</span>
+                    <span class="placeholder-text i18n-en">{image.altEn}</span>
                   </div>
                   <div class="image-overlay">
-                    <span class="overlay-category">{gallery.category}</span>
-                    <span class="overlay-text">{image.alt}</span>
+                    <span class="overlay-category">
+                      <span class="i18n-es">{gallery.category}</span>
+                      <span class="i18n-en">{gallery.categoryEn}</span>
+                    </span>
+                    <span class="overlay-text">
+                      <span class="i18n-es">{image.alt}</span>
+                      <span class="i18n-en">{image.altEn}</span>
+                    </span>
                   </div>
                 </div>
               )),
@@ -106,47 +114,18 @@ const galleries = [
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
-      <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar">
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
+      <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar / Close">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M18 6L6 18M6 6l12 12"></path>
         </svg>
       </button>
-      <button
-        class="lightbox-nav lightbox-prev"
-        id="lightbox-prev"
-        aria-label="Anterior"
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Anterior / Previous">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M15 18l-6-6 6-6"></path>
         </svg>
       </button>
-      <button
-        class="lightbox-nav lightbox-next"
-        id="lightbox-next"
-        aria-label="Siguiente"
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
+      <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Siguiente / Next">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M9 18l6-6-6-6"></path>
         </svg>
       </button>
@@ -332,6 +311,9 @@ const galleries = [
     .placeholder-text {
       display: block;
     }
+    /* i18n overrides for placeholder-text (block element) */
+    html[lang="en"] .placeholder-text.i18n-es { display: none; }
+    html[lang="en"] .placeholder-text.i18n-en { display: block; }
   }
 
   .image-overlay {
@@ -371,7 +353,6 @@ const galleries = [
     color: var(--cream);
   }
 
-  /* Lightbox */
   .lightbox {
     position: fixed;
     inset: 0;
@@ -420,21 +401,12 @@ const galleries = [
     color: var(--cream);
   }
 
-  .lightbox-prev {
-    left: 10px;
-  }
-
-  .lightbox-next {
-    right: 10px;
-  }
+  .lightbox-prev { left: 10px; }
+  .lightbox-next { right: 10px; }
 
   @media (min-width: 768px) {
-    .lightbox-prev {
-      left: 30px;
-    }
-    .lightbox-next {
-      right: 30px;
-    }
+    .lightbox-prev { left: 30px; }
+    .lightbox-next { right: 30px; }
   }
 
   .lightbox-content {
@@ -467,17 +439,14 @@ const galleries = [
 </style>
 
 <script>
-  // Tab filtering
   const tabs = document.querySelectorAll(".tab");
   const items = document.querySelectorAll(".gallery-item");
 
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       const category = tab.getAttribute("data-category");
-
       tabs.forEach((t) => t.classList.remove("active"));
       tab.classList.add("active");
-
       items.forEach((item) => {
         const itemCategory = item.getAttribute("data-category");
         if (category === "all" || itemCategory === category) {
@@ -489,7 +458,6 @@ const galleries = [
     });
   });
 
-  // Lightbox
   const lightbox = document.getElementById("lightbox");
   const lightboxText = document.getElementById("lightbox-text");
   const closeBtn = document.getElementById("lightbox-close");
@@ -505,12 +473,17 @@ const galleries = [
     );
   }
 
+  function getItemText(item: Element): string {
+    const lang = document.documentElement.getAttribute("lang") || "es";
+    const selector = lang === "en" ? ".overlay-text .i18n-en" : ".overlay-text .i18n-es";
+    return item.querySelector(selector)?.textContent || item.querySelector(".overlay-text")?.textContent || "";
+  }
+
   function openLightbox(index: number) {
     updateVisibleItems();
     currentIndex = index;
     const item = visibleItems[currentIndex];
-    const text = item?.querySelector(".overlay-text")?.textContent || "";
-    if (lightboxText) lightboxText.textContent = text;
+    if (lightboxText) lightboxText.textContent = getItemText(item);
     lightbox?.classList.add("open");
     document.body.style.overflow = "hidden";
   }
@@ -521,25 +494,19 @@ const galleries = [
   }
 
   function showPrev() {
-    currentIndex =
-      (currentIndex - 1 + visibleItems.length) % visibleItems.length;
-    const item = visibleItems[currentIndex];
-    const text = item?.querySelector(".overlay-text")?.textContent || "";
-    if (lightboxText) lightboxText.textContent = text;
+    currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+    if (lightboxText) lightboxText.textContent = getItemText(visibleItems[currentIndex]);
   }
 
   function showNext() {
     currentIndex = (currentIndex + 1) % visibleItems.length;
-    const item = visibleItems[currentIndex];
-    const text = item?.querySelector(".overlay-text")?.textContent || "";
-    if (lightboxText) lightboxText.textContent = text;
+    if (lightboxText) lightboxText.textContent = getItemText(visibleItems[currentIndex]);
   }
 
   items.forEach((item) => {
     item.addEventListener("click", () => {
       updateVisibleItems();
-      const index = visibleItems.indexOf(item);
-      openLightbox(index);
+      openLightbox(visibleItems.indexOf(item));
     });
   });
 

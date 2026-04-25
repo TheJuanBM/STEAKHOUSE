@@ -32,6 +32,15 @@ const itemListElement = [
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <!-- Language detection — runs before paint to avoid flash -->
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem("lf-lang");
+        var nav = navigator.language || "";
+        var lang = stored || (nav.startsWith("en") ? "en" : "es");
+        if (lang === "en") document.documentElement.setAttribute("lang", "en");
+      })();
+    </script>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"
@@ -50,8 +59,10 @@ const itemListElement = [
 
     <link rel="canonical" href={canonicalURL} />
 
-    <!-- Hreflang Tag para idioma del sitio -->
+    <!-- Hreflang — same URL serves both languages -->
     <link rel="alternate" hreflang="es-CO" href={canonicalURL} />
+    <link rel="alternate" hreflang="en" href={canonicalURL} />
+    <link rel="alternate" hreflang="x-default" href={canonicalURL} />
 
     <!-- Geo Meta Tags -->
     <meta name="geo.region" content="CO-ANT" />
@@ -397,6 +408,11 @@ const itemListElement = [
 </html>
 
 <style is:global>
+  /* i18n — default: show Spanish, hide English */
+  .i18n-en { display: none; }
+  html[lang="en"] .i18n-es { display: none; }
+  html[lang="en"] .i18n-en { display: revert; }
+
   :root {
     --burgundy: #3d1f1f;
     --burgundy-light: #4a2828;

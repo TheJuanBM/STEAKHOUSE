@@ -1,42 +1,43 @@
 ---
-
+import Trans from "../i18n/Trans.astro";
 ---
 
 <footer>
   <div class="container">
     <div class="brand">
       <span class="logo">LF Steakhouse</span>
-      <p class="tagline">Cocina de autor con alma tradicional</p>
+      <p class="tagline">
+        <Trans es="Cocina de autor con alma tradicional" en="Chef-driven cuisine with a traditional soul" />
+      </p>
     </div>
 
     <div class="links-grid">
       <div class="links-column">
-        <p class="column-title">Navegación</p>
-        <a href="/" class="link">Inicio</a>
-        <a href="/menu" class="link">Menú</a>
-        <a href="/galeria" class="link">Galería</a>
-        <a href="/reservar" class="link">Reservar</a>
+        <p class="column-title"><Trans es="Navegación" en="Navigation" /></p>
+        <a href="/" class="link"><Trans es="Inicio" en="Home" /></a>
+        <a href="/menu" class="link"><Trans es="Menú" en="Menu" /></a>
+        <a href="/galeria" class="link"><Trans es="Galería" en="Gallery" /></a>
+        <a href="/reservar" class="link"><Trans es="Reservar" en="Reserve" /></a>
       </div>
 
       <div class="links-column">
-        <p class="column-title">Contacto</p>
+        <p class="column-title"><Trans es="Contacto" en="Contact" /></p>
         <p class="info">
           <a
             href="https://www.google.com/maps?q=7.9995370,-75.2310100"
             target="_blank"
             rel="noopener noreferrer"
             class="link"
-            >Km 3, vía a la costa, glorieta antes de llegar a Campoalegre.</a
-          >
+          >Km 3, vía a la costa, glorieta antes de llegar a Campoalegre.</a>
         </p>
         <p class="info">+57 304 258 2119</p>
       </div>
 
       <div class="links-column">
-        <p class="column-title">Horarios</p>
-        <p class="info">Lunes a Jueves</p>
+        <p class="column-title"><Trans es="Horarios" en="Hours" /></p>
+        <p class="info"><Trans es="Lunes a Jueves" en="Monday to Thursday" /></p>
         <p class="info-highlight">13:00 - 23:00</p>
-        <p class="info">Viernes a Domingo</p>
+        <p class="info"><Trans es="Viernes a Domingo" en="Friday to Sunday" /></p>
         <p class="info-highlight">12:00 - 00:00</p>
       </div>
     </div>
@@ -45,7 +46,8 @@
       <div class="divider"></div>
       <div class="bottom-content">
         <p class="copyright">
-          &copy; {new Date().getFullYear()} LF Steakhouse. Todos los derechos reservados.
+          &copy; {new Date().getFullYear()} LF Steakhouse.
+          <Trans es="Todos los derechos reservados." en="All rights reserved." />
         </p>
         <div class="social">
           <a
@@ -55,18 +57,10 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-            >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <rect x="2" y="2" width="20" height="20" rx="5"></rect>
               <circle cx="12" cy="12" r="4"></circle>
-              <circle cx="18" cy="6" r="1.5" fill="currentColor" stroke="none"
-              ></circle>
+              <circle cx="18" cy="6" r="1.5" fill="currentColor" stroke="none"></circle>
             </svg>
           </a>
         </div>

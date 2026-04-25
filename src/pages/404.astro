@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Trans from "../i18n/Trans.astro";
 ---
 
 <Layout title="Página no encontrada | LF Steakhouse">
@@ -13,20 +14,28 @@ import Footer from "../components/Footer.astro";
         <span class="diamond"></span>
         <span class="line"></span>
       </div>
-      
+
       <h1 class="error-code">404</h1>
-      
+
       <div class="content">
-        <h2 class="title">Página no encontrada</h2>
+        <h2 class="title">
+          <Trans es="Página no encontrada" en="Page not found" />
+        </h2>
         <p class="description">
-          Lo sentimos, la página que buscas no existe o ha sido movida. 
-          Te invitamos a volver a nuestro restaurante.
+          <Trans
+            es="Lo sentimos, la página que buscas no existe o ha sido movida. Te invitamos a volver a nuestro restaurante."
+            en="We're sorry, the page you're looking for doesn't exist or has been moved. We invite you to return to our restaurant."
+          />
         </p>
       </div>
 
       <div class="actions">
-        <a href="/" class="btn btn-primary">Volver al inicio</a>
-        <a href="/menu" class="btn btn-secondary">Ver menú</a>
+        <a href="/" class="btn btn-primary">
+          <Trans es="Volver al inicio" en="Back to home" />
+        </a>
+        <a href="/menu" class="btn btn-secondary">
+          <Trans es="Ver menú" en="View menu" />
+        </a>
       </div>
 
       <div class="ornament bottom">
