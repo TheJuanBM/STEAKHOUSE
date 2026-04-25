@@ -393,7 +393,7 @@ import Layout from "../layouts/Layout.astro";
 
   #form-toast {
     position: fixed;
-    bottom: 32px;
+    bottom: max(90px, calc(env(safe-area-inset-bottom) + 90px));
     left: 50%;
     transform: translateX(-50%) translateY(20px);
     display: flex;
@@ -408,7 +408,8 @@ import Layout from "../layouts/Layout.astro";
     font-size: 12px;
     font-weight: 400;
     letter-spacing: 0.3px;
-    max-width: calc(100vw - 40px);
+    width: calc(100vw - 32px);
+    max-width: 480px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
     z-index: 9999;
     pointer-events: none;
@@ -423,10 +424,12 @@ import Layout from "../layouts/Layout.astro";
 
   @media (min-width: 540px) {
     #form-toast {
+      bottom: 32px;
       left: auto;
       right: 24px;
       transform: translateY(20px);
-      max-width: 340px;
+      width: auto;
+      max-width: 380px;
     }
 
     #form-toast.visible {
