@@ -5,135 +5,10 @@ import MenuNav from "../components/MenuNav.astro";
 import MenuSection from "../components/MenuSection.astro";
 import Layout from "../layouts/Layout.astro";
 
-//  {
-//    entradas: [
-//     {
-//       nombre: "Carpaccio de Res",
-//       descripcion:
-//         "Finas láminas de res con rúcula, parmesano y vinagreta de limón",
-//       precio: "$185",
-//     },
-//     {
-//       nombre: "Tartar de Atún",
-//       descripcion: "Atún fresco con aguacate, ajonjolí y salsa ponzu",
-//       precio: "$210",
-//     },
-//     {
-//       nombre: "Bruschetta Mediterránea",
-//       descripcion:
-//         "Pan artesanal con tomate, albahaca fresca y aceite de oliva",
-//       precio: "$125",
-//     },
-//     {
-//       nombre: "Sopa de Cebolla Gratinada",
-//       descripcion: "Clásica sopa francesa con queso gruyère fundido",
-//       precio: "$145",
-//     },
-//   ],
-//   fuertes: [
-//     {
-//       nombre: "Costillas BBQ",
-//       descripcion: "Costillas de cerdo glaseadas con salsa barbacoa casera",
-//       precio: "$385",
-//     },
-//     {
-//       nombre: "Pollo al Horno",
-//       descripcion:
-//         "Medio pollo marinado con hierbas provenzales y papas rústicas",
-//       precio: "$295",
-//     },
-//     {
-//       nombre: "Arrachera",
-//       descripcion:
-//         "Corte de res marinado a la parrilla con guacamole y tortillas",
-//       precio: "$365",
-//     },
-//     {
-//       nombre: "Cochinita Pibil",
-//       descripcion: "Cerdo marinado en achiote con cebolla morada encurtida",
-//       precio: "$285",
-//     },
-//   ],
-//   principales: [
-//     {
-//       nombre: "Filete Mignon",
-//       descripcion:
-//         "Corte premium de 250g con salsa de vino tinto y puré trufado",
-//       precio: "$485",
-//     },
-//     {
-//       nombre: "Salmón a la Parrilla",
-//       descripcion: "Con vegetales de temporada y salsa de eneldo",
-//       precio: "$365",
-//     },
-//     {
-//       nombre: "Risotto de Hongos",
-//       descripcion: "Arroz arborio con mezcla de hongos silvestres y parmesano",
-//       precio: "$285",
-//     },
-//     {
-//       nombre: "Rack de Cordero",
-//       descripcion:
-//         "Costillas de cordero con costra de hierbas y reducción de menta",
-//       precio: "$425",
-//     },
-//     {
-//       nombre: "Pasta Trufa Negra",
-//       descripcion: "Tagliatelle frescos con crema de trufa negra y pecorino",
-//       precio: "$345",
-//     },
-//   ],
-//   postres: [
-//     {
-//       nombre: "Tiramisú Clásico",
-//       descripcion: "Tradicional postre italiano con mascarpone y café espresso",
-//       precio: "$145",
-//     },
-//     {
-//       nombre: "Crème Brûlée",
-//       descripcion: "Crema de vainilla con costra de caramelo",
-//       precio: "$125",
-//     },
-//     {
-//       nombre: "Fondant de Chocolate",
-//       descripcion: "Volcán de chocolate belga con helado de vainilla",
-//       precio: "$155",
-//     },
-//     {
-//       nombre: "Tarta de Queso",
-//       descripcion: "Estilo vasco con frutos rojos de temporada",
-//       precio: "$135",
-//     },
-//   ],
-//   bebidas: [
-//     {
-//       nombre: "Copa de Vino Tinto de LF Steakhouse",
-//       descripcion: "Selección del sommelier",
-//       precio: "$95",
-//     },
-//     {
-//       nombre: "Copa de Vino Blanco de LF Steakhouse",
-//       descripcion: "Selección del sommelier",
-//       precio: "$85",
-//     },
-//     { nombre: "Agua Mineral", descripcion: "Con o sin gas", precio: "$45" },
-//     {
-//       nombre: "Café Americano",
-//       descripcion: "Grano de altura tostado artesanalmente",
-//       precio: "$55",
-//     },
-//     {
-//       nombre: "Espresso Doble",
-//       descripcion: "Intenso y aromático",
-//       precio: "$65",
-//     },
-//   ],
-// };
-
 const menuData = {
   entradas: [
     {
-      nombre: "Mazorcitas",
+      nombre: "Mazorquitas",
       descripcion:
         "Asadas y bañadas en salsa de tocineta y queso fresco rallado",
       precio: "$39.900",
@@ -141,11 +16,11 @@ const menuData = {
     {
       nombre: "Cazuela de empanadas",
       descripcion:
-        "Empanadas listas para untar con salsa verde tatemada, crema agria, queso fresco, cebolla roja, cilantro y limón",
+        "Empanadas de iglesia listas para untar con salsa verde tatemada, crema agria, queso fresco, cebolla roja con cilantro y limón",
       precio: "$29.900",
     },
     {
-      nombre: "Chicharron acevichado",
+      nombre: "Chicharrón acevichado",
       descripcion: "",
       precio: "$29.900",
     },
@@ -231,19 +106,19 @@ const menuData = {
     {
       nombre: "Lomo Steak House",
       descripcion:
-        "Lomo fino con frijol refrito, salsa verde, guacamole, crema agria, pico de gallo y chicharrón",
+        "Lomo fino con frijol refrito, salsa verde tatemada, guacamole, crema agria, pico de gallo y chicharroncitos crocantes",
       precio: "$72.900",
     },
     {
       nombre: "Morrillo Ajisaso",
       descripcion:
-        "Morrillo con marinación especial en salsa de ají amarillo y chimichurri",
+        "Tierno morrillo con marinación especial de la casa, en salsa de ají amarillo y chimichurri",
       precio: "$62.900",
     },
     {
       nombre: "Lomo americano",
       descripcion:
-        "Lomo fino con queso philadelphia y mermelada especial de tocineta",
+        "Lomo fino con queso Philadelphia y mermelada especial de tocineta con Worcestershire",
       precio: "$72.900",
     },
     {
@@ -263,13 +138,13 @@ const menuData = {
     {
       nombre: "Molcajete",
       descripcion:
-        "Guacamole con chicharrón, chorizo, queso costeño, carne de res y arepitas",
+        "Guacamole hecho en el momento, con chicharrón, chorizo, queso costeño frito, carne de res, arepitas fritas",
       precio: "$69.900",
     },
     {
       nombre: "Cacerola a lo macho",
       descripcion:
-        "Frijol refrito, carne molida, queso fundido, salsa verde, guacamole, pico de gallo y arepitas",
+        "Frijol refrito, carne molida con nuestro guiso especial, queso fundido, salsa verde tatemada, crema agria, guacamole, pico de gallo y arepitas fritas",
       precio: "$38.900",
     },
   ],
@@ -284,7 +159,7 @@ const menuData = {
     {
       nombre: "Hamburguesa Americana",
       descripcion:
-        "Pan brioche, carne americana 150gr, queso americano, mermelada de tocineta y escabeche de cebolla",
+        "Pan brioche, carne americana 150gr, queso americano, mermelada de tocineta con Worcestershire y escabeche de cebolla con queso crema",
       precio: "$44.900",
     },
   ],
@@ -307,18 +182,52 @@ const menuData = {
     { nombre: "Soda de corozo", descripcion: "", precio: "$18.000" },
     { nombre: "Soda naranja jengibre", descripcion: "", precio: "$18.000" },
     { nombre: "Soda frutos rojos", descripcion: "", precio: "$18.000" },
-    { nombre: "Sangría rose", descripcion: "", precio: "$129.000" },
+    { nombre: "Sangría rosé", descripcion: "", precio: "$129.000" },
     { nombre: "Sangría tinto", descripcion: "", precio: "$129.000" },
   ],
 
   cocteles: [
-    { nombre: "Paloma LF", descripcion: "", precio: "$27.900" },
-    { nombre: "Penicilin", descripcion: "", precio: "$27.900" },
-    { nombre: "Moscow Mule", descripcion: "", precio: "$29.900" },
-    { nombre: "Mojito a la fresca", descripcion: "", precio: "$25.900" },
-    { nombre: "Margarita de corozo", descripcion: "", precio: "$25.900" },
-    { nombre: "Gin & Tonic", descripcion: "", precio: "$27.900" },
-    { nombre: "Nace un borracho", descripcion: "", precio: "$28.900" },
+    {
+      nombre: "Nace un borracho",
+      descripcion:
+        "Famosa chelada de la L y la F a base de tequila, chamoy, zumo de limón y cerveza",
+      precio: "$28.900",
+    },
+    {
+      nombre: "Paloma LF",
+      descripcion:
+        "Cóctel clásico a base de tequila reposado, zumo fresco de limón, syrup de maracuyá-naranja y gaseosa de toronja",
+      precio: "$27.900",
+    },
+    {
+      nombre: "Penicillin",
+      descripcion:
+        "Cóctel a base de whisky escocés, zumo fresco de limón, syrup de jengibre y naranja",
+      precio: "$27.900",
+    },
+    {
+      nombre: "Moscow Mule",
+      descripcion:
+        "Cóctel a base de vodka, zumo fresco de limón, syrup de jengibre y ginger beer",
+      precio: "$29.900",
+    },
+    {
+      nombre: "Mojito a la fresca",
+      descripcion:
+        "Clásico refrescante a base de ron añejo, hierbabuena, fresas, zumo de limón y soda",
+      precio: "$25.900",
+    },
+    {
+      nombre: "Margarita de corozo",
+      descripcion:
+        "Clásico margarita a base de tequila reposado, triple sec, zumo de limón y un toque de corozo de la región",
+      precio: "$25.900",
+    },
+    {
+      nombre: "Gin & Tonic",
+      descripcion: "London dry gin y agua tónica",
+      precio: "$27.900",
+    },
   ],
 };
 
@@ -326,6 +235,7 @@ const categorias = [
   { id: "entradas", nombre: "Entradas" },
   { id: "brasas", nombre: "Brasas" },
   { id: "importados", nombre: "Importados" },
+  { id: "guarniciones", nombre: "Guarniciones" },
   { id: "especiales", nombre: "Especiales de la casa" },
   { id: "compartir", nombre: "Para compartir" },
   { id: "hamburguesas", nombre: "Hamburguesas" },
@@ -349,6 +259,26 @@ const categorias = [
         titulo="Importados"
         items={menuData.importados}
       />
+      <section id="guarniciones" class="guarniciones-section">
+        <header class="guarniciones-header">
+          <h2 class="guarniciones-title">Escoge tu Guarnición</h2>
+        </header>
+        <ul class="guarniciones-list">
+          <li>Papa Francesa Artesanal</li>
+          <li>Papas Criollas</li>
+          <li>Papa Americana</li>
+          <li>Vegetales a la Brasa</li>
+        </ul>
+        <div class="guarnicion-extra">
+          <div class="guarnicion-extra-row">
+            <span class="guarnicion-extra-name">Desgranado con Salsa de Tocineta y Queso</span>
+            <span class="guarnicion-extra-line" />
+            <span class="guarnicion-extra-price">$4.900</span>
+          </div>
+          <span class="guarnicion-extra-note">Valor adicional</span>
+        </div>
+      </section>
+
       <MenuSection
         id="especiales"
         titulo="Especiales de la casa"
@@ -449,6 +379,135 @@ const categorias = [
     color: rgba(245, 230, 200, 0.8);
     letter-spacing: 1px;
     margin: 0;
+  }
+
+  .guarniciones-section {
+    scroll-margin-top: 120px;
+  }
+
+  @media (min-width: 768px) {
+    .guarniciones-section {
+      scroll-margin-top: 130px;
+    }
+  }
+
+  .guarniciones-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(245, 230, 200, 0.2);
+  }
+
+  .guarniciones-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #f5e6c8;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  @media (min-width: 640px) {
+    .guarniciones-title {
+      font-size: 28px;
+      letter-spacing: 4px;
+    }
+  }
+
+  .guarniciones-list {
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .guarniciones-list li {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #f5e6c8;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .guarniciones-list li::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    background-color: rgba(245, 230, 200, 0.4);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 640px) {
+    .guarniciones-list li {
+      font-size: 20px;
+    }
+  }
+
+  .guarnicion-extra {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(245, 230, 200, 0.1);
+  }
+
+  .guarnicion-extra-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .guarnicion-extra-name {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #f5e6c8;
+    flex-shrink: 0;
+  }
+
+  .guarnicion-extra-line {
+    flex: 1;
+    height: 1px;
+    background: repeating-linear-gradient(
+      to right,
+      rgba(245, 230, 200, 0.3),
+      rgba(245, 230, 200, 0.3) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+    min-width: 20px;
+    position: relative;
+    top: -4px;
+  }
+
+  .guarnicion-extra-price {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #f5e6c8;
+    flex-shrink: 0;
+  }
+
+  .guarnicion-extra-note {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.5);
+    font-style: italic;
+  }
+
+  @media (min-width: 640px) {
+    .guarnicion-extra-name,
+    .guarnicion-extra-price {
+      font-size: 20px;
+    }
   }
 
   .allergy {

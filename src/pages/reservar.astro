@@ -513,46 +513,70 @@ import Layout from "../layouts/Layout.astro";
     );
   }
 
+  // Clear individual field errors on change
+  document.getElementById("nombre")?.addEventListener("input", () => clearError("nombre"));
+  document.getElementById("hora")?.addEventListener("change", () => clearError("hora"));
+  document.getElementById("personas")?.addEventListener("change", () => clearError("personas"));
+
   form?.addEventListener("submit", (e) => {
     e.preventDefault();
     clearAllErrors();
 
     const formData = new FormData(form);
-    const nombre = formData.get("nombre") as string;
-    const hora = formData.get("hora") as string;
-    const personas = formData.get("personas") as string;
+    const nombre = (formData.get("nombre") as string) ?? "";
+    const hora = (formData.get("hora") as string) ?? "";
+    const personas = (formData.get("personas") as string) ?? "";
     const ocasion = formData.get("ocasion") as string;
     const notas = formData.get("notas") as string;
 
-    let hasError = false;
+    let firstErrorField: string | null = null;
+    let firstErrorMsg = "";
+
+    function markError(fieldId: string, message: string) {
+      document.getElementById(fieldId)?.classList.add("input-error");
+      if (!firstErrorField) {
+        firstErrorField = fieldId;
+        firstErrorMsg = message;
+      }
+    }
+
+    if (!nombre.trim()) {
+      markError("nombre", "Por favor ingresa tu nombre completo");
+    }
 
     if (!selectedDate) {
-      showError("fecha", "Por favor selecciona una fecha para tu reserva");
-      hasError = true;
+      markError("fecha", "Por favor selecciona una fecha para tu reserva");
     } else {
       const hoy = new Date();
       hoy.setHours(0, 0, 0, 0);
       const fechaSeleccionada = new Date(selectedDate + "T00:00:00");
       if (fechaSeleccionada < hoy) {
-        showError("fecha", "Solo aceptamos reservas a partir de hoy");
-        hasError = true;
+        markError("fecha", "Solo aceptamos reservas a partir de hoy");
       }
     }
 
-    if (!hasError && hora && selectedDate) {
+    if (!hora) {
+      markError("hora", "Por favor selecciona un horario");
+    } else if (selectedDate) {
       const todayStr = new Date().toISOString().split("T")[0];
       if (selectedDate === todayStr) {
         const [h, m] = hora.split(":").map(Number);
         const horaSeleccionada = new Date();
         horaSeleccionada.setHours(h, m, 0, 0);
         if (horaSeleccionada <= new Date()) {
-          showError("hora", "Este horario ya no está disponible para hoy");
-          hasError = true;
+          markError("hora", "Este horario ya no está disponible para hoy");
         }
       }
     }
 
-    if (hasError) return;
+    if (!personas) {
+      markError("personas", "Por favor selecciona el número de personas");
+    }
+
+    if (firstErrorField) {
+      showToast(firstErrorMsg);
+      return;
+    }
 
     const fechaObj = new Date(selectedDate + "T00:00:00");
     const fechaFormateada = fechaObj.toLocaleDateString("es-CO", {
