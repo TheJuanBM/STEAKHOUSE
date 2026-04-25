@@ -337,6 +337,18 @@ import Layout from "../layouts/Layout.astro";
     }
   }
 
+  .field-error {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: #e07070;
+    margin-top: 4px;
+  }
+
+  .input-error {
+    border-color: rgba(224, 112, 112, 0.6) !important;
+  }
+
   .info-card {
     padding: 24px;
     border: 1px solid rgba(245, 230, 200, 0.15);
@@ -363,20 +375,101 @@ import Layout from "../layouts/Layout.astro";
 <script>
   const form = document.getElementById("reservation-form") as HTMLFormElement;
   const phoneNumber = "573042582119";
+  const fechaInput = document.getElementById("fecha") as HTMLInputElement;
+  let selectedDate = "";
+
+  if (fechaInput) {
+    const today = new Date().toISOString().split("T")[0];
+    fechaInput.min = today;
+
+    fechaInput.addEventListener("focus", () => {
+      fechaInput.min = today;
+      fechaInput.type = "date";
+      if (selectedDate) fechaInput.value = selectedDate;
+    });
+
+    fechaInput.addEventListener("change", () => {
+      selectedDate = fechaInput.value;
+      clearError("fecha");
+    });
+
+    fechaInput.addEventListener("blur", () => {
+      if (!fechaInput.value) {
+        selectedDate = "";
+        fechaInput.type = "text";
+      }
+    });
+  }
+
+  function showError(fieldId: string, message: string) {
+    const input = document.getElementById(fieldId);
+    if (!input) return;
+    input.classList.add("input-error");
+    const existing = input.parentElement?.querySelector(".field-error");
+    if (!existing) {
+      const err = document.createElement("p");
+      err.className = "field-error";
+      err.textContent = message;
+      input.parentElement?.appendChild(err);
+    }
+  }
+
+  function clearError(fieldId: string) {
+    const input = document.getElementById(fieldId);
+    input?.classList.remove("input-error");
+    input?.parentElement?.querySelector(".field-error")?.remove();
+  }
+
+  function clearAllErrors() {
+    document.querySelectorAll(".field-error").forEach((el) => el.remove());
+    document
+      .querySelectorAll(".input-error")
+      .forEach((el) => el.classList.remove("input-error"));
+  }
 
   form?.addEventListener("submit", (e) => {
     e.preventDefault();
+    clearAllErrors();
 
     const formData = new FormData(form);
     const nombre = formData.get("nombre") as string;
-    const fecha = formData.get("fecha") as string;
     const hora = formData.get("hora") as string;
     const personas = formData.get("personas") as string;
     const ocasion = formData.get("ocasion") as string;
     const notas = formData.get("notas") as string;
 
-    const fechaObj = new Date(fecha + "T00:00:00");
-    const fechaFormateada = fechaObj.toLocaleDateString("es-MX", {
+    let hasError = false;
+
+    if (!selectedDate) {
+      showError("fecha", "Selecciona una fecha");
+      hasError = true;
+    } else {
+      const hoy = new Date();
+      hoy.setHours(0, 0, 0, 0);
+      const fechaSeleccionada = new Date(selectedDate + "T00:00:00");
+      if (fechaSeleccionada < hoy) {
+        showError("fecha", "La fecha no puede ser en el pasado");
+        hasError = true;
+      }
+    }
+
+    if (!hasError && hora && selectedDate) {
+      const todayStr = new Date().toISOString().split("T")[0];
+      if (selectedDate === todayStr) {
+        const [h, m] = hora.split(":").map(Number);
+        const horaSeleccionada = new Date();
+        horaSeleccionada.setHours(h, m, 0, 0);
+        if (horaSeleccionada <= new Date()) {
+          showError("hora", "Esta hora ya pasó hoy, elige una futura");
+          hasError = true;
+        }
+      }
+    }
+
+    if (hasError) return;
+
+    const fechaObj = new Date(selectedDate + "T00:00:00");
+    const fechaFormateada = fechaObj.toLocaleDateString("es-CO", {
       weekday: "long",
       year: "numeric",
       month: "long",
@@ -388,36 +481,13 @@ import Layout from "../layouts/Layout.astro";
     mensaje += `• *Fecha:* ${fechaFormateada}\n`;
     mensaje += `• *Hora:* ${hora}\n`;
     mensaje += `• *Personas:* ${personas}\n`;
-
-    if (ocasion) {
-      mensaje += `• *Ocasión:* ${ocasion}\n`;
-    }
-
-    if (notas) {
-      mensaje += `• *Notas:* ${notas}\n`;
-    }
-
+    if (ocasion) mensaje += `• *Ocasión:* ${ocasion}\n`;
+    if (notas) mensaje += `• *Notas:* ${notas}\n`;
     mensaje += `\nQuedo atento a su confirmación. Gracias.`;
 
-    const mensajeCodificado = encodeURIComponent(mensaje);
-
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${mensajeCodificado}`;
-    window.open(whatsappUrl, "_blank");
+    window.open(
+      `https://wa.me/${phoneNumber}?text=${encodeURIComponent(mensaje)}`,
+      "_blank",
+    );
   });
-
-  const fechaInput = document.getElementById("fecha") as HTMLInputElement;
-  if (fechaInput) {
-    const today = new Date().toISOString().split("T")[0];
-
-    fechaInput.addEventListener("focus", () => {
-      fechaInput.type = "date";
-      fechaInput.min = today;
-    });
-
-    fechaInput.addEventListener("blur", () => {
-      if (!fechaInput.value) {
-        fechaInput.type = "text";
-      }
-    });
-  }
 </script>
