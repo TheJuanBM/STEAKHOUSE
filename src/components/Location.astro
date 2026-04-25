@@ -1,0 +1,377 @@
+---
+const googleMapsUrl =
+  "https://www.google.com/maps/dir/?api=1&destination=7.999502155398765,-75.23093994479436";
+const wazeUrl =
+  "https://waze.com/ul?ll=7.999502155398765,-75.23093994479436&navigate=yes";
+const embedUrl =
+  "https://maps.google.com/maps?q=7.999502155398765,-75.23093994479436&z=14&output=embed&hl=es";
+---
+
+<section id="como-llegar" aria-labelledby="llegar-titulo">
+  <div class="container">
+    <div class="header">
+      <div class="ornament">
+        <span class="line"></span>
+        <span class="diamond"></span>
+        <span class="line"></span>
+      </div>
+      <h2 id="llegar-titulo" class="title">Encuéntranos</h2>
+      <p class="subtitle">Te esperamos en Caucasia, Antioquia</p>
+    </div>
+
+    <div class="content">
+      <!-- Info lateral -->
+      <div class="info">
+        <div class="info-block">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+            ></path>
+            <circle cx="12" cy="9" r="2.5"></circle>
+          </svg>
+          <div>
+            <p class="info-label">Dirección</p>
+            <p class="info-value">
+              Km 3, vía a la costa, glorieta antes de llegar a Campoalegre
+            </p>
+            <p class="info-value">Caucasia, Antioquia, Colombia</p>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+            ></path>
+          </svg>
+          <div>
+            <p class="info-label">Teléfono</p>
+            <a href="tel:+573042582119" class="info-value info-link">
+              +57 304 258 2119
+            </a>
+          </div>
+        </div>
+
+        <div class="info-block">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 6v6l4 2"></path>
+          </svg>
+          <div>
+            <p class="info-label">Horarios</p>
+            <p class="info-value">Lunes a Jueves: 13:00 – 23:00</p>
+            <p class="info-value">Viernes a Domingo: 12:00 – 00:00</p>
+          </div>
+        </div>
+
+        <div class="cta-buttons">
+          <a
+            href={googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary"
+            aria-label="Abrir ruta en Google Maps"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+              ></path>
+            </svg>
+            Google Maps
+          </a>
+          <a
+            href={wazeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-secondary"
+            aria-label="Abrir ruta en Waze"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 18a8 8 0 110-16 8 8 0 010 16zm-1-5h2v2h-2zm0-8h2v6h-2z"
+              ></path>
+            </svg>
+            Waze
+          </a>
+        </div>
+      </div>
+
+      <!-- Mapa -->
+      <div class="map-wrapper">
+        <iframe
+          src={embedUrl}
+          width="600"
+          height="450"
+          style="border:0;"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicación de LF Steakhouse en Caucasia, Antioquia"
+          aria-label="Mapa de Google con la ubicación de LF Steakhouse"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    padding: 80px 20px;
+    background-color: var(--burgundy-light);
+  }
+
+  @media (min-width: 768px) {
+    section {
+      padding: 120px 40px;
+    }
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .ornament .line {
+    width: 30px;
+    height: 1px;
+    background-color: rgba(245, 230, 200, 0.3);
+  }
+
+  .ornament .diamond {
+    width: 6px;
+    height: 6px;
+    background-color: rgba(245, 230, 200, 0.4);
+    transform: rotate(45deg);
+  }
+
+  .title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  @media (min-width: 768px) {
+    .title {
+      font-size: 44px;
+    }
+  }
+
+  .subtitle {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.6);
+    letter-spacing: 1px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  @media (min-width: 900px) {
+    .content {
+      flex-direction: row;
+      align-items: stretch;
+      gap: 64px;
+    }
+  }
+
+  /* Info */
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    flex: 0 0 auto;
+  }
+
+  @media (min-width: 900px) {
+    .info {
+      width: 300px;
+      justify-content: center;
+    }
+  }
+
+  .info-block {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .info-block svg {
+    color: rgba(245, 230, 200, 0.4);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .info-label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(245, 230, 200, 0.4);
+    margin-bottom: 6px;
+  }
+
+  .info-value {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.8);
+    line-height: 1.7;
+  }
+
+  .info-link {
+    text-decoration: none;
+    color: rgba(245, 230, 200, 0.8);
+    transition: color 0.2s ease;
+  }
+
+  .info-link:hover {
+    color: var(--cream);
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 24px;
+    transition: all 0.25s ease;
+  }
+
+  .btn-primary {
+    background-color: var(--cream);
+    color: var(--burgundy);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--cream-light);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    border: 1px solid rgba(245, 230, 200, 0.35);
+    color: var(--cream);
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(245, 230, 200, 0.7);
+    background-color: rgba(245, 230, 200, 0.05);
+  }
+
+  /* Mapa */
+  .map-wrapper {
+    flex: 1;
+    min-height: 360px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(245, 230, 200, 0.12);
+    box-shadow:
+      0 0 0 4px rgba(245, 230, 200, 0.04),
+      0 24px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Esquinas decorativas */
+  .map-wrapper::before,
+  .map-wrapper::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .map-wrapper::before {
+    top: 10px;
+    left: 10px;
+    border-top: 1px solid rgba(245, 230, 200, 0.45);
+    border-left: 1px solid rgba(245, 230, 200, 0.45);
+  }
+
+  .map-wrapper::after {
+    bottom: 10px;
+    right: 10px;
+    border-bottom: 1px solid rgba(245, 230, 200, 0.45);
+    border-right: 1px solid rgba(245, 230, 200, 0.45);
+  }
+
+  .map-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 360px;
+    display: block;
+    filter: sepia(0.55) saturate(0.65) brightness(0.78) contrast(1.12);
+    transition: filter 0.4s ease;
+  }
+
+  .map-wrapper:hover iframe {
+    filter: sepia(0.3) saturate(0.8) brightness(0.88) contrast(1.08);
+  }
+</style>

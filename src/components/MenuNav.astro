@@ -199,61 +199,51 @@ const { categorias } = Astro.props;
       updateFades();
     }
 
-    function updateActiveSection() {
-      const headerHeight = window.innerWidth >= 768 ? 68 : 56;
-      const menuNavHeight = 48;
-      const totalOffset = headerHeight + menuNavHeight;
-      const viewportHeight = window.innerHeight;
-      const checkPoint = totalOffset + (viewportHeight - totalOffset) * 0.3;
+    // Initial state: always start on first section
+    const firstId = sections[0]?.getAttribute("id");
+    if (firstId) setActiveLink(firstId);
 
-      let activeSection: HTMLElement | null = null;
+    const headerHeight = window.innerWidth >= 768 ? 68 : 56;
+    const navHeight = 48;
+    const topOffset = headerHeight + navHeight;
 
-      sections.forEach((section) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= checkPoint && rect.bottom > checkPoint) {
-          activeSection = section;
-        }
-      });
+    const visibleSections = new Set<string>();
 
-      if (!activeSection) {
-        let closestDistance = Infinity;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.getAttribute("id");
+          if (!id) return;
+          if (entry.isIntersecting) {
+            visibleSections.add(id);
+          } else {
+            visibleSections.delete(id);
+          }
+        });
+
+        // Pick the topmost visible section
+        let topmostId: string | null = null;
+        let topmostTop = Infinity;
         sections.forEach((section) => {
-          const rect = section.getBoundingClientRect();
-          if (rect.top < checkPoint) {
-            const distance = checkPoint - rect.top;
-            if (distance < closestDistance) {
-              closestDistance = distance;
-              activeSection = section;
+          const id = section.getAttribute("id");
+          if (id && visibleSections.has(id)) {
+            const top = section.getBoundingClientRect().top;
+            if (top < topmostTop) {
+              topmostTop = top;
+              topmostId = id;
             }
           }
         });
+
+        if (topmostId) setActiveLink(topmostId);
+      },
+      {
+        rootMargin: `-${topOffset}px 0px -45% 0px`,
+        threshold: 0,
       }
+    );
 
-      if (!activeSection && sections.length > 0) {
-        activeSection = sections[0];
-      }
-
-      if (activeSection) {
-        const id = activeSection.getAttribute("id");
-        if (id) setActiveLink(id);
-      }
-    }
-
-    let ticking = false;
-    function onScroll() {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          updateActiveSection();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }
-
-    window.addEventListener("scroll", onScroll);
-
-    // Initial state
-    updateActiveSection();
+    sections.forEach((section) => observer.observe(section));
 
     links.forEach((link) => {
       link.addEventListener("click", (e) => {
