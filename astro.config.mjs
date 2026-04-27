@@ -27,7 +27,7 @@ const csp = [
 export default defineConfig({
   site: "https://lfsteakhouse.com",
   build: {
-    inlineStylesheets: "auto",
+    inlineStylesheets: "always",
   },
   vite: {
     plugins: [tailwindcss()],
