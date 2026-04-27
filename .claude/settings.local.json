@@ -7,7 +7,8 @@
       "Bash(git push *)",
       "Bash(PRE_COMMIT_ALLOW_NO_CONFIG=1 git add -A)",
       "Bash(git commit -m 'refactor: phone number from PUBLIC_WHATSAPP_NUMBER env var in all components *)",
-      "Bash(git commit -m 'feat: asterisk indicator on required form fields with legend note *)"
+      "Bash(git commit -m 'feat: asterisk indicator on required form fields with legend note *)",
+      "Bash(git commit -m 'fix: explicit color on Trans spans via :global\\(\\) for AAA contrast compliance *)"
     ]
   }
 }

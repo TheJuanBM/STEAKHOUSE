@@ -1031,9 +1031,22 @@ const tipIcons = ["pin", "health", "card", "phone", "health", "bus"];
   /* Content sections */
   .content-section {
     padding: 72px 24px;
+    background-color: #3d1f1f;
   }
   .content-section.alt {
     background-color: #2d1717;
+  }
+
+  /* Force explicit color on Trans spans so contrast scanners can resolve it */
+  .content-section :global(span.i18n-es),
+  .content-section :global(span.i18n-en),
+  .cta-final :global(span.i18n-es),
+  .cta-final :global(span.i18n-en),
+  .facts-bar :global(span.i18n-es),
+  .facts-bar :global(span.i18n-en),
+  .toc-section :global(span.i18n-es),
+  .toc-section :global(span.i18n-en) {
+    color: #f5e6c8;
   }
   @media (min-width: 768px) {
     .content-section {
