@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(PRE_COMMIT_ALLOW_NO_CONFIG=1 git commit *)",
+      "Bash(git push *)",
+      "Bash(PRE_COMMIT_ALLOW_NO_CONFIG=1 git add -A)",
+      "Bash(git commit -m 'refactor: phone number from PUBLIC_WHATSAPP_NUMBER env var in all components *)"
     ]
   }
 }

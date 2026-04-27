@@ -1,5 +1,9 @@
 ---
 import Trans from "../i18n/Trans.astro";
+
+const rawPhone = import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? "573042582119";
+const telHref  = `+${rawPhone}`;
+const telDisplay = `+${rawPhone.slice(0,2)} ${rawPhone.slice(2,5)} ${rawPhone.slice(5,8)} ${rawPhone.slice(8)}`;
 ---
 
 <footer>
@@ -31,7 +35,7 @@ import Trans from "../i18n/Trans.astro";
             class="link"
           >Km 3, vía a la costa, glorieta antes de llegar a Campoalegre.</a>
         </p>
-        <a href="tel:+573042582119" class="link">+57 304 258 2119</a>
+        <a href={telHref} class="link">{telDisplay}</a>
       </div>
 
       <div class="links-column">

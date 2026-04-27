@@ -244,7 +244,7 @@ const itemListElement = [
           latitude: 7.999502155398765,
           longitude: -75.23093994479436,
         },
-        telephone: "+573042582119",
+        telephone: `+${import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? "573042582119"}`,
         // email: "TODO: add email",
         sameAs: [
           "https://instagram.com/lf.steakhouse",
@@ -374,7 +374,7 @@ const itemListElement = [
         },
         contactPoint: {
           "@type": "ContactPoint",
-          telephone: "+573042582119",
+          telephone: `+${import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? "573042582119"}`,
           contactType: "reservations",
           availableLanguage: ["Spanish", "English"],
           areaServed: "CO",

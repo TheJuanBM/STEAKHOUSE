@@ -1,6 +1,10 @@
 ---
 import Trans from "../i18n/Trans.astro";
 
+const rawPhone   = import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? "573042582119";
+const telHref    = `+${rawPhone}`;
+const telDisplay = `+${rawPhone.slice(0,2)} ${rawPhone.slice(2,5)} ${rawPhone.slice(5,8)} ${rawPhone.slice(8)}`;
+
 const googleMapsUrl =
   "https://www.google.com/maps/dir/?api=1&destination=7.999502155398765,-75.23093994479436";
 const wazeUrl =
@@ -47,9 +51,7 @@ const embedUrl =
           </svg>
           <div>
             <p class="info-label"><Trans es="Teléfono" en="Phone" /></p>
-            <a href="tel:+573042582119" class="info-value info-link">
-              +57 304 258 2119
-            </a>
+            <a href={telHref} class="info-value info-link">{telDisplay}</a>
           </div>
         </div>
 
