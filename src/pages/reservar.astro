@@ -40,7 +40,6 @@ import Trans from "../i18n/Trans.astro";
               type="text"
               id="nombre"
               name="nombre"
-              required
               class="input"
               data-placeholder-es="Tu nombre"
               data-placeholder-en="Your name"
@@ -57,7 +56,7 @@ import Trans from "../i18n/Trans.astro";
                 <Trans es="Fecha" en="Date" />
               </label>
               <div class="date-wrapper">
-                <input type="date" id="fecha" name="fecha" required class="input" aria-describedby="fecha-error" />
+                <input type="date" id="fecha" name="fecha" class="input" aria-describedby="fecha-error" />
               </div>
             <span id="fecha-error" class="field-error" aria-live="polite"></span>
             </div>
@@ -66,7 +65,7 @@ import Trans from "../i18n/Trans.astro";
                 <span class="req" aria-hidden="true">*</span>
                 <Trans es="Hora" en="Time" />
               </label>
-              <select id="hora" name="hora" required class="input" aria-describedby="hora-error">
+              <select id="hora" name="hora" class="input" aria-describedby="hora-error">
                 <option value="" data-i18n-select="true">Seleccionar</option>
                 <option value="13:00">13:00</option>
                 <option value="13:30">13:30</option>
@@ -91,7 +90,7 @@ import Trans from "../i18n/Trans.astro";
                 <span class="req" aria-hidden="true">*</span>
                 <Trans es="Personas" en="Guests" />
               </label>
-              <select id="personas" name="personas" required class="input" aria-describedby="personas-error">
+              <select id="personas" name="personas" class="input" aria-describedby="personas-error">
                 <option value="" data-i18n-select="true">Seleccionar</option>
                 <option value="1 persona">1 persona</option>
                 <option value="2 personas">2 personas</option>
