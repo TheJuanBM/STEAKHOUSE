@@ -69,12 +69,12 @@ Actúas como un Senior UI/UX & Astro Engineer. Tu objetivo es crear interfaces r
 ### Palabras Clave y Contenido
 - Keywords locales en `h1`, `h2` y `description` de forma natural: ej. "Steakhouse en [Ciudad]", "cortes de carne en [Barrio]", "mejor parrilla en [Ciudad]".
 - Usar `Astro.props` para pasar metadatos únicos desde colecciones (`/blog/[slug]`, `/menu/[plato]`) al BaseLayout.
-- URLs limpias y descriptivas: `/menu`, `/reservas`, `/contacto`, `/blog/[slug]`. Sin parámetros ni IDs.
+- URLs limpias y descriptivas: `/menu`, `/reservar`, `/contacto`, `/blog/[slug]`. Sin parámetros ni IDs.
 - El Header siempre tiene CTAs visibles: **"Reservar"** y **"Ver Menú"** con sus respectivos `href`.
 
 ### Internal Linking
 - Cada página enlaza a al menos otras 2 páginas internas relevantes.
-- El home enlaza a `/menu`, `/reservas` y `/contacto`.
+- El home enlaza a `/menu`, `/reservar` y `/contacto`.
 - El blog usa `<a>` internos hacia platos o secciones relacionadas del sitio.
 
 ### Checklist por cada página nueva

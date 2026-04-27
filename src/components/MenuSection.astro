@@ -15,7 +15,34 @@ interface Props {
 }
 
 const { id, titulo, tituloEn, items } = Astro.props;
+
+const baseUrl = Astro.site?.toString() ?? "https://lfsteakhouse.com";
+
+const getDesc = (d: Descripcion) =>
+  typeof d === "object" ? d.es || d.en || "" : d || "";
+
+const parsePrice = (p: string) => p.replace(/[$.\s]/g, "");
+
+const menuSectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "MenuSection",
+  "@id": `${baseUrl}/menu#${id}`,
+  name: titulo,
+  inMenu: `${baseUrl}/menu#menu`,
+  hasMenuItem: items.map((item) => ({
+    "@type": "MenuItem",
+    name: item.nombre,
+    ...(getDesc(item.descripcion) && { description: getDesc(item.descripcion) }),
+    offers: {
+      "@type": "Offer",
+      price: parsePrice(item.precio),
+      priceCurrency: "COP",
+    },
+  })),
+};
 ---
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(menuSectionSchema)} />
 
 <section id={id}>
   <header>

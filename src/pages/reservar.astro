@@ -5,7 +5,10 @@ import Layout from "../layouts/Layout.astro";
 import Trans from "../i18n/Trans.astro";
 ---
 
-<Layout title="Reservar Mesa - LF Steakhouse">
+<Layout
+  title="Reservar Mesa | LF Steakhouse en Caucasia, Antioquia"
+  description="Reserva tu mesa en LF Steakhouse, Caucasia. Confirmamos por WhatsApp de inmediato. Almuerzo 13:00–16:00 · Cena 19:00–23:00. Fines de semana desde las 12:00."
+>
   <Header currentPage="/reservar" />
   <main>
     <section class="reservar">
@@ -41,7 +44,9 @@ import Trans from "../i18n/Trans.astro";
               data-placeholder-es="Tu nombre"
               data-placeholder-en="Your name"
               placeholder="Tu nombre"
+              aria-describedby="nombre-error"
             />
+            <span id="nombre-error" class="field-error" aria-live="polite"></span>
           </div>
 
           <div class="form-row">
@@ -50,14 +55,15 @@ import Trans from "../i18n/Trans.astro";
                 <Trans es="Fecha" en="Date" />
               </label>
               <div class="date-wrapper">
-                <input type="date" id="fecha" name="fecha" required class="input" />
+                <input type="date" id="fecha" name="fecha" required class="input" aria-describedby="fecha-error" />
               </div>
+            <span id="fecha-error" class="field-error" aria-live="polite"></span>
             </div>
             <div class="form-group">
               <label for="hora" class="label">
                 <Trans es="Hora" en="Time" />
               </label>
-              <select id="hora" name="hora" required class="input">
+              <select id="hora" name="hora" required class="input" aria-describedby="hora-error">
                 <option value="" data-i18n-select="true">Seleccionar</option>
                 <option value="13:00">13:00</option>
                 <option value="13:30">13:30</option>
@@ -72,6 +78,7 @@ import Trans from "../i18n/Trans.astro";
                 <option value="21:30">21:30</option>
                 <option value="22:00">22:00</option>
               </select>
+              <span id="hora-error" class="field-error" aria-live="polite"></span>
             </div>
           </div>
 
@@ -80,7 +87,7 @@ import Trans from "../i18n/Trans.astro";
               <label for="personas" class="label">
                 <Trans es="Personas" en="Guests" />
               </label>
-              <select id="personas" name="personas" required class="input">
+              <select id="personas" name="personas" required class="input" aria-describedby="personas-error">
                 <option value="" data-i18n-select="true">Seleccionar</option>
                 <option value="1 persona">1 persona</option>
                 <option value="2 personas">2 personas</option>
@@ -91,6 +98,7 @@ import Trans from "../i18n/Trans.astro";
                 <option value="7 personas">7 personas</option>
                 <option value="8 personas">8+ personas</option>
               </select>
+              <span id="personas-error" class="field-error" aria-live="polite"></span>
             </div>
             <div class="form-group">
               <label for="ocasion" class="label">
@@ -400,6 +408,16 @@ import Trans from "../i18n/Trans.astro";
     border-color: rgba(200, 90, 90, 0.55) !important;
   }
 
+  .field-error {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    color: #c97a7a;
+    min-height: 16px;
+    letter-spacing: 0.3px;
+    display: block;
+  }
+
   #form-toast {
     position: fixed;
     bottom: max(90px, calc(env(safe-area-inset-bottom) + 90px));
@@ -477,7 +495,7 @@ import Trans from "../i18n/Trans.astro";
 
 <script>
   const form = document.getElementById("reservation-form") as HTMLFormElement;
-  const phoneNumber = "573042582119";
+  const phoneNumber = import.meta.env.PUBLIC_WHATSAPP_NUMBER ?? "573042582119";
   const fechaInput = document.getElementById("fecha") as HTMLInputElement;
   let selectedDate = "";
 
@@ -531,13 +549,21 @@ import Trans from "../i18n/Trans.astro";
   }
 
   function clearError(fieldId: string) {
-    document.getElementById(fieldId)?.classList.remove("input-error");
+    const field = document.getElementById(fieldId);
+    field?.classList.remove("input-error");
+    field?.setAttribute("aria-invalid", "false");
+    const errorEl = document.getElementById(`${fieldId}-error`);
+    if (errorEl) errorEl.textContent = "";
   }
 
   function clearAllErrors() {
-    document.querySelectorAll(".input-error").forEach((el) =>
-      el.classList.remove("input-error")
-    );
+    document.querySelectorAll<HTMLElement>(".input-error").forEach((el) => {
+      el.classList.remove("input-error");
+      el.setAttribute("aria-invalid", "false");
+    });
+    document.querySelectorAll(".field-error").forEach((el) => {
+      el.textContent = "";
+    });
   }
 
   document.getElementById("nombre")?.addEventListener("input", () => clearError("nombre"));
@@ -571,7 +597,11 @@ import Trans from "../i18n/Trans.astro";
     let firstErrorMsg = "";
 
     function markError(fieldId: string, message: string) {
-      document.getElementById(fieldId)?.classList.add("input-error");
+      const field = document.getElementById(fieldId);
+      field?.classList.add("input-error");
+      field?.setAttribute("aria-invalid", "true");
+      const errorEl = document.getElementById(`${fieldId}-error`);
+      if (errorEl) errorEl.textContent = message;
       if (!firstErrorField) {
         firstErrorField = fieldId;
         firstErrorMsg = message;

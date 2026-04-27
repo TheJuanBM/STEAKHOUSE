@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+
+import copaImg from "../assets/copa.jpg";
 import Trans from "../i18n/Trans.astro";
 ---
 
@@ -49,10 +52,13 @@ import Trans from "../i18n/Trans.astro";
     <div class="image-container">
       <div class="image-frame">
         <div class="image-placeholder">
-          <img
-            src="/fotos/copa.jpg"
+          <Image
+            src={copaImg}
             alt="Copa de vino en LF Steakhouse"
             class="about-image"
+            width={450}
+            height={562}
+            loading="lazy"
           />
         </div>
       </div>

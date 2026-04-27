@@ -1,4 +1,5 @@
 ---
+import { getCollection } from 'astro:content';
 import About from "../components/About.astro";
 import Location from "../components/Location.astro";
 import Footer from "../components/Footer.astro";
@@ -6,9 +7,34 @@ import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
 import Layout from "../layouts/Layout.astro";
 import Trans from "../i18n/Trans.astro";
+
+const collectionPosts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Guías .astro que no están en la colección
+const staticGuides = [
+  {
+    slug: 'que-hacer-en-caucasia',
+    title: 'Guía de Viaje: Qué Hacer en Caucasia, Antioquia',
+    description: 'Descubre los mejores lugares, actividades y gastronomía de Caucasia, la capital del Bajo Cauca.',
+    date: new Date('2026-04-27'),
+  },
+];
+
+// Mezclar y tomar los 2 más recientes
+const allPosts = [
+  ...staticGuides.map(g => ({ slug: g.slug, title: g.title, description: g.description, date: g.date })),
+  ...collectionPosts.map(p => ({ slug: p.id.replace(/\.md$/, ''), title: p.data.title, description: p.data.description, date: p.data.date })),
+].sort((a, b) => b.date.getTime() - a.date.getTime()).slice(0, 2);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
-<Layout title="LF Steakhouse - Restaurante de Cocina de Autor">
+<Layout
+  title="LF Steakhouse | Restaurante de Carnes en Caucasia, Antioquia"
+  description="LF Steakhouse, restaurante premium de carnes y parrilla en Caucasia, Antioquia. Cortes importados, brasas y cócteles artesanales. Reserva tu mesa hoy."
+>
   <Header currentPage="/" />
   <main>
     <Hero />
@@ -96,6 +122,47 @@ import Trans from "../i18n/Trans.astro";
 
     <Location />
 
+    <!-- Blog Preview -->
+    <section class="blog-preview">
+      <div class="blog-container">
+        <div class="blog-header">
+          <div class="ornament">
+            <span class="line"></span>
+            <span class="diamond"></span>
+            <span class="line"></span>
+          </div>
+          <h2 class="blog-title">
+            <Trans es="Del Blog" en="From the Blog" />
+          </h2>
+          <p class="blog-subtitle">
+            <Trans es="Gastronomía, parrilla y cultura de mesa" en="Gastronomy, grill and table culture" />
+          </p>
+        </div>
+        <div class="blog-grid">
+          {allPosts.map((post) => (
+            <article class="blog-card">
+              <time class="blog-date" datetime={post.date.toISOString()}>
+                {fmt(post.date)}
+              </time>
+              <h3 class="blog-card-title">
+                <a href={`/blog/${post.slug}`}>{post.title}</a>
+              </h3>
+              <p class="blog-card-desc">{post.description}</p>
+              <a href={`/blog/${post.slug}`} class="blog-read-more">
+                <Trans es="Leer artículo" en="Read article" />
+                <span aria-hidden="true"> →</span>
+              </a>
+            </article>
+          ))}
+        </div>
+        <div class="blog-cta">
+          <a href="/blog" class="blog-btn">
+            <Trans es="Ver todos los artículos" en="View all articles" />
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="cta-section">
       <div class="cta-content">
@@ -115,6 +182,42 @@ import Trans from "../i18n/Trans.astro";
     </section>
   </main>
   <Footer />
+  <script is:inline type="application/ld+json">{JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "¿Dónde está ubicado LF Steakhouse?",
+        acceptedAnswer: { "@type": "Answer", text: "LF Steakhouse está ubicado en el Km 3 Vía a la Costa, Sector Campoalegre, Caucasia, Antioquia, Colombia." }
+      },
+      {
+        "@type": "Question",
+        name: "¿Cuál es el horario de LF Steakhouse?",
+        acceptedAnswer: { "@type": "Answer", text: "Lunes a jueves de 13:00 a 23:00. Viernes, sábado y domingo de 12:00 a 00:00." }
+      },
+      {
+        "@type": "Question",
+        name: "¿Cómo puedo hacer una reserva en LF Steakhouse?",
+        acceptedAnswer: { "@type": "Answer", text: "Puedes reservar a través de nuestra página web en lfsteakhouse.com/reservar. Te confirmamos la reserva por WhatsApp." }
+      },
+      {
+        "@type": "Question",
+        name: "¿Qué tipo de comida sirve LF Steakhouse?",
+        acceptedAnswer: { "@type": "Answer", text: "LF Steakhouse es un restaurante de carnes y parrilla premium en Caucasia. Ofrecemos cortes importados como Strip Loin y Picanha, brasas de la casa, hamburguesas, cócteles artesanales y menú infantil." }
+      },
+      {
+        "@type": "Question",
+        name: "¿Acepta LF Steakhouse tarjetas de crédito?",
+        acceptedAnswer: { "@type": "Answer", text: "Sí, aceptamos efectivo, tarjeta de crédito, tarjeta de débito y transferencia bancaria." }
+      },
+      {
+        "@type": "Question",
+        name: "¿LF Steakhouse tiene menú infantil?",
+        acceptedAnswer: { "@type": "Answer", text: "Sí, contamos con menú infantil. También disponemos de estacionamiento, WiFi gratis y aire acondicionado." }
+      }
+    ]
+  })}</script>
 </Layout>
 
 <style>
@@ -254,6 +357,156 @@ import Trans from "../i18n/Trans.astro";
   }
 
   .menu-preview .btn:hover {
+    background-color: var(--cream);
+    color: var(--burgundy);
+    border-color: var(--cream);
+  }
+
+  /* Blog Preview */
+  .blog-preview {
+    padding: 80px 20px;
+    background-color: var(--burgundy);
+  }
+
+  @media (min-width: 768px) {
+    .blog-preview {
+      padding: 120px 40px;
+    }
+  }
+
+  .blog-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .blog-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .blog-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  @media (min-width: 768px) {
+    .blog-title { font-size: 44px; }
+  }
+
+  .blog-subtitle {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.5);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  @media (min-width: 640px) {
+    .blog-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+  }
+
+  .blog-card {
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(245, 230, 200, 0.1);
+  }
+
+  @media (min-width: 640px) {
+    .blog-card {
+      padding: 32px;
+      border: 1px solid rgba(245, 230, 200, 0.1);
+      transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .blog-card:hover {
+      border-color: rgba(245, 230, 200, 0.25);
+      background-color: rgba(245, 230, 200, 0.02);
+    }
+  }
+
+  .blog-date {
+    display: block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(245, 230, 200, 0.35);
+    margin-bottom: 12px;
+  }
+
+  .blog-card-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--cream);
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+
+  .blog-card-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .blog-card-title a:hover { opacity: 0.75; }
+
+  .blog-card-desc {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.6);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .blog-read-more {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(245, 230, 200, 0.55);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .blog-read-more:hover { color: var(--cream); }
+
+  .blog-cta {
+    text-align: center;
+    margin-top: 48px;
+  }
+
+  .blog-btn {
+    display: inline-block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--cream);
+    border: 1px solid rgba(245, 230, 200, 0.35);
+    padding: 14px 36px;
+    transition: all 0.3s ease;
+  }
+
+  .blog-btn:hover {
     background-color: var(--cream);
     color: var(--burgundy);
     border-color: var(--cream);

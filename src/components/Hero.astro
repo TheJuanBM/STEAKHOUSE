@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+
+import logoImg from "../assets/logo.jpg";
 import Trans from "../i18n/Trans.astro";
 ---
 
@@ -11,10 +14,21 @@ import Trans from "../i18n/Trans.astro";
       <span class="line"></span>
     </div>
     <div class="logo-wrapper">
-      <img src="/logo.jpg" alt="LF Steakhouse" class="hero-logo" />
+      <Image
+        src={logoImg}
+        alt="LF Steakhouse"
+        class="hero-logo"
+        width={520}
+        height={520}
+        loading="eager"
+        fetchpriority="high"
+      />
     </div>
     <p class="subtitle">
-      <Trans es="Cocina de autor con alma tradicional" en="Chef-driven cuisine with a traditional soul" />
+      <Trans
+        es="Cocina de autor con alma tradicional"
+        en="Chef-driven cuisine with a traditional soul"
+      />
     </p>
     <div class="cta-group">
       <a href="/reservar" class="btn btn-primary">

@@ -10,7 +10,7 @@ import Trans from "../i18n/Trans.astro";
       <span class="line"></span>
     </div>
 
-    <h1>MENÚ</h1>
+    <h1>MENÚ<span class="sr-only"> — LF Steakhouse en Caucasia, Antioquia</span></h1>
 
     <p class="subtitle">
       <Trans es="Carta del Día" en="Today's Menu" />
@@ -92,6 +92,18 @@ import Trans from "../i18n/Trans.astro";
       letter-spacing: 20px;
       margin-right: -20px;
     }
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   .subtitle {

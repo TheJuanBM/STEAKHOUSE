@@ -1,0 +1,1575 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Trans from "../../i18n/Trans.astro";
+
+const baseUrl = Astro.site?.toString() ?? "https://lfsteakhouse.com";
+
+// ── Bilingual content ────────────────────────────────────────────────────────
+
+const facts = [
+  { value: "~100k", es: "Habitantes", en: "Inhabitants" },
+  { value: "30-33°C", es: "Temperatura", en: "Temperature" },
+  { value: "~5 h", es: "Desde Medellín", en: "From Medellín" },
+  { value: "50 msnm", es: "Altitud", en: "Altitude" },
+];
+
+const toc = [
+  {
+    href: "#sobre-caucasia",
+    es: "01 · Sobre Caucasia",
+    en: "01 · About Caucasia",
+  },
+  { href: "#como-llegar", es: "02 · Cómo Llegar", en: "02 · How to Get There" },
+  { href: "#que-hacer", es: "03 · Qué Hacer", en: "03 · What to Do" },
+  { href: "#gastronomia", es: "04 · Gastronomía", en: "04 · Gastronomy" },
+  { href: "#festividades", es: "05 · Festividades", en: "05 · Festivities" },
+  { href: "#consejos", es: "06 · Consejos de Viaje", en: "06 · Travel Tips" },
+];
+
+const infoCards = [
+  {
+    es: {
+      title: "Economía",
+      text: "Ganadería, minería de oro, comercio y agroindustria son los pilares económicos del Bajo Cauca.",
+    },
+    en: {
+      title: "Economy",
+      text: "Cattle farming, gold mining, commerce and agro-industry are the economic pillars of Bajo Cauca.",
+    },
+  },
+  {
+    es: {
+      title: "Zona horaria",
+      text: "UTC-5 (hora Colombia). El sol sale alrededor de las 6:00 am y cae a las 6:00 pm todo el año.",
+    },
+    en: {
+      title: "Time Zone",
+      text: "UTC-5 (Colombia time). Sunrise is around 6:00 am and sunset at 6:00 pm year-round.",
+    },
+  },
+  {
+    es: {
+      title: "Ubicación",
+      text: "Km 3 vía a la Costa, a orillas del río Cauca, en el límite norte de Antioquia con Córdoba y Bolívar.",
+    },
+    en: {
+      title: "Location",
+      text: "Km 3 on the coastal road, on the banks of the Cauca River, at the northern border of Antioquia with Córdoba and Bolívar.",
+    },
+  },
+];
+
+const routes = [
+  {
+    es: {
+      title: "Desde Medellín",
+      text: "~5 horas por la Troncal del Norte (vía Yarumal). Salidas frecuentes desde el Terminal del Norte. Hay buses Rápido Ochoa, Brasilia y Flota Magdalena.",
+    },
+    en: {
+      title: "From Medellín",
+      text: "~5 hours via the Troncal del Norte (through Yarumal). Frequent departures from the North Bus Terminal. Rápido Ochoa, Brasilia and Flota Magdalena buses available.",
+    },
+  },
+  {
+    es: {
+      title: "Desde la Costa Caribe",
+      text: "Desde Montería ~2.5 h, desde Barranquilla ~6 h por la Troncal de Occidente. Conexión directa con Sucre y Bolívar.",
+    },
+    en: {
+      title: "From the Caribbean Coast",
+      text: "From Montería ~2.5 h, from Barranquilla ~6 h via the Troncal de Occidente. Direct connection with Sucre and Bolívar.",
+    },
+  },
+  {
+    es: {
+      title: "En carro particular",
+      text: "La doble calzada Medellín-Caucasia está parcialmente lista. Peajes en Yarumal y Santa Rosa de Osos. Se recomienda salir antes de las 6 am para evitar tráfico en Yarumal.",
+    },
+    en: {
+      title: "By Private Car",
+      text: "The Medellín-Caucasia dual carriageway is partially complete. Tolls at Yarumal and Santa Rosa de Osos. We recommend leaving before 6 am to avoid traffic in Yarumal.",
+    },
+  },
+];
+
+const activities = [
+  {
+    es: {
+      title: "Río Cauca",
+      text: "El río es el alma de Caucasia. Paseos en lancha, pesca deportiva y los atardeceres sobre el agua son experiencias únicas que solo encuentras aquí. El Malecón del Río es el punto de encuentro local al final de la tarde.",
+    },
+    en: {
+      title: "Cauca River",
+      text: "The river is the soul of Caucasia. Boat rides, sport fishing and sunsets over the water are unique experiences you can only find here. The riverside promenade is the local meeting point at the end of the afternoon.",
+    },
+  },
+  {
+    es: {
+      title: "Centro Histórico",
+      text: "El parque principal y la Catedral de Nuestra Señora de las Mercedes concentran la vida cultural y religiosa de la ciudad. Los domingos el parque se llena de familias y vendedores de frutas locales.",
+    },
+    en: {
+      title: "Historic Center",
+      text: "The main square and the Cathedral of Our Lady of Mercy are the heart of the city's cultural and religious life. On Sundays the square fills with families and local fruit vendors.",
+    },
+  },
+  {
+    es: {
+      title: "Avistamiento de Aves",
+      text: "La región del Bajo Cauca es un corredor natural para aves migratorias y endémicas. La ribera del río y los bosques de galería alrededor de Caucasia son ideales para birdwatching.",
+    },
+    en: {
+      title: "Birdwatching",
+      text: "The Bajo Cauca region is a natural corridor for migratory and endemic birds. The riverbank and gallery forests around Caucasia are ideal for birdwatching.",
+    },
+  },
+  {
+    es: {
+      title: "Turismo Rural",
+      text: "Las fincas ganaderas de los alrededores ofrecen experiencias auténticas de campo: ordeño, caminatas ecológicas y la posibilidad de probar quesos y derivados lácteos directamente de la fuente.",
+    },
+    en: {
+      title: "Rural Tourism",
+      text: "The surrounding cattle farms offer authentic countryside experiences: milking, nature walks and the chance to taste cheeses and dairy products straight from the source.",
+    },
+  },
+  {
+    es: {
+      title: "Parque Lineal",
+      text: "El paseo peatonal sobre la ribera del río es uno de los proyectos de renovación urbana más recientes de Caucasia. Perfecto para correr, caminar o simplemente disfrutar la brisa del río al amanecer.",
+    },
+    en: {
+      title: "Linear Park",
+      text: "The riverside pedestrian walkway is one of Caucasia's most recent urban renewal projects. Perfect for running, walking or simply enjoying the river breeze at dawn.",
+    },
+  },
+  {
+    es: {
+      title: "Comercio Local",
+      text: "Caucasia es el principal centro comercial del Bajo Cauca. Sus galerías, mercado de frutas y tiendas de artesanías locales son una ventana a la vida cotidiana de la región.",
+    },
+    en: {
+      title: "Local Commerce",
+      text: "Caucasia is the main commercial hub of Bajo Cauca. Its galleries, fruit market and local craft shops offer a window into the daily life of the region.",
+    },
+  },
+];
+
+const foods = [
+  {
+    es: {
+      name: "Mojarra frita",
+      desc: "Pescado de río frito entero, acompañado de patacón pisado, arroz con coco y ensalada. El plato más popular del Bajo Cauca.",
+    },
+    en: {
+      name: "Fried mojarra",
+      desc: "Whole fried river fish, served with smashed patacón, coconut rice and salad. The most popular dish in Bajo Cauca.",
+    },
+  },
+  {
+    es: {
+      name: "Bandeja paisa ribereña",
+      desc: "Variación local de la bandeja tradicional, con chicharrón, frijoles, carne molida, arepa, aguacate y arroz blanco.",
+    },
+    en: {
+      name: "Riverside bandeja paisa",
+      desc: "Local variation of the traditional bandeja, with chicharrón, beans, ground beef, arepa, avocado and white rice.",
+    },
+  },
+  {
+    es: {
+      name: "Suero costeño",
+      desc: "Crema de leche fermentada, herencia caribeña que se sirve con todo: arepas, patacones y carnes.",
+    },
+    en: {
+      name: "Caribbean suero",
+      desc: "Fermented cream with Caribbean roots, served with everything: arepas, patacones and meats.",
+    },
+  },
+  {
+    es: {
+      name: "Corozo",
+      desc: "Fruta silvestre de la región que se usa en jugos, raspadillas y cócteles. Tiene un sabor ácido y tropical único del Bajo Cauca.",
+    },
+    en: {
+      name: "Corozo berry",
+      desc: "Wild regional fruit used in juices, shaved ice and cocktails. It has a tart, tropical flavor unique to Bajo Cauca.",
+    },
+  },
+];
+
+const events = [
+  {
+    month: "Jul - Ago",
+    es: {
+      name: "Fiestas del Río Cauca",
+      desc: "La celebración más importante del año. Reinado del Río, regatas, conciertos y desfiles convierten a Caucasia en el epicentro cultural del Bajo Cauca durante varias semanas.",
+    },
+    en: {
+      name: "Cauca River Festival",
+      desc: "The most important celebration of the year. River Queen pageant, regattas, concerts and parades turn Caucasia into the cultural epicenter of Bajo Cauca for several weeks.",
+    },
+  },
+  {
+    month: "Oct",
+    es: {
+      name: "Feria Ganadera y Agropecuaria",
+      desc: "Exposición de razas bovinas, muestra comercial y concursos que reflejan la identidad ganadera de la región. Una ventana al campo del Bajo Cauca.",
+    },
+    en: {
+      name: "Livestock and Agricultural Fair",
+      desc: "Exhibition of bovine breeds, commercial showcase and contests reflecting the cattle identity of the region. A window into the Bajo Cauca countryside.",
+    },
+  },
+  {
+    month: "Dic",
+    es: {
+      name: "Temporada Decembrina",
+      desc: "El parque principal se ilumina y las calles se llenan de música vallenata y champeta. La temporada más animada para visitar la ciudad.",
+    },
+    en: {
+      name: "Holiday Season",
+      desc: "The main square lights up and the streets fill with vallenato and champeta music. The most lively time of year to visit the city.",
+    },
+  },
+];
+
+const tips = [
+  {
+    es: {
+      title: "Mejor época",
+      text: "Diciembre-marzo es temporada seca. Abril-noviembre es más lluvioso pero el paisaje es más verde y el río más caudaloso.",
+    },
+    en: {
+      title: "Best Time to Visit",
+      text: "December-March is dry season. April-November is rainier but the landscape is greener and the river fuller.",
+    },
+  },
+  {
+    es: {
+      title: "Qué empacar",
+      text: "Ropa ligera y de colores claros, protector solar alto, repelente de insectos, sombrero y calzado cómodo para caminar.",
+    },
+    en: {
+      title: "What to Pack",
+      text: "Light, light-colored clothing, high-SPF sunscreen, insect repellent, a hat and comfortable walking shoes.",
+    },
+  },
+  {
+    es: {
+      title: "Dinero",
+      text: "Hay cajeros Bancolombia, Davivienda y Nequi en el centro. La mayoría de restaurantes y comercios aceptan tarjetas, aunque en plazas de mercado se prefiere efectivo.",
+    },
+    en: {
+      title: "Money",
+      text: "Bancolombia, Davivienda and Nequi ATMs are available downtown. Most restaurants and shops accept cards, though cash is preferred in markets.",
+    },
+  },
+  {
+    es: {
+      title: "Conectividad",
+      text: "Claro, Movistar y Tigo tienen cobertura en el área urbana. El internet 4G/5G es estable en el centro. Zonas rurales pueden tener señal limitada.",
+    },
+    en: {
+      title: "Connectivity",
+      text: "Claro, Movistar and Tigo have coverage in the urban area. 4G/5G is stable downtown. Rural areas may have limited signal.",
+    },
+  },
+  {
+    es: {
+      title: "Salud",
+      text: "Usa repelente — hay presencia de mosquitos cerca del río. El Hospital La Apartada atiende urgencias. Se recomienda vacuna de hepatitis A para viajeros.",
+    },
+    en: {
+      title: "Health",
+      text: "Use insect repellent — mosquitoes are common near the river. Hospital La Apartada handles emergencies. Hepatitis A vaccine is recommended for travelers.",
+    },
+  },
+  {
+    es: {
+      title: "Transporte local",
+      text: "Mototaxis y taxis son los medios más comunes. Negocia la tarifa antes de subir. Para el Km 3 (LF Steakhouse), cualquier mototaxi del centro te lleva en 10 min.",
+    },
+    en: {
+      title: "Local Transport",
+      text: "Motorbike taxis and taxis are the most common options. Agree on the fare before boarding. To reach Km 3 (LF Steakhouse), any downtown motorbike taxi gets you there in 10 min.",
+    },
+  },
+];
+
+// ── JSON-LD ──────────────────────────────────────────────────────────────────
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Guía de Viaje: Qué Hacer en Caucasia, Antioquia",
+  description:
+    "Descubre los mejores lugares, actividades, gastronomía y consejos para visitar Caucasia, la capital del Bajo Cauca antioqueño.",
+  datePublished: "2026-04-27T00:00:00Z",
+  dateModified: "2026-04-27T00:00:00Z",
+  url: `${baseUrl}/blog/que-hacer-en-caucasia`,
+  author: { "@type": "Organization", name: "LF Steakhouse", url: baseUrl },
+  publisher: {
+    "@type": "Organization",
+    name: "LF Steakhouse",
+    url: baseUrl,
+    logo: { "@type": "ImageObject", url: `${baseUrl}/logo.jpg` },
+  },
+  about: {
+    "@type": "TouristDestination",
+    name: "Caucasia, Antioquia, Colombia",
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": `${baseUrl}/blog/que-hacer-en-caucasia`,
+  },
+};
+
+// SVG icons reused across cards
+const iconMap: Record<string, string> = {
+  economy:
+    '<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+  clock:
+    '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+  pin: '<path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/>',
+  bus: '<rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>',
+  box: '<path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>',
+  card: '<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>',
+  phone:
+    '<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>',
+  health:
+    '<path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>',
+  info: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',
+};
+
+const infoCardIcons = ["economy", "clock", "pin"];
+const routeIcons = ["bus", "bus", "box"];
+const tipIcons = ["pin", "health", "card", "phone", "health", "bus"];
+---
+
+<Layout
+  title="Guía de Viaje: Qué Hacer en Caucasia, Antioquia | LF Steakhouse"
+  description="Descubre los mejores lugares, actividades, gastronomía y consejos para visitar Caucasia, la capital del Bajo Cauca antioqueño. Guía completa 2026."
+  keywords="qué hacer en Caucasia, turismo Caucasia Antioquia, visitar Bajo Cauca, Caucasia Colombia, lugares Caucasia"
+>
+  <Header currentPage="/blog" />
+
+  <main>
+    <!-- ── Hero ── -->
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <nav class="breadcrumb" aria-label="breadcrumb">
+          <a href="/"><Trans es="Inicio" en="Home" /></a>
+          <span aria-hidden="true"> / </span>
+          <a href="/blog">Blog</a>
+          <span aria-hidden="true"> / </span>
+          <span aria-current="page"
+            ><Trans es="Guía Caucasia" en="Caucasia Guide" /></span
+          >
+        </nav>
+        <p class="hero-category">
+          <Trans es="Guía de Viaje" en="Travel Guide" />
+        </p>
+        <h1 class="hero-title">
+          <Trans
+            es="Qué Hacer en Caucasia, Antioquia"
+            en="What to Do in Caucasia, Antioquia"
+          />
+        </h1>
+        <p class="hero-subtitle i18n-es">
+          La capital del Bajo Cauca: río, cultura ganadera, gastronomía y la
+          mejor mesa de la región
+        </p>
+        <p class="hero-subtitle i18n-en">
+          The capital of Bajo Cauca: river, cattle culture, gastronomy and the
+          best table in the region
+        </p>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">
+        <span class="scroll-line"></span>
+      </div>
+    </section>
+
+    <!-- ── Facts bar ── -->
+    <section class="facts-bar">
+      <div class="facts-inner">
+        {
+          facts.map((f, i) => (
+            <>
+              <div class="fact">
+                <span class="fact-value">{f.value}</span>
+                <span class="fact-label">
+                  <Trans es={f.es} en={f.en} />
+                </span>
+              </div>
+              {i < facts.length - 1 && <div class="fact-divider" />}
+            </>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ── Table of contents ── -->
+    <section class="toc-section">
+      <details class="toc" open>
+        <summary class="toc-title">
+          <span><Trans es="Contenido" en="Contents" /></span>
+          <svg
+            class="toc-arrow"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg
+          >
+        </summary>
+        <nav class="toc-grid">
+          {
+            toc.map((item) => (
+              <a href={item.href}>
+                <Trans es={item.es} en={item.en} />
+              </a>
+            ))
+          }
+        </nav>
+      </details>
+    </section>
+
+    <!-- ── 01 Sobre Caucasia ── -->
+    <section id="sobre-caucasia" class="content-section">
+      <div class="section-inner">
+        <div class="section-label">01</div>
+        <h2 class="section-title">
+          <Trans es="Sobre Caucasia" en="About Caucasia" />
+        </h2>
+        <p class="section-text i18n-es">
+          Caucasia es la capital de la subregión del Bajo Cauca antioqueño y uno
+          de los centros económicos más importantes del norte de Colombia.
+          Ubicada a orillas del río Cauca, la ciudad concentra el comercio, la
+          gastronomía y la cultura ganadera de toda la región.
+        </p>
+        <p class="section-text i18n-en">
+          Caucasia is the capital of the Bajo Cauca Antioqueño subregion and one
+          of the most important economic centers in northern Colombia. Located
+          on the banks of the Cauca River, the city concentrates the commerce,
+          gastronomy and cattle culture of the entire region.
+        </p>
+        <p class="section-text i18n-es">
+          Con una población de cerca de 100.000 habitantes y un clima cálido que
+          ronda los 30-33°C todo el año, Caucasia es una ciudad de paso obligado
+          para quienes viajan entre Medellín, la Costa Caribe y el Urabá
+          antioqueño.
+        </p>
+        <p class="section-text i18n-en">
+          With a population of around 100,000 inhabitants and a warm climate of
+          30-33°C year-round, Caucasia is a mandatory stop for those traveling
+          between Medellín, the Caribbean Coast and Urabá antioqueño.
+        </p>
+        <div class="cards-grid">
+          {
+            infoCards.map((card, i) => (
+              <div class="info-card">
+                <div class="info-card-icon">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    set:html={iconMap[infoCardIcons[i]]}
+                  />
+                </div>
+                <div>
+                  <p class="info-card-title">
+                    <Trans es={card.es.title} en={card.en.title} />
+                  </p>
+                  <p class="info-card-text i18n-es">{card.es.text}</p>
+                  <p class="info-card-text i18n-en">{card.en.text}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 02 Cómo Llegar ── -->
+    <section id="como-llegar" class="content-section alt">
+      <div class="section-inner">
+        <div class="section-label">02</div>
+        <h2 class="section-title">
+          <Trans es="Cómo Llegar" en="How to Get There" />
+        </h2>
+        <p class="section-text i18n-es">
+          Caucasia está bien conectada por vía terrestre desde las principales
+          ciudades de Colombia. La ruta más usada es la que viene desde Medellín
+          pasando por Yarumal y Valdivia.
+        </p>
+        <p class="section-text i18n-en">
+          Caucasia is well connected by road from Colombia's main cities. The
+          most used route comes from Medellín via Yarumal and Valdivia.
+        </p>
+        <div class="route-list">
+          {
+            routes.map((r, i) => (
+              <div class="route-item">
+                <div class="route-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    set:html={iconMap[routeIcons[i]]}
+                  />
+                </div>
+                <div>
+                  <p class="route-title">
+                    <Trans es={r.es.title} en={r.en.title} />
+                  </p>
+                  <p class="route-text i18n-es">{r.es.text}</p>
+                  <p class="route-text i18n-en">{r.en.text}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 03 Qué Hacer ── -->
+    <section id="que-hacer" class="content-section">
+      <div class="section-inner">
+        <div class="section-label">03</div>
+        <h2 class="section-title">
+          <Trans es="Qué Hacer en Caucasia" en="What to Do in Caucasia" />
+        </h2>
+        <p class="section-text i18n-es">
+          Caucasia ofrece una combinación de naturaleza, cultura y la calidez
+          característica del Bajo Cauca. Estas son las actividades
+          imprescindibles:
+        </p>
+        <p class="section-text i18n-en">
+          Caucasia offers a blend of nature, culture and the warmth
+          characteristic of Bajo Cauca. These are the must-do activities:
+        </p>
+        <div class="activities-grid">
+          {
+            activities.map((a) => (
+              <div class="activity-card">
+                <h3 class="activity-title">
+                  <Trans es={a.es.title} en={a.en.title} />
+                </h3>
+                <p class="activity-text i18n-es">{a.es.text}</p>
+                <p class="activity-text i18n-en">{a.en.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 04 Gastronomía ── -->
+    <section id="gastronomia" class="content-section alt">
+      <div class="section-inner">
+        <div class="section-label">04</div>
+        <h2 class="section-title">
+          <Trans es="Gastronomía en Caucasia" en="Gastronomy in Caucasia" />
+        </h2>
+        <p class="section-text i18n-es">
+          La mesa caucasiana mezcla la cocina paisa con sabores caribeños y la
+          tradición ganadera del Bajo Cauca. El pescado de río, la carne a la
+          brasa y los patacones son protagonistas.
+        </p>
+        <p class="section-text i18n-en">
+          Caucasian cuisine blends paisa cooking with Caribbean flavors and the
+          cattle tradition of Bajo Cauca. River fish, grilled meat and patacones
+          take center stage.
+        </p>
+
+        <div class="featured-restaurant">
+          <div class="featured-badge">
+            <Trans es="Recomendado" en="Recommended" />
+          </div>
+          <h3 class="featured-title">LF Steakhouse</h3>
+          <p class="featured-text i18n-es">
+            Si hay una dirección que no puedes perderte en Caucasia, es LF
+            Steakhouse. Ubicado en el Km 3 vía a la Costa, es el restaurante
+            premium de carnes y parrilla del Bajo Cauca. Cortes importados como
+            Strip Loin y Picanha, especiales de la casa como el Lomo Steak
+            House, y una barra de cócteles artesanales que incluye la icónica <strong
+              >Margarita de Corozo</strong
+            > — hecha con fruta silvestre de la región.
+          </p>
+          <p class="featured-text i18n-en">
+            If there is one address you cannot miss in Caucasia, it is LF
+            Steakhouse. Located at Km 3 on the coastal road, it is the premium
+            steakhouse of Bajo Cauca. Imported cuts like Strip Loin and Picanha,
+            house specials like the Lomo Steak House, and an artisan cocktail
+            bar featuring the iconic <strong>Margarita de Corozo</strong> — made with
+            wild regional fruit.
+          </p>
+          <p class="featured-text i18n-es">
+            El ambiente es íntimo y cuidado, con brasas a la vista y una
+            selección de cortes que no encontrarás en ningún otro lugar del Bajo
+            Cauca. Ideal para celebraciones, cenas de negocios o simplemente
+            disfrutar de la mejor carne de la región.
+          </p>
+          <p class="featured-text i18n-en">
+            The setting is intimate and refined, with open-fire grills and a
+            selection of cuts you won't find anywhere else in Bajo Cauca.
+            Perfect for celebrations, business dinners or simply enjoying the
+            best meat in the region.
+          </p>
+          <div class="featured-actions">
+            <a href="/reservar" class="featured-btn-primary"
+              ><Trans es="Reservar Mesa" en="Reserve a Table" /></a
+            >
+            <a href="/menu" class="featured-btn-secondary"
+              ><Trans es="Ver Carta" en="View Menu" /></a
+            >
+          </div>
+        </div>
+
+        <h3 class="subsection-title">
+          <Trans
+            es="Platos Típicos de la Región"
+            en="Regional Typical Dishes"
+          />
+        </h3>
+        <div class="food-grid">
+          {
+            foods.map((f) => (
+              <div class="food-item">
+                <p class="food-name">
+                  <Trans es={f.es.name} en={f.en.name} />
+                </p>
+                <p class="food-desc i18n-es">{f.es.desc}</p>
+                <p class="food-desc i18n-en">{f.en.desc}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 05 Festividades ── -->
+    <section id="festividades" class="content-section">
+      <div class="section-inner">
+        <div class="section-label">05</div>
+        <h2 class="section-title">
+          <Trans es="Festividades" en="Festivities" />
+        </h2>
+        <p class="section-text i18n-es">
+          Caucasia celebra su identidad ribereña y ganadera con festividades que
+          reúnen a toda la subregión.
+        </p>
+        <p class="section-text i18n-en">
+          Caucasia celebrates its riverside and cattle identity with festivities
+          that bring together the entire subregion.
+        </p>
+        <div class="events-list">
+          {
+            events.map((e) => (
+              <div class="event-item">
+                <div class="event-month">{e.month}</div>
+                <div class="event-info">
+                  <p class="event-name">
+                    <Trans es={e.es.name} en={e.en.name} />
+                  </p>
+                  <p class="event-desc i18n-es">{e.es.desc}</p>
+                  <p class="event-desc i18n-en">{e.en.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 06 Consejos ── -->
+    <section id="consejos" class="content-section alt">
+      <div class="section-inner">
+        <div class="section-label">06</div>
+        <h2 class="section-title">
+          <Trans es="Consejos de Viaje" en="Travel Tips" />
+        </h2>
+        <div class="tips-grid">
+          {
+            tips.map((tip, i) => (
+              <div class="tip-card">
+                <div class="tip-icon">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    set:html={iconMap[tipIcons[i]]}
+                  />
+                </div>
+                <p class="tip-title">
+                  <Trans es={tip.es.title} en={tip.en.title} />
+                </p>
+                <p class="tip-text i18n-es">{tip.es.text}</p>
+                <p class="tip-text i18n-en">{tip.en.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA Final ── -->
+    <section class="cta-final">
+      <div class="cta-inner">
+        <div class="ornament">
+          <span class="line"></span>
+          <span class="diamond"></span>
+          <span class="line"></span>
+        </div>
+        <h2 class="cta-title">
+          <Trans
+            es="Completa tu Visita a Caucasia"
+            en="Complete Your Visit to Caucasia"
+          />
+        </h2>
+        <p class="cta-text i18n-es">
+          Después de explorar la ciudad, reserva tu mesa en LF Steakhouse. La
+          mejor carne, los mejores cócteles y el mejor ambiente del Bajo Cauca
+          te esperan en el Km 3 vía a la Costa.
+        </p>
+        <p class="cta-text i18n-en">
+          After exploring the city, reserve your table at LF Steakhouse. The
+          best meat, the best cocktails and the best atmosphere in Bajo Cauca
+          await you at Km 3 on the coastal road.
+        </p>
+        <div class="cta-actions">
+          <a href="/reservar" class="cta-btn-primary"
+            ><Trans es="Reservar Mesa" en="Reserve a Table" /></a
+          >
+          <a href="/menu" class="cta-btn-secondary"
+            ><Trans es="Ver Carta" en="View Menu" /></a
+          >
+        </div>
+      </div>
+    </section>
+
+    <div class="back">
+      <a href="/blog" class="back-link">
+        <Trans es="← Todos los artículos" en="← All articles" />
+      </a>
+    </div>
+  </main>
+
+  <Footer />
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(schema)}
+  />
+</Layout>
+
+<style>
+  main {
+    padding-top: var(--header-height, 90px);
+    min-height: 100vh;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    background-color: var(--burgundy-dark);
+    overflow: hidden;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at 30% 50%,
+      rgba(61, 31, 31, 0.3) 0%,
+      rgba(45, 23, 23, 0.85) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 60px 24px;
+    max-width: 760px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .hero-content {
+      padding: 80px 40px;
+    }
+  }
+
+  .breadcrumb {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(245, 230, 200, 0.35);
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .breadcrumb a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .breadcrumb a:hover {
+    color: rgba(245, 230, 200, 0.65);
+  }
+
+  .hero-category {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245, 230, 200, 0.5);
+    border: 1px solid rgba(245, 230, 200, 0.2);
+    display: inline-block;
+    padding: 5px 12px;
+    margin-bottom: 20px;
+  }
+
+  .hero-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 44px;
+    font-weight: 600;
+    color: var(--cream);
+    line-height: 1.15;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 640px) {
+    .hero-title {
+      font-size: 60px;
+    }
+  }
+
+  .hero-subtitle {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.65);
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .scroll-line {
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(
+      to bottom,
+      rgba(245, 230, 200, 0.5),
+      transparent
+    );
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%,
+    100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  /* Facts bar */
+  .facts-bar {
+    background-color: var(--burgundy-light);
+    border-top: 1px solid rgba(245, 230, 200, 0.1);
+    border-bottom: 1px solid rgba(245, 230, 200, 0.1);
+    padding: 24px 20px;
+  }
+
+  .facts-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .fact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 24px;
+  }
+
+  .fact-value {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--cream);
+  }
+
+  .fact-label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(245, 230, 200, 0.4);
+    margin-top: 2px;
+  }
+
+  .fact-divider {
+    width: 1px;
+    height: 32px;
+    background-color: rgba(245, 230, 200, 0.15);
+  }
+
+  /* TOC */
+  .toc-section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 24px 0;
+  }
+  @media (min-width: 768px) {
+    .toc-section {
+      padding: 48px 40px 0;
+    }
+  }
+
+  .toc {
+    border: 1px solid rgba(245, 230, 200, 0.12);
+    padding: 20px 24px;
+  }
+
+  .toc-title {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(245, 230, 200, 0.6);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+    list-style: none;
+  }
+
+  .toc-title::-webkit-details-marker {
+    display: none;
+  }
+  details[open] .toc-arrow {
+    transform: rotate(180deg);
+  }
+  .toc-arrow {
+    color: rgba(245, 230, 200, 0.4);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    margin-top: 16px;
+  }
+  @media (min-width: 480px) {
+    .toc-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (min-width: 640px) {
+    .toc-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  .toc-grid a {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.55);
+    text-decoration: none;
+    padding: 6px 0;
+    transition: color 0.2s;
+    border-bottom: 1px solid rgba(245, 230, 200, 0.06);
+  }
+
+  .toc-grid a:hover {
+    color: var(--cream);
+  }
+
+  /* Content sections */
+  .content-section {
+    padding: 72px 24px;
+  }
+  .content-section.alt {
+    background-color: var(--burgundy-dark);
+  }
+  @media (min-width: 768px) {
+    .content-section {
+      padding: 96px 40px;
+    }
+  }
+
+  .section-inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 72px;
+    font-weight: 600;
+    color: rgba(245, 230, 200, 0.05);
+    line-height: 1;
+    margin-bottom: -20px;
+    letter-spacing: 4px;
+    user-select: none;
+  }
+
+  .section-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+
+  @media (min-width: 640px) {
+    .section-title {
+      font-size: 44px;
+    }
+  }
+
+  .section-text {
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.75);
+    line-height: 1.85;
+    margin-bottom: 20px;
+    max-width: 640px;
+  }
+
+  /* Info cards */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  @media (min-width: 560px) {
+    .cards-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  .info-card {
+    display: flex;
+    gap: 14px;
+    padding: 20px;
+    border: 1px solid rgba(245, 230, 200, 0.1);
+  }
+  .info-card-icon {
+    color: rgba(245, 230, 200, 0.4);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .info-card-title {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(245, 230, 200, 0.7);
+    margin-bottom: 6px;
+  }
+
+  .info-card-text {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.55);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Routes */
+  .route-list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+  }
+
+  .route-item {
+    display: flex;
+    gap: 16px;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(245, 230, 200, 0.08);
+  }
+  .route-icon {
+    color: rgba(245, 230, 200, 0.35);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .route-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .route-text {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.6);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Activities */
+  .activities-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  @media (min-width: 560px) {
+    .activities-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (min-width: 860px) {
+    .activities-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  .activity-card {
+    padding: 24px;
+    border: 1px solid rgba(245, 230, 200, 0.1);
+    transition: border-color 0.3s;
+  }
+  .activity-card:hover {
+    border-color: rgba(245, 230, 200, 0.25);
+  }
+
+  .activity-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 10px;
+  }
+
+  .activity-text {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.6);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Featured restaurant */
+  .featured-restaurant {
+    border: 1px solid rgba(245, 230, 200, 0.25);
+    padding: 32px;
+    margin: 36px 0 48px;
+    position: relative;
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: -1px;
+    left: 32px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    background-color: var(--cream);
+    padding: 4px 12px;
+  }
+
+  .featured-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--cream);
+    margin: 16px 0 12px;
+  }
+
+  .featured-text {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.75);
+    line-height: 1.75;
+    margin-bottom: 14px;
+  }
+
+  .featured-text strong {
+    font-weight: 500;
+    color: var(--cream);
+  }
+
+  .featured-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  .featured-btn-primary {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 14px 28px;
+    background-color: var(--cream);
+    color: var(--burgundy);
+    transition: all 0.3s;
+  }
+
+  .featured-btn-primary:hover {
+    background-color: var(--cream-light);
+    transform: translateY(-2px);
+  }
+
+  .featured-btn-secondary {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 14px 28px;
+    color: var(--cream);
+    border: 1px solid rgba(245, 230, 200, 0.3);
+    transition: all 0.3s;
+  }
+
+  .featured-btn-secondary:hover {
+    border-color: var(--cream);
+    background-color: rgba(245, 230, 200, 0.06);
+  }
+
+  /* Food grid */
+  .subsection-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 20px;
+  }
+
+  .food-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  @media (min-width: 560px) {
+    .food-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .food-item {
+    padding: 20px;
+    border: 1px solid rgba(245, 230, 200, 0.08);
+  }
+
+  .food-name {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+
+  .food-desc {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.55);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Events */
+  .events-list {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .event-item {
+    display: flex;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(245, 230, 200, 0.08);
+    align-items: flex-start;
+  }
+
+  .event-month {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(245, 230, 200, 0.35);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    min-width: 56px;
+    padding-top: 3px;
+  }
+
+  .event-name {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+
+  .event-desc {
+    font-family: "Montserrat", sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.6);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Tips */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  @media (min-width: 560px) {
+    .tips-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (min-width: 860px) {
+    .tips-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  .tip-card {
+    padding: 24px;
+    border: 1px solid rgba(245, 230, 200, 0.1);
+  }
+  .tip-icon {
+    color: rgba(245, 230, 200, 0.35);
+    margin-bottom: 12px;
+  }
+
+  .tip-title {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(245, 230, 200, 0.7);
+    margin-bottom: 8px;
+  }
+
+  .tip-text {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.55);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* CTA Final */
+  .cta-final {
+    padding: 96px 24px;
+    background: linear-gradient(
+      180deg,
+      var(--burgundy) 0%,
+      var(--burgundy-light) 100%
+    );
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .cta-final {
+      padding: 120px 40px;
+    }
+  }
+
+  .cta-inner {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .ornament .line {
+    width: 30px;
+    height: 1px;
+    background-color: rgba(245, 230, 200, 0.3);
+  }
+  .ornament .diamond {
+    width: 6px;
+    height: 6px;
+    background-color: rgba(245, 230, 200, 0.4);
+    transform: rotate(45deg);
+  }
+
+  .cta-title {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--cream);
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+  @media (min-width: 640px) {
+    .cta-title {
+      font-size: 44px;
+    }
+  }
+
+  .cta-text {
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.65);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  @media (min-width: 480px) {
+    .cta-actions {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  .cta-btn-primary {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 18px 40px;
+    background-color: var(--cream);
+    color: var(--burgundy);
+    transition: all 0.3s;
+    width: 100%;
+    text-align: center;
+  }
+
+  @media (min-width: 480px) {
+    .cta-btn-primary {
+      width: auto;
+    }
+  }
+  .cta-btn-primary:hover {
+    background-color: var(--cream-light);
+    transform: translateY(-2px);
+  }
+
+  .cta-btn-secondary {
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 18px 40px;
+    color: var(--cream);
+    border: 1px solid rgba(245, 230, 200, 0.35);
+    transition: all 0.3s;
+    width: 100%;
+    text-align: center;
+  }
+
+  @media (min-width: 480px) {
+    .cta-btn-secondary {
+      width: auto;
+    }
+  }
+  .cta-btn-secondary:hover {
+    border-color: var(--cream);
+    background-color: rgba(245, 230, 200, 0.06);
+  }
+
+  /* Back */
+  .back {
+    text-align: center;
+    padding: 32px 20px 64px;
+  }
+
+  .back-link {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(245, 230, 200, 0.35);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .back-link:hover {
+    color: rgba(245, 230, 200, 0.65);
+  }
+</style>

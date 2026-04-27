@@ -12,6 +12,7 @@ const links = [
   { href: "/menu",     es: "Menú",    en: "Menu" },
   { href: "/galeria",  es: "Galería", en: "Gallery" },
   { href: "/reservar", es: "Reservar",en: "Reserve" },
+  { href: "/blog",     es: "Blog",    en: "Blog" },
 ];
 ---
 
@@ -277,8 +278,26 @@ const links = [
 
 <script>
   function initScrollHeader() {
-    const header = document.querySelector("header");
+    const header = document.querySelector<HTMLElement>("header");
     if (!header) return;
+
+    function setHeaderHeight() {
+      const h = header!.getBoundingClientRect().height;
+      if (h > 0) {
+        document.documentElement.style.setProperty("--header-height", `${Math.round(h)}px`);
+      }
+    }
+
+    // Measure immediately, after first paint, and after fonts settle
+    setHeaderHeight();
+    requestAnimationFrame(setHeaderHeight);
+    document.fonts?.ready?.then?.(setHeaderHeight);
+
+    // Keep in sync if the header ever changes size (mobile menu open, resize)
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(setHeaderHeight).observe(header);
+    }
+
     const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 80);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();

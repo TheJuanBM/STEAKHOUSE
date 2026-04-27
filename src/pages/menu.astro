@@ -229,7 +229,10 @@ const categorias = [
 ];
 ---
 
-<Layout title="Menú - LF Steakhouse">
+<Layout
+  title="Menú del Restaurante en Caucasia | LF Steakhouse"
+  description="Explora el menú de LF Steakhouse en Caucasia: cortes importados, brasas, especiales de la casa, cócteles artesanales y más. Cocina premium en el Bajo Cauca Antioquia."
+>
   <Header currentPage="/menu" />
   <main>
     <MenuHeader />
@@ -287,6 +290,11 @@ const categorias = [
           en="Please inform your server about any food allergies"
         />
       </p>
+      <div class="reserve-cta">
+        <a href="/reservar" class="reserve-btn">
+          <Trans es="Reservar Mesa" en="Reserve a Table" />
+        </a>
+      </div>
     </footer>
   </main>
 </Layout>
@@ -295,7 +303,7 @@ const categorias = [
   main {
     max-width: 500px;
     margin: 0 auto;
-    padding-top: 60px;
+    padding-top: var(--header-height, 100px);
     padding-bottom: 60px;
   }
 
@@ -362,6 +370,29 @@ const categorias = [
     color: rgba(245, 230, 200, 0.75);
     margin: 8px 0 0;
     font-style: italic;
+  }
+
+  .reserve-cta {
+    margin-top: 32px;
+  }
+
+  .reserve-btn {
+    display: inline-block;
+    font-family: "Montserrat", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    background-color: var(--cream);
+    color: var(--burgundy);
+    padding: 16px 40px;
+    transition: all 0.3s ease;
+  }
+
+  .reserve-btn:hover {
+    background-color: var(--cream-light);
+    transform: translateY(-2px);
   }
 
   /* Guarniciones */

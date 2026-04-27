@@ -32,16 +32,10 @@ const { categorias } = Astro.props;
 <style>
   nav {
     position: sticky;
-    top: 56px;
+    top: calc(var(--header-height, 90px) - 0.3px);
     z-index: 90;
     background-color: #3d1f1f;
     border-bottom: 1px solid rgba(245, 230, 200, 0.12);
-  }
-
-  @media (min-width: 768px) {
-    nav {
-      top: 68px;
-    }
   }
 
   .nav-scroll {
@@ -207,9 +201,15 @@ const { categorias } = Astro.props;
     const firstId = sections[0]?.getAttribute("id");
     if (firstId) setActiveLink(firstId);
 
-    const headerHeight = window.innerWidth >= 768 ? 68 : 56;
+    const getHeaderHeight = () =>
+      parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue(
+          "--header-height",
+        ),
+      ) || 90;
+
     const navHeight = 48;
-    const topOffset = headerHeight + navHeight;
+    const topOffset = getHeaderHeight() + navHeight;
 
     const visibleSections = new Set<string>();
 
@@ -243,7 +243,7 @@ const { categorias } = Astro.props;
       {
         rootMargin: `-${topOffset}px 0px -45% 0px`,
         threshold: 0,
-      }
+      },
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -254,9 +254,8 @@ const { categorias } = Astro.props;
         const targetId = link.getAttribute("href")?.slice(1);
         const target = document.getElementById(targetId || "");
         if (target) {
-          const headerHeight = window.innerWidth >= 768 ? 68 : 56;
           const menuNavHeight = 48;
-          const offset = headerHeight + menuNavHeight + 10;
+          const offset = getHeaderHeight() + menuNavHeight + 10;
           const y =
             target.getBoundingClientRect().top + window.scrollY - offset;
           window.scrollTo({ top: y, behavior: "smooth" });
