@@ -1,47 +1,138 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-import Trans from "../i18n/Trans.astro";
+import { Image, getImage } from "astro:assets";
 
-const galleries = [
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Trans from "../i18n/Trans.astro";
+import Layout from "../layouts/Layout.astro";
+
+import imgAmbiente1 from "../assets/ambiente-1.png";
+import imgAmbiente2 from "../assets/ambiente-2.png";
+import imgAmbiente3 from "../assets/ambiente-3.png";
+import imgEmpanadas from "../assets/empanadas.jpg";
+import imgEvento1 from "../assets/evento-1.png";
+import imgEvento2 from "../assets/evento-2.png";
+import imgEvento3 from "../assets/evento-3.png";
+import imgEvento4 from "../assets/evento-4.png";
+import imgEvento5 from "../assets/evento-5.png";
+import imgMargarita from "../assets/margarita.jpg";
+import imgMazorquitas from "../assets/mazorquitas.jpg";
+import imgMolcajete from "../assets/molcajete.jpg";
+
+const images = [
   {
-    category: "Platillos",
-    categoryEn: "Dishes",
-    images: [
-      { id: 1, alt: "Filete Mignon con salsa de vino tinto", altEn: "Filet Mignon with red wine sauce" },
-      { id: 2, alt: "Tartar de atún fresco", altEn: "Fresh tuna tartare" },
-      { id: 3, alt: "Risotto de hongos silvestres", altEn: "Wild mushroom risotto" },
-      { id: 4, alt: "Postre de chocolate", altEn: "Chocolate dessert" },
-      { id: 5, alt: "Carpaccio de res", altEn: "Beef carpaccio" },
-      { id: 6, alt: "Salmón a la parrilla", altEn: "Grilled salmon" },
-    ],
+    src: imgEmpanadas,
+    alt: "Empanadas de la casa",
+    altEn: "House empanadas",
+    category: "carta",
+    categoryLabel: "Carta",
+    categoryLabelEn: "Menu",
   },
   {
-    category: "Ambiente",
-    categoryEn: "Ambiance",
-    images: [
-      { id: 7, alt: "Interior del restaurante", altEn: "Restaurant interior" },
-      { id: 8, alt: "Barra de vinos", altEn: "Wine bar" },
-      { id: 9, alt: "Terraza exterior", altEn: "Outdoor terrace" },
-      { id: 10, alt: "Mesa privada", altEn: "Private table" },
-    ],
+    src: imgMazorquitas,
+    alt: "Mazorquitas a la brasa",
+    altEn: "Grilled baby corn",
+    category: "carta",
+    categoryLabel: "Carta",
+    categoryLabelEn: "Menu",
   },
   {
-    category: "Eventos",
-    categoryEn: "Events",
-    images: [
-      { id: 11, alt: "Cena privada", altEn: "Private dinner" },
-      { id: 12, alt: "Celebración especial", altEn: "Special celebration" },
-      { id: 13, alt: "Evento corporativo", altEn: "Corporate event" },
-    ],
+    src: imgMolcajete,
+    alt: "Molcajete especial LF",
+    altEn: "LF Special molcajete",
+    category: "carta",
+    categoryLabel: "Carta",
+    categoryLabelEn: "Menu",
   },
+  {
+    src: imgMargarita,
+    alt: "Margarita de frutos rojos con borde de tajín",
+    altEn: "Red berry margarita with tajín rim",
+    category: "carta",
+    categoryLabel: "Carta",
+    categoryLabelEn: "Menu",
+  },
+  {
+    src: imgEvento1,
+    alt: "Cantante en vivo en LF Steakhouse",
+    altEn: "Live singer at LF Steakhouse",
+    category: "eventos",
+    categoryLabel: "Eventos",
+    categoryLabelEn: "Events",
+  },
+  {
+    src: imgEvento2,
+    alt: "Banda en vivo en LF Steakhouse",
+    altEn: "Live band at LF Steakhouse",
+    category: "eventos",
+    categoryLabel: "Eventos",
+    categoryLabelEn: "Events",
+  },
+  {
+    src: imgEvento3,
+    alt: "Cumpleaños en LF Steakhouse",
+    altEn: "Birthday celebration at LF Steakhouse",
+    category: "eventos",
+    categoryLabel: "Eventos",
+    categoryLabelEn: "Events",
+  },
+  {
+    src: imgEvento4,
+    alt: "Celebración entre amigos en LF Steakhouse",
+    altEn: "Friends celebration at LF Steakhouse",
+    category: "eventos",
+    categoryLabel: "Eventos",
+    categoryLabelEn: "Events",
+  },
+  {
+    src: imgEvento5,
+    alt: "Celebración familiar en LF Steakhouse",
+    altEn: "Family celebration at LF Steakhouse",
+    category: "eventos",
+    categoryLabel: "Eventos",
+    categoryLabelEn: "Events",
+  },
+  {
+    src: imgAmbiente1,
+    alt: "Stand de licores premium en LF Steakhouse",
+    altEn: "Premium liquor stand at LF Steakhouse",
+    category: "ambiente",
+    categoryLabel: "Ambiente",
+    categoryLabelEn: "Ambiance",
+  },
+  {
+    src: imgAmbiente2,
+    alt: "Entrada de LF Steakhouse con letrero iluminado",
+    altEn: "LF Steakhouse entrance with illuminated sign",
+    category: "ambiente",
+    categoryLabel: "Ambiente",
+    categoryLabelEn: "Ambiance",
+  },
+  {
+    src: imgAmbiente3,
+    alt: "Comedor interior de LF Steakhouse",
+    altEn: "LF Steakhouse interior dining area",
+    category: "ambiente",
+    categoryLabel: "Ambiente",
+    categoryLabelEn: "Ambiance",
+  },
+];
+
+const lightboxSrcs = await Promise.all(
+  images.map((img) => getImage({ src: img.src, width: 1200, format: "avif" })),
+);
+
+const tabs = [
+  { id: "all", label: "Todo", labelEn: "All" },
+  { id: "carta", label: "Carta", labelEn: "Menu" },
+  { id: "ambiente", label: "Ambiente", labelEn: "Ambiance" },
+  { id: "eventos", label: "Eventos", labelEn: "Events" },
 ];
 ---
 
 <Layout
   title="Galería | LF Steakhouse Caucasia Antioquia"
-  description="Descubre el ambiente, los platos y los eventos de LF Steakhouse en Caucasia. Fotos de nuestras brasas, cócteles y espacios únicos en el Bajo Cauca."
+  description="Descubre el ambiente, los platos y los eventos de LF Steakhouse en Caucasia, Antioquia. Fotos de brasas, cócteles y espacios únicos en el Bajo Cauca."
 >
   <Header currentPage="/galeria" />
   <main>
@@ -53,7 +144,9 @@ const galleries = [
             <span class="diamond"></span>
             <span class="line"></span>
           </div>
-          <h1 class="title"><Trans es="Galería LF Steakhouse" en="LF Steakhouse Gallery" /></h1>
+          <h1 class="title">
+            <Trans es="Galería LF Steakhouse" en="LF Steakhouse Gallery" />
+          </h1>
           <p class="subtitle">
             <Trans
               es="Descubre nuestra cocina, ambiente y momentos especiales en Caucasia, Antioquia"
@@ -63,15 +156,14 @@ const galleries = [
         </div>
 
         <nav class="tabs">
-          <button class="tab active" data-category="all">
-            <span class="i18n-es">Todo</span>
-            <span class="i18n-en">All</span>
-          </button>
           {
-            galleries.map((gallery) => (
-              <button class="tab" data-category={gallery.category.toLowerCase()}>
-                <span class="i18n-es">{gallery.category}</span>
-                <span class="i18n-en">{gallery.categoryEn}</span>
+            tabs.map((tab) => (
+              <button
+                class={`tab${tab.id === "all" ? " active" : ""}`}
+                data-category={tab.id}
+              >
+                <span class="i18n-es">{tab.label}</span>
+                <span class="i18n-en">{tab.labelEn}</span>
               </button>
             ))
           }
@@ -79,63 +171,100 @@ const galleries = [
 
         <div class="gallery-grid" id="gallery-grid">
           {
-            galleries.map((gallery) =>
-              gallery.images.map((image) => (
-                <div
-                  class="gallery-item"
-                  data-category={gallery.category.toLowerCase()}
-                  data-id={image.id}
-                >
-                  <div class="image-placeholder">
-                    <span class="placeholder-icon">
-                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                        <rect x="3" y="3" width="18" height="18" rx="2" />
-                        <circle cx="8.5" cy="8.5" r="1.5" />
-                        <path d="M21 15l-5-5L5 21" />
-                      </svg>
-                    </span>
-                    <span class="placeholder-text i18n-es">{image.alt}</span>
-                    <span class="placeholder-text i18n-en">{image.altEn}</span>
-                  </div>
-                  <div class="image-overlay">
-                    <span class="overlay-category">
-                      <span class="i18n-es">{gallery.category}</span>
-                      <span class="i18n-en">{gallery.categoryEn}</span>
-                    </span>
-                    <span class="overlay-text">
-                      <span class="i18n-es">{image.alt}</span>
-                      <span class="i18n-en">{image.altEn}</span>
-                    </span>
-                  </div>
+            images.map((img, i) => (
+              <div
+                class="gallery-item"
+                data-category={img.category}
+                data-lightbox-src={lightboxSrcs[i].src}
+                data-alt-es={img.alt}
+                data-alt-en={img.altEn}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  width={600}
+                  height={600}
+                  class="gallery-img"
+                  loading={i < 4 ? "eager" : "lazy"}
+                  fetchpriority={i < 4 ? "high" : "auto"}
+                  format="avif"
+                />
+                <div class="image-overlay">
+                  <span class="overlay-category">
+                    <span class="i18n-es">{img.categoryLabel}</span>
+                    <span class="i18n-en">{img.categoryLabelEn}</span>
+                  </span>
+                  <span class="overlay-text">
+                    <span class="i18n-es">{img.alt}</span>
+                    <span class="i18n-en">{img.altEn}</span>
+                  </span>
                 </div>
-              )),
-            )
+              </div>
+            ))
           }
         </div>
       </div>
     </section>
 
     <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-      <button class="lightbox-close" id="lightbox-close" aria-label="Cerrar / Close">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <div
+      class="lightbox"
+      id="lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Imagen ampliada"
+    >
+      <button
+        class="lightbox-close"
+        id="lightbox-close"
+        aria-label="Cerrar / Close"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <path d="M18 6L6 18M6 6l12 12"></path>
         </svg>
       </button>
-      <button class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Anterior / Previous">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <button
+        class="lightbox-nav lightbox-prev"
+        id="lightbox-prev"
+        aria-label="Anterior / Previous"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <path d="M15 18l-6-6 6-6"></path>
         </svg>
       </button>
-      <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Siguiente / Next">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <button
+        class="lightbox-nav lightbox-next"
+        id="lightbox-next"
+        aria-label="Siguiente / Next"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
           <path d="M9 18l6-6-6-6"></path>
         </svg>
       </button>
       <div class="lightbox-content" id="lightbox-content">
-        <div class="lightbox-placeholder">
-          <span class="lightbox-text" id="lightbox-text"></span>
-        </div>
+        <img id="lightbox-img" src="" alt="" class="lightbox-img" />
+        <p class="lightbox-caption" id="lightbox-caption"></p>
       </div>
     </div>
   </main>
@@ -278,45 +407,12 @@ const galleries = [
     display: none;
   }
 
-  .gallery-item:hover {
-    transform: scale(1.02);
-  }
-
-  .image-placeholder {
+  .gallery-img {
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      135deg,
-      var(--burgundy-light) 0%,
-      var(--burgundy-dark) 100%
-    );
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .placeholder-icon {
-    color: rgba(245, 230, 200, 0.2);
-  }
-
-  .placeholder-text {
-    font-family: "Montserrat", sans-serif;
-    font-size: 10px;
-    color: rgba(245, 230, 200, 0.25);
-    text-align: center;
-    padding: 0 12px;
-    display: none;
-  }
-
-  @media (min-width: 600px) {
-    .placeholder-text {
-      display: block;
-    }
-    /* i18n overrides for placeholder-text (block element) */
-    html[lang="en"] .placeholder-text.i18n-es { display: none; }
-    html[lang="en"] .placeholder-text.i18n-en { display: block; }
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
   }
 
   .image-overlay {
@@ -331,12 +427,26 @@ const galleries = [
     flex-direction: column;
     justify-content: flex-end;
     padding: 16px;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.3s ease;
   }
 
-  .gallery-item:hover .image-overlay {
-    opacity: 1;
+  @media (hover: hover) {
+    .image-overlay {
+      opacity: 0;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.02);
+    }
+
+    .gallery-item:hover .gallery-img {
+      transform: scale(1.05);
+    }
+
+    .gallery-item:hover .image-overlay {
+      opacity: 1;
+    }
   }
 
   .overlay-category {
@@ -356,11 +466,12 @@ const galleries = [
     color: #f5e6c8;
   }
 
+  /* Lightbox */
   .lightbox {
     position: fixed;
     inset: 0;
     z-index: 2000;
-    background-color: rgba(45, 23, 23, 0.97);
+    background-color: rgba(20, 10, 10, 0.97);
     display: none;
     align-items: center;
     justify-content: center;
@@ -404,71 +515,77 @@ const galleries = [
     color: #f5e6c8;
   }
 
-  .lightbox-prev { left: 10px; }
-  .lightbox-next { right: 10px; }
+  .lightbox-prev {
+    left: 10px;
+  }
+  .lightbox-next {
+    right: 10px;
+  }
 
   @media (min-width: 768px) {
-    .lightbox-prev { left: 30px; }
-    .lightbox-next { right: 30px; }
+    .lightbox-prev {
+      left: 30px;
+    }
+    .lightbox-next {
+      right: 30px;
+    }
   }
 
   .lightbox-content {
-    max-width: 90vw;
-    max-height: 80vh;
-  }
-
-  .lightbox-placeholder {
-    width: 80vw;
-    height: 60vh;
-    max-width: 800px;
-    background: linear-gradient(
-      135deg,
-      var(--burgundy-light) 0%,
-      var(--burgundy-dark) 100%
-    );
-    border: 1px solid rgba(245, 230, 200, 0.15);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    gap: 16px;
+    max-width: 90vw;
+    max-height: 85vh;
   }
 
-  .lightbox-text {
+  .lightbox-img {
+    max-width: 90vw;
+    max-height: 78vh;
+    object-fit: contain;
+    border: 1px solid rgba(245, 230, 200, 0.1);
+  }
+
+  .lightbox-caption {
     font-family: "Cormorant Garamond", serif;
-    font-size: 24px;
-    color: rgba(245, 230, 200, 0.5);
+    font-size: 16px;
+    color: rgba(245, 230, 200, 0.6);
     text-align: center;
-    padding: 20px;
+    margin: 0;
   }
 </style>
 
 <script>
-  const tabs = document.querySelectorAll(".tab");
-  const items = document.querySelectorAll(".gallery-item");
+  const tabBtns = document.querySelectorAll(".tab");
+  const items = document.querySelectorAll<HTMLElement>(".gallery-item");
 
-  tabs.forEach((tab) => {
+  tabBtns.forEach((tab) => {
     tab.addEventListener("click", () => {
       const category = tab.getAttribute("data-category");
-      tabs.forEach((t) => t.classList.remove("active"));
+      tabBtns.forEach((t) => t.classList.remove("active"));
       tab.classList.add("active");
       items.forEach((item) => {
         const itemCategory = item.getAttribute("data-category");
-        if (category === "all" || itemCategory === category) {
-          item.classList.remove("hidden");
-        } else {
-          item.classList.add("hidden");
-        }
+        item.classList.toggle(
+          "hidden",
+          category !== "all" && itemCategory !== category,
+        );
       });
     });
   });
 
   const lightbox = document.getElementById("lightbox");
-  const lightboxText = document.getElementById("lightbox-text");
+  const lightboxImg = document.getElementById(
+    "lightbox-img",
+  ) as HTMLImageElement;
+  const lightboxCaption = document.getElementById("lightbox-caption");
   const closeBtn = document.getElementById("lightbox-close");
   const prevBtn = document.getElementById("lightbox-prev");
   const nextBtn = document.getElementById("lightbox-next");
 
   let currentIndex = 0;
-  let visibleItems: Element[] = [];
+  let visibleItems: HTMLElement[] = [];
 
   function updateVisibleItems() {
     visibleItems = Array.from(items).filter(
@@ -476,19 +593,31 @@ const galleries = [
     );
   }
 
-  function getItemText(item: Element): string {
-    const lang = document.documentElement.getAttribute("lang") || "es";
-    const selector = lang === "en" ? ".overlay-text .i18n-en" : ".overlay-text .i18n-es";
-    return item.querySelector(selector)?.textContent || item.querySelector(".overlay-text")?.textContent || "";
+  function getLang() {
+    return document.documentElement.getAttribute("lang") || "es";
   }
 
   function openLightbox(index: number) {
     updateVisibleItems();
     currentIndex = index;
-    const item = visibleItems[currentIndex];
-    if (lightboxText) lightboxText.textContent = getItemText(item);
+    showImage(currentIndex);
     lightbox?.classList.add("open");
     document.body.style.overflow = "hidden";
+  }
+
+  function showImage(index: number) {
+    const item = visibleItems[index];
+    const src = item.getAttribute("data-lightbox-src") || "";
+    const lang = getLang();
+    const alt =
+      lang === "en"
+        ? item.getAttribute("data-alt-en") || ""
+        : item.getAttribute("data-alt-es") || "";
+    if (lightboxImg) {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt;
+    }
+    if (lightboxCaption) lightboxCaption.textContent = alt;
   }
 
   function closeLightbox() {
@@ -497,13 +626,14 @@ const galleries = [
   }
 
   function showPrev() {
-    currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
-    if (lightboxText) lightboxText.textContent = getItemText(visibleItems[currentIndex]);
+    currentIndex =
+      (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+    showImage(currentIndex);
   }
 
   function showNext() {
     currentIndex = (currentIndex + 1) % visibleItems.length;
-    if (lightboxText) lightboxText.textContent = getItemText(visibleItems[currentIndex]);
+    showImage(currentIndex);
   }
 
   items.forEach((item) => {
