@@ -1,13 +1,13 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import tailwindcss from '@tailwindcss/vite';
+import tailwindcss from "@tailwindcss/vite";
 
 const baseHeaders = {
-  'X-Frame-Options': 'DENY',
-  'X-Content-Type-Options': 'nosniff',
-  'Referrer-Policy': 'strict-origin-when-cross-origin',
-  'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=()',
+  "X-Frame-Options": "DENY",
+  "X-Content-Type-Options": "nosniff",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=()",
 };
 
 const csp = [
@@ -21,14 +21,17 @@ const csp = [
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
-].join('; ');
+].join("; ");
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://lfsteakhouse.com",
+  build: {
+    inlineStylesheets: "auto",
+  },
   vite: {
     plugins: [tailwindcss()],
     server: { headers: baseHeaders },
-    preview: { headers: { ...baseHeaders, 'Content-Security-Policy': csp } },
+    preview: { headers: { ...baseHeaders, "Content-Security-Policy": csp } },
   },
 });
