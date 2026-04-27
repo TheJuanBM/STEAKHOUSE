@@ -33,6 +33,7 @@ import Trans from "../i18n/Trans.astro";
         <form id="reservation-form" class="form">
           <div class="form-group">
             <label for="nombre" class="label">
+              <span class="req" aria-hidden="true">*</span>
               <Trans es="Nombre completo" en="Full name" />
             </label>
             <input
@@ -52,6 +53,7 @@ import Trans from "../i18n/Trans.astro";
           <div class="form-row">
             <div class="form-group">
               <label for="fecha" class="label">
+                <span class="req" aria-hidden="true">*</span>
                 <Trans es="Fecha" en="Date" />
               </label>
               <div class="date-wrapper">
@@ -61,6 +63,7 @@ import Trans from "../i18n/Trans.astro";
             </div>
             <div class="form-group">
               <label for="hora" class="label">
+                <span class="req" aria-hidden="true">*</span>
                 <Trans es="Hora" en="Time" />
               </label>
               <select id="hora" name="hora" required class="input" aria-describedby="hora-error">
@@ -85,6 +88,7 @@ import Trans from "../i18n/Trans.astro";
           <div class="form-row">
             <div class="form-group">
               <label for="personas" class="label">
+                <span class="req" aria-hidden="true">*</span>
                 <Trans es="Personas" en="Guests" />
               </label>
               <select id="personas" name="personas" required class="input" aria-describedby="personas-error">
@@ -128,6 +132,11 @@ import Trans from "../i18n/Trans.astro";
               data-placeholder-en="Allergies, table preferences, etc."
               placeholder="Alergias, preferencias de mesa, etc."></textarea>
           </div>
+
+          <p class="required-note">
+            <span aria-hidden="true">*</span>
+            <Trans es="Campo obligatorio" en="Required field" />
+          </p>
 
           <button type="submit" class="submit-btn">
             <svg class="whatsapp-icon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -265,6 +274,16 @@ import Trans from "../i18n/Trans.astro";
     color: rgba(245, 230, 200, 0.85);
     letter-spacing: 1px;
     text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .req {
+    color: #c97a7a;
+    font-size: 14px;
+    line-height: 1;
+    flex-shrink: 0;
   }
 
   .input {
@@ -406,6 +425,23 @@ import Trans from "../i18n/Trans.astro";
 
   .input-error {
     border-color: rgba(200, 90, 90, 0.55) !important;
+  }
+
+  .required-note {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    color: rgba(245, 230, 200, 0.35);
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: -8px;
+  }
+
+  .required-note span {
+    color: #c97a7a;
+    font-size: 13px;
   }
 
   .field-error {
