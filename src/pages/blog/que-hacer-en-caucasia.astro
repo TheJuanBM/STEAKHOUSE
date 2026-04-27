@@ -529,9 +529,8 @@ const tipIcons = ["pin", "health", "card", "phone", "health", "bus"];
                   />
                 </div>
                 <div>
-                  <p class="route-title">
-                    <Trans es={r.es.title} en={r.en.title} />
-                  </p>
+                  <p class="route-title i18n-es">{r.es.title}</p>
+                  <p class="route-title i18n-en">{r.en.title}</p>
                   <p class="route-text i18n-es">{r.es.text}</p>
                   <p class="route-text i18n-en">{r.en.text}</p>
                 </div>
@@ -1154,10 +1153,6 @@ const tipIcons = ["pin", "health", "card", "phone", "health", "bus"];
     margin-bottom: 6px;
   }
 
-  .route-title :global(.i18n-es),
-  .route-title :global(.i18n-en) {
-    color: #f5e6c8;
-  }
 
   .route-text {
     font-family: "Montserrat", sans-serif;
