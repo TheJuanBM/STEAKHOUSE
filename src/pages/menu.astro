@@ -260,12 +260,14 @@ const categorias = [
             <span class="guarnicion-extra-name">
               <Trans es="Desgranado con Salsa de Tocineta y Queso" en="Corn Kernels with Bacon and Cheese Sauce" />
             </span>
-            <span class="guarnicion-extra-line" />
-            <span class="guarnicion-extra-price">$4.900</span>
+            <span class="guarnicion-extra-line" aria-hidden="true" />
+            <span class="guarnicion-extra-price">
+              $4.900
+              <small class="guarnicion-extra-note">
+                (<Trans es="valor adicional" en="additional charge" />)
+              </small>
+            </span>
           </div>
-          <span class="guarnicion-extra-note">
-            <Trans es="valor adicional" en="additional charge" />
-          </span>
         </div>
       </section>
 
@@ -516,6 +518,8 @@ const categorias = [
     font-weight: 300;
     color: rgba(245, 230, 200, 0.5);
     font-style: italic;
+    display: block;
+    margin-top: 2px;
   }
 
   @media (min-width: 640px) {
