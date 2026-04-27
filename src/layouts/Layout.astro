@@ -438,10 +438,10 @@ const itemListElement = [
 
 <style is:global>
   /* i18n — default: show Spanish, hide English */
-  /* Explicit color so contrast scanners don't need to resolve CSS custom properties */
+  /* Explicit inherit so scanners follow the parent's already-explicit hex color */
   .i18n-es,
   .i18n-en {
-    color: #f5e6c8;
+    color: inherit;
   }
   .i18n-en {
     display: none;
