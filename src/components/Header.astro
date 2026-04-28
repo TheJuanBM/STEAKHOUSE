@@ -64,6 +64,9 @@ const links = [
   </nav>
 </header>
 
+<!-- Backdrop: cubre el contenido cuando el menú mobile está abierto -->
+<div id="menu-backdrop" aria-hidden="true"></div>
+
 <style>
   header {
     position: fixed;
@@ -226,19 +229,39 @@ const links = [
   }
 
   .nav-mobile {
-    display: none;
     background-color: #3d1f1f;
     border-top: 1px solid rgba(245, 230, 200, 0.1);
+    /* Transición por max-height para poder animar sin display:none */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.32s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .nav-mobile.open {
-    display: block;
+    max-height: 420px;
   }
 
   @media (min-width: 768px) {
     .nav-mobile {
       display: none !important;
     }
+  }
+
+  #menu-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 999; /* justo debajo del header (z-index: 1000) */
+    background: rgba(20, 8, 8, 0.45);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.32s ease;
+  }
+
+  #menu-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .nav-mobile-inner {
@@ -309,21 +332,32 @@ const links = [
   function initMobileMenu() {
     const menuBtn = document.getElementById("menu-btn");
     const navMobile = document.getElementById("nav-mobile");
+    const backdrop = document.getElementById("menu-backdrop");
     if (!menuBtn || !navMobile) return;
 
     const newBtn = menuBtn.cloneNode(true) as HTMLElement;
     menuBtn.parentNode?.replaceChild(newBtn, menuBtn);
 
+    function openMenu() {
+      newBtn.classList.add("open");
+      navMobile.classList.add("open");
+      backdrop?.classList.add("open");
+    }
+
+    function closeMenu() {
+      newBtn.classList.remove("open");
+      navMobile.classList.remove("open");
+      backdrop?.classList.remove("open");
+    }
+
     newBtn.addEventListener("click", () => {
-      newBtn.classList.toggle("open");
-      navMobile.classList.toggle("open");
+      newBtn.classList.contains("open") ? closeMenu() : openMenu();
     });
 
+    backdrop?.addEventListener("click", closeMenu);
+
     navMobile.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        newBtn.classList.remove("open");
-        navMobile.classList.remove("open");
-      });
+      link.addEventListener("click", closeMenu);
     });
   }
 
