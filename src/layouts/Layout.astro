@@ -190,6 +190,8 @@ const itemListElement = [
     <meta name="msapplication-config" content="/browserconfig.xml" />
 
     <meta name="generator" content={Astro.generator} />
+    <!-- Sin JS: ocultar splash inmediatamente -->
+    <noscript><style>#lf-splash{display:none!important}</style></noscript>
 
     <!-- JSON-LD Schema for LFSteakhouse -->
     <script
@@ -440,11 +442,97 @@ const itemListElement = [
     />
   </head>
   <body>
+    <!-- Splash Screen: visible hasta que window.load dispara -->
+    <div id="lf-splash" role="status" aria-label="Cargando LF Steakhouse" aria-live="polite">
+      <div id="lf-splash-inner">
+        <p id="lf-splash-lf">LF</p>
+        <div id="lf-splash-rule"></div>
+        <p id="lf-splash-name">STEAKHOUSE</p>
+      </div>
+    </div>
+    <script is:inline>
+      (function () {
+        document.body.style.overflow = 'hidden';
+        function hideSplash() {
+          var el = document.getElementById('lf-splash');
+          if (!el) return;
+          el.classList.add('lf-splash--out');
+          el.addEventListener('transitionend', function () {
+            el.remove();
+            document.body.style.overflow = '';
+          }, { once: true });
+        }
+        if (document.readyState === 'complete') {
+          hideSplash();
+        } else {
+          window.addEventListener('load', hideSplash, { once: true });
+        }
+      })();
+    </script>
+
     <slot />
   </body>
 </html>
 
 <style is:global>
+  /* ── Splash Screen ─────────────────────────────────────── */
+  #lf-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: var(--burgundy-dark, #2d1717);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity;
+  }
+  #lf-splash.lf-splash--out {
+    opacity: 0;
+    pointer-events: none;
+  }
+  #lf-splash-inner {
+    text-align: center;
+    animation: splashEnter 0.9s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+  @keyframes splashEnter {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  #lf-splash-lf {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(4.5rem, 18vw, 9rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream, #f5e6c8);
+    line-height: 1;
+    letter-spacing: 0.04em;
+  }
+  #lf-splash-rule {
+    width: 2.5rem;
+    height: 1px;
+    background: var(--cream-dark, #e5d6b8);
+    margin: 1.1rem auto;
+    opacity: 0.5;
+  }
+  #lf-splash-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.55rem, 2.2vw, 0.8rem);
+    font-weight: 400;
+    color: var(--cream-dark, #e5d6b8);
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  /* ── /Splash Screen ─────────────────────────────────────── */
+
   /* i18n — default: show Spanish, hide English */
   /* Explicit inherit so scanners follow the parent's already-explicit hex color */
   .i18n-es,
