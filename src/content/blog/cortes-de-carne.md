@@ -27,7 +27,7 @@ Un corte tierno y jugoso de 250/280 gr. El baby beef es perfecto para quienes bu
 
 ### Morrillo
 
-El morrillo es el favorito de los entendidos. Viene del cuello y tiene vetas de grasa intramuscular que al cocinarse se convierten en mantequilla. Lo preparamos marinado con nuestra receta especial, y también en la versión **Morrillo Ajisaso**: con salsa de ají amarillo y chimichurri de la casa.
+El morrillo es el favorito de los entendidos. Viene del cuello y tiene vetas de grasa intramuscular que al cocinarse se convierten en mantequilla. Lo preparamos marinado con nuestra receta especial, y también en la versión **Morrillo Ajisoso**: con salsa de ají amarillo y chimichurri de la casa.
 
 ## Cortes Importados
 

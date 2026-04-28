@@ -49,7 +49,7 @@ También contamos con sodas artesanales de corozo, naranja-jengibre y frutos roj
 
 - **Punta de anca** → Paloma LF — la acidez del maracuyá equilibra la grasa del corte
 - **Strip Loin importado** → Penicillin — el whisky potencia los sabores intensos
-- **Morrillo Ajisaso** → Nace un Borracho — el chamoy complementa el ají amarillo
+- **Morrillo Ajisoso** → Nace un Borracho — el chamoy complementa el ají amarillo
 - **Lomo especial** → Margarita de Corozo — la fruta local contrasta con la carne
 
 Visita nuestra [carta completa](/menu) o [reserva tu mesa](/reservar) para vivir la experiencia completa en LF Steakhouse, Caucasia.
