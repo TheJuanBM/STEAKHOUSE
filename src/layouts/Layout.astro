@@ -1,4 +1,6 @@
 ---
+import { SpeedInsights } from "@vercel/speed-insights/astro";
+
 interface Props {
   title: string;
   image?: string;
@@ -480,6 +482,7 @@ const itemListElement = [
     </script>
 
     <slot />
+    <SpeedInsights />
   </body>
 </html>
 
