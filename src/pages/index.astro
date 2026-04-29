@@ -182,7 +182,7 @@ const fmt = (d: Date) =>
     </section>
   </main>
   <Footer />
-  <script is:inline type="application/ld+json">{JSON.stringify({
+  <script is:inline type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: [
@@ -217,7 +217,7 @@ const fmt = (d: Date) =>
         acceptedAnswer: { "@type": "Answer", text: "Sí, contamos con menú infantil. También disponemos de estacionamiento, WiFi gratis y aire acondicionado." }
       }
     ]
-  })}</script>
+  })} />
 </Layout>
 
 <style>
