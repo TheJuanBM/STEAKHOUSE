@@ -1,5 +1,6 @@
 ---
 import SpeedInsights from "@vercel/speed-insights/astro";
+import { Analytics } from "@vercel/analytics/astro";
 import "@fontsource/cormorant-garamond/latin-300.css";
 import "@fontsource/cormorant-garamond/latin-400.css";
 import "@fontsource/cormorant-garamond/latin-500.css";
@@ -472,6 +473,7 @@ const itemListElement = [
 
     <slot />
     <SpeedInsights />
+    <Analytics />
   </body>
 </html>
 
