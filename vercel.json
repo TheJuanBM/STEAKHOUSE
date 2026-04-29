@@ -1,6 +1,5 @@
 {
   "installCommand": "npm install --registry https://registry.npmjs.org",
-  "skewProtection": true,
   "headers": [
     {
       "source": "/(.*)",
