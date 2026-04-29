@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+import vercel from "@astrojs/vercel";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -12,11 +13,11 @@ const baseHeaders = {
 
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+  "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://va.vercel-scripts.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: https://maps.googleapis.com https://maps.gstatic.com https://lh3.googleusercontent.com",
   "frame-src https://www.google.com https://maps.google.com",
-  "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://vitals.vercel-insights.com",
+  "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://vitals.vercel-insights.com https://va.vercel-analytics.com",
   "font-src 'self'",
   "object-src 'none'",
   "base-uri 'self'",
@@ -26,6 +27,9 @@ const csp = [
 // https://astro.build/config
 export default defineConfig({
   site: "https://lfsteakhouse.com",
+  adapter: vercel({
+    webAnalytics: { enabled: true },
+  }),
   build: {
     inlineStylesheets: "always",
   },

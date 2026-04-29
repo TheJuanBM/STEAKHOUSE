@@ -12,6 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/vercel": "^10.0.6",
     "@fontsource/cormorant-garamond": "^5.2.11",
     "@fontsource/montserrat": "^5.2.8",
     "@tailwindcss/vite": "^4.2.1",
